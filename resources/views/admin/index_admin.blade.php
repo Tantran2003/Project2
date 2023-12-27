@@ -18,7 +18,7 @@
                                       </svg>
                                       Announcements
                                   </a>
-                              </div> -->dsadsadadsad  
+                              </div> -->
                           </div>
                       </div>
                   </div>
