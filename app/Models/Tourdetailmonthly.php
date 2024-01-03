@@ -13,6 +13,6 @@ class Tourdetailmonthly extends Model
     public $timestamps = false;
     public function selectedDates()
     {
-        return $this->hasMany(Tourselectdate::class, 'tour_detail_id');
+        return $this->hasMany(Tourlistmonthly::class, 'tour_detail_id');
     }
 }
