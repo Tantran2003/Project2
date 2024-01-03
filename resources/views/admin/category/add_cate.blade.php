@@ -33,7 +33,7 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
             <div class="col-sm-5">
-                <input type="file" class="form-control" name="image">
+                <input type="file" class="form-control" name="image" >
                 {!!$errors->first('image','<div class="has-error text-danger">:message</div>')!!}
             </div>
         </div>

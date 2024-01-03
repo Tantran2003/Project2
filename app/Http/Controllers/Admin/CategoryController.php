@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
+use Intervention\Image\Facades\Image as ResizeImage;
 
+use Image;
 class CategoryController extends Controller
 {
     public function categorie()
@@ -33,12 +35,23 @@ class CategoryController extends Controller
         $cate->status = $request->status;
         if ($request->hasFile("image")) {
           $img = $request->file("image");
+          // if($img){
+          //   ResizeImage::make($img)
+          //   ->resize(100,100)
+          //   ->save( 'public/file/img/img_category/'.$img->getClientOriginalName());
+          // }
           $nameimage = time() . "_" . $img->getClientOriginalName();
+          // $img = Category::make($img->getRealPath());
+          // $img->resize(100,100,function($constraints){
+          //   $constraints->aspectRatio();
+          // });
           //move vao thu vien public
           $img->move('public/file/img/img_category/', $nameimage);
+       
           //gan ten hinh anh vao cot image
           $cate->image = $nameimage;
         }
+
         $cate->save();
         toastr()->success(' More success!');
         // Session::flash('note','Successfully !');

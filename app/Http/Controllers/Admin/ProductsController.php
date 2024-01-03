@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
-
+use Carbon\Carbon;
 class ProductsController extends Controller
 {
     public function products()
@@ -22,11 +22,11 @@ class ProductsController extends Controller
         "keyword" => "required",
         "desc" => "required",
         // "content" => "required",
-        "price" => "required|numeric",
+        "price" => "required",
         'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
         'images.*'=>'mimes:jpeg,bmp,png,gif,jpg|max:4096',
         //"idcat" => "required",
-        // "datecreate" => "required",
+        "departuredate" => 'required|date_format:Y-m-d\TH:i',
         // "dateedit" => "required",
         // "status" => "required",
       ]);
@@ -55,11 +55,11 @@ class ProductsController extends Controller
 }
       // $prod->images = $request->images;
       $prod->idcat = $request->idcat;
-      $prod->departureday = time();
-      $prod->departurelocation = time();
+      $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
+      $prod->departurelocation = $request->departurelocation;
       $prod->status = $request->status;
       $prod->save();
-      toastr()->success(' More success!');
+      toastr()->success('Thêm thành công!');
       // Session::flash('note','Successfully !');
       return redirect()->route("ht.products");
     } else {
@@ -67,7 +67,7 @@ class ProductsController extends Controller
     return view("admin/products/add_pro", $data);
     }
 
-    
+    // //////////////////////////////////////////////////////////////////////////////
   }
   public function update(Request $request, $id)
   {
@@ -77,11 +77,9 @@ class ProductsController extends Controller
         "name" => "required",
         "keyword" => "required",
         "desc" => "required",
-        "price" => "required|numeric",
+        "price" => "required",
         'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
-        // "idcat" => "required",
-        // "datecreate" => "required",
-        // "dateedit" => "required",
+        "departuredate" => 'required|date_format:Y-m-d\TH:i',
       ]);
       $edit = Products::find($id);
       $edit->name = $request->name;
@@ -114,8 +112,8 @@ class ProductsController extends Controller
 }
       $edit->price = $request->price;
       $edit->idcat = $request->idcat;
-      $edit->departureday = time();
-      $edit->departurelocation = time();
+      $edit->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
+      $edit->departurelocation = $request->departurelocation;
       $edit->status = $request->status;
       $edit->content = $request->content;
       $edit->save();

@@ -8,13 +8,20 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
 
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{asset('public/interface')}}/css/style.css" rel="stylesheet">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -23,18 +30,15 @@
     <!-- Libraries Stylesheet -->
     <link href="{{asset('public/interface')}}/lib/animate/animate.min.css" rel="stylesheet">
     <link href="{{asset('public/interface')}}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="{{asset('public/interface')}}/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="{{asset('public/interface')}}/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
+        rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="{{asset('public/interface')}}/css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
@@ -67,8 +71,8 @@
 
 
     <!-- Navbar & Hero Start -->
-    <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+    <div class="container-fluid position-relative p-0" style="">
+        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
             <a href="" class="navbar-brand p-0">
                 <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1>
                 <!-- <img src="img/logo.png" alt="Logo"> -->
@@ -78,8 +82,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="{{route('gd.home')}}" class="nav-item nav-link ">Trang chủ</a>
+                    <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
                     <a href="service.html" class="nav-item nav-link">Services</a>
                     <a href="package.html" class="nav-item nav-link">Packages</a>
                     <div class="nav-item dropdown">
@@ -94,19 +98,24 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                @if(Auth::check())
+                <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{ Auth::user()->fullname}}</a>
+                <a class="nav-link" href="{{route('gd.logout')}}">Thoát</a>
+                @else
+                <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
+                @endif
             </div>
         </nav>
 
-        
+
     </div>
 
     <!-- content////////////////////////////////////////////////////////////////////////////////////////////// -->
     @yield('content')
     <!-- content////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-      <!-- Footer Start -->
-      <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
@@ -156,8 +165,10 @@
                     <h4 class="text-white mb-3">Newsletter</h4>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
+                            placeholder="Your email">
+                        <button type="button"
+                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                     </div>
                 </div>
             </div>

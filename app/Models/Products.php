@@ -9,6 +9,9 @@ class Products extends Model
 {
     protected $table = "products";
     protected $fillable = ["name", "keyword", "desc", "content","price","image","images","idcat","departureday","departurelocation","status"];
+    protected $casts = [
+        'departuredate' => 'datetime',
+    ];
     protected $primarykey = "id";
     public $timestamps = false;
 }

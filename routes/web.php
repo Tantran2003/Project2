@@ -5,19 +5,37 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Interface\HomeController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Interface\SecureController;
+use App\Http\Controllers\Interface\TourlistController; 
 
+
+
+//index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
+// danh sach tour
+Route::get("/tour-list/{key}", [TourlistController::class, 'index'])->name("gd.index_tour");
+//search
+Route::get("/search/{key?}", [HomeController::class, 'search'])->name("gd.search"); //{key?} ? la nhap gi cung dc
+// Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
+//filter
+Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->name('filter.products');
+//login
+Route::match(['get','post'],"/login", [SecureController::class, 'login'])->name("gd.login");
+Route::get("/logout", [SecureController::class, 'logout'])->name("gd.logout");
+Route::match(['get','post'],"/register", [SecureController::class, 'register'])->name("gd.register");
+//profile user
+Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
+Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');
+Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd.editprofile');
 
+
+//end login
+//reset password
+Route::get("/forget-password", [SecureController::class, 'forgetPassword'])->name("gd.forget");
+Route::post("/forget-password", [SecureController::class, 'forgetPasswordPost'])->name("gd.forgetPost");
+Route::get("/reset-password/{token}", [SecureController::class, 'resetPassword'])->name("gd.resetPassword");
+Route::post("/reset-password", [SecureController::class, 'resetPasswordPost'])->name("gd.resetPasswordPost");
+//end reset password
 Route::prefix("system")->group(function () {
     Route::get("/admin", [AdminController::class, 'index'])->name("ht.admin");
     //routes category

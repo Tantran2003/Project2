@@ -7,13 +7,13 @@
             <div class="col-md-12">
                 <div class="flex-wrap d-flex justify-content-between align-items-center">
                     <div>
-                        <h2 class="text-dark">Category</h2>
-                        <small class="text-dark">System<a class="text-primary" href="">/Category</a></small>
+                        <h2 class="text-dark">Danh mục</h2>
+                        <small class="text-dark">Hệ thống<a class="text-primary" href="">/Danh mục</a></small>
 
                     </div>
                     <div>
                         <a href="{{route('ht.categorieadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                        Add cate
+                       Thêm danh mục
                         </a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Category</h4>
+                        <h4 class="card-title">Danh mục</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -44,13 +44,13 @@
                             <thead>
                             <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Keyword</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th>Level</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Tên</th>
+                        <th>Từ khóa</th>
+                        <th>Mô tả</th>
+                        <th>Hình ảnh</th>
+                        <th>Cấp bậc</th>
+                        <th>Trạng thái</th>
+                        <th></th>
                     </tr>
                             </thead>
                             <tbody>
@@ -70,9 +70,9 @@
                         <td>{{ $value["level"]}}</td>
                         <td>
                             @if($value->status == 1)
-                            <span style="font-weight:bold;  border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Active</span>
+                            <span style="font-weight:bold;  border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Mở</span>
                             @else
-                            <span style="font-weight:bold;  border: 2px solid #df2a3c; padding: 2px 5px; color: #df2a3c;">Deactivate </span>
+                            <span style="font-weight:bold;  border: 2px solid #df2a3c; padding: 2px 5px; color: #df2a3c;">Khóa </span>
                             @endif
 
                         </td>

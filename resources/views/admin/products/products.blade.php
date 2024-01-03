@@ -7,12 +7,12 @@
          <div class="col-md-12">
             <div class="flex-wrap d-flex justify-content-between align-items-center">
                <div>
-                  <h2 class="text-dark">Product</h2>
-                  <small class="text-dark">System<a class="text-primary" href="">/Product</a></small>
+                  <h2 class="text-dark">Danh sách tour</h2>
+                  <small class="text-dark">Hệ thống<a class="text-primary" href="">/Tour</a></small>
                </div>
                <div>
                   <a href="{{route('ht.productsadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                     Add product
+                   Thêm tour
                   </a>
                </div>
             </div>
@@ -33,7 +33,7 @@
          <div class="card">
             <div class="card-header d-flex justify-content-between">
                <div class="header-title">
-                  <h4 class="card-title">Product</h4>
+                  <h4 class="card-title">Tour</h4>
                </div>
             </div>
             <div class="card-body">
@@ -43,14 +43,17 @@
                      <thead>
                         <tr>
                            <th>No</th>
-                           <th>Name</th>
-                           <th>Keyword</th>
-                           <th>Image</th>
-                           <th>Images</th>
-                           <th>Price</th>
-                           <th>Category</th>
-                           <th>Status</th>
-                           <th>Action</th>
+                           <th>Tên </th>
+
+                           <th>Hình ảnh</th>
+                           <th>Hình ảnh *</th>
+                           <th>Giá</th>
+                           <th>Danh mục</th>
+                           <th>Ngày đi</th>
+                           <th>Thời gian đi</th>                          
+                           <th>Điểm khởi hành</th>
+                           <th>Trạng thái</th>
+                           <th></th>
                         </tr>
                      </thead>
                      <tbody>
@@ -62,7 +65,7 @@
                         <tr>
                            <td scope="row">{{ $value["id"]}}</td>
                            <td>{{ $value["name"]}}</td>
-                           <td>{{ $value["keyword"]}}</td>
+                          
                            <td>
                               <img width="100" height="100"
                                  src="{{asset('public/file/img/img_product/'.$value->image)}}" alt="">
@@ -70,14 +73,16 @@
                            <td>{{ $value["images"]}}</td>
                            <td>{{ $value["price"]}}</td>
                            <td>{{ $value["idcat"]}}</td>
-
+                           <td>{{ $value["departureday"]}}</td>
+                           <td>{{ $value["keyword"]}}</td>
+                           <td>{{ $value["departurelocation"]}}</td>
                            <td>
                               @if($value->status == 1)
                               <span
-                                 style="font-weight:bold; border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Active</span>
+                                 style="font-weight:bold; border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Mở</span>
                               @else
                               <span
-                                 style="font-weight:bold; border: 2px solid #df2a3c; padding: 2px 5px; color: #df2a3c;">Deactivate
+                                 style="font-weight:bold; border: 2px solid #df2a3c; padding: 2px 5px; color: #df2a3c;">Khóa
                               </span>
                               @endif
                            </td>

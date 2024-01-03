@@ -79,7 +79,7 @@
                     stroke="currentColor" />
                 </svg>
               </i>
-              <span class="item-name">Category</span>
+              <span class="item-name">Danh mục tour</span>
             </a>
           </li>
           <li class="nav-item">
@@ -93,7 +93,7 @@
                     stroke="currentColor" />
                 </svg>
               </i>
-              <span class="item-name">Product</span>
+              <span class="item-name">Tour</span>
             </a>
           </li>
         </ul>
