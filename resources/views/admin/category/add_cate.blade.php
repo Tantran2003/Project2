@@ -5,7 +5,7 @@
         <h3 class="breadcrumb-item active">Add Category</h3>
     </ol>
 
-    <form action="{{route('ht.categorieadd')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('ht.addtourmonthlist')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Name</label>
@@ -24,19 +24,19 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+            <label for="inputPassword" class="col-sm-2 col-form-label">Language</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" value="{{old('desc')}}" name="desc">
-                {!!$errors->first('desc','<div class="has-error text-danger">:message</div>')!!}
+                <input type="text" class="form-control" value="{{old('language')}}" name="language">
+                {!!$errors->first('language','<div class="has-error text-danger">:message</div>')!!}
             </div>
         </div>
-        <div class="mb-3 row">
+        <!-- <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Image</label>
             <div class="col-sm-5">
                 <input type="file" class="form-control" name="image">
                 {!!$errors->first('image','<div class="has-error text-danger">:message</div>')!!}
             </div>
-        </div>
+        </div> -->
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Level</label>
             <div class="col-sm-5">
@@ -61,9 +61,9 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
-                <button class="btn btn-success" type="submit" href="" role="button">Add</button>
-                <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Back</a>
-
+            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> ADD</button>
+            <a href="{{route('ht.tourmonthlist')}}" class="btn btn-sm btn-primary"> <i
+                        class="fa fa-arrow-circle-left"></i> Back</a>
             </div>
         </div>
     </form>

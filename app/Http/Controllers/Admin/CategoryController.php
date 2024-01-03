@@ -4,76 +4,67 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Tourlistmonthly;
 use Illuminate\Http\Request;
 use Session;
 
 class CategoryController extends Controller
 {
-    public function categorie()
+    public function tourmonthlist()
     {
-      $data["categorie"] = Category::get();
+      $data["tourlistmonthly"] = Tourlistmonthly::get();
+      $data["cate"] = $data["tourlistmonthly"];
       return view("admin/category/category", $data);
     }
-    public function add(Request $request)
+    public function addtourmonthlist(Request $request)
     {
       if ($request->isMethod("post")) {
         $this->validate($request, [
           "name" => "required",
           "keyword" => "required",
-          'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
-          "desc" => "required",
-          "level" => "required|numeric",
+          'language' => 'required',
+          "level" => "required",
+          "status" => "required|numeric",
   
         ]);
-        $cate = new Category();
+        $cate = new Tourlistmonthly();
         $cate->name = $request->name;
         $cate->keyword = $request->keyword;
-        $cate->desc = $request->desc;
+        $cate->language = $request->language;
         $cate->level = $request->level;
         $cate->status = $request->status;
-        if ($request->hasFile("image")) {
-          $img = $request->file("image");
-          $nameimage = time() . "_" . $img->getClientOriginalName();
-          //move vao thu vien public
-          $img->move('public/file/img/img_category/', $nameimage);
-          //gan ten hinh anh vao cot image
-          $cate->image = $nameimage;
-        }
+        // if ($request->hasFile("image")) {
+        //   $img = $request->file("image");
+        //   $nameimage = time() . "_" . $img->getClientOriginalName();
+        //   //move vao thu vien public
+        //   $img->move('public/file/img/img_category/', $nameimage);
+        //   //gan ten hinh anh vao cot image
+        //   $cate->image = $nameimage;
+        // }
         $cate->save();
         toastr()->success(' More success!');
         // Session::flash('note','Successfully !');
-        return redirect()->route("ht.categorie");
+        return redirect()->route("ht.tourmonthlist");
       }
       return view("admin/category/add_cate");
   
     }
-    public function update(Request $request, $id = null)
+    public function updatetourmonthlist(Request $request, $id = null)
     {
-      $olddata["display"] = Category::find($id);
+      $olddata["display"] = Tourlistmonthly::find($id);
       if ($request->isMethod("post")) {
         $this->validate($request, [
           "name" => "required",
           "keyword" => "required",
-          'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
+          'language' => "required",
           "desc" => "required",
           "level" => "required|numeric",
         ]);
-        $edit = Category::find($id);
+        $edit = Tourlistmonthly::find($id);
         $edit->name = $request->name;
         $edit->keyword = $request->keyword;
-        if ($request->hasFile("image")) {
-          $img = $request->file("image");
-          $nameimage = time() . "_" . $img->getClientOriginalName();
-          //xoa hinh cu
-          @unlink('public/file/img/img_category/'.$olddata["display"]->image);
-          //move vao thu vien public
-          $img->move('public/file/img/img_category/',$nameimage);
-          //gan ten hinh anh vao cot image
-          $edit->image = $nameimage;
-        }else{
-          $edit->image=$olddata["display"]->image;
-        }
-        $edit->desc = $request->desc;
+        
+        $edit->language = $request->language;
         $edit->level = $request->level;
         $edit->status = $request->status;
         $edit->save();
@@ -84,12 +75,12 @@ class CategoryController extends Controller
       }
   
     }
-    public function delete($id)
+    public function deletetourmonthlist($id)
     {
       try {
-        $load = Category::find($id);
+        $load = Tourlistmonthly::find($id);
         @unlink('public/file/img/img_category/'.$load->image);
-        Category::destroy($id);
+        Tourlistmonthly::destroy($id);
         toastr()->success('Delete success !');
         return redirect()->route('ht.categorie'); //chuyen ve trang category
       } catch (\Throwable $th) {

@@ -12,7 +12,7 @@
 
                     </div>
                     <div>
-                        <a href="{{route('ht.categorieadd')}}" class="btn btn-link btn-soft-light bg-primary ">
+                        <a href="{{route('ht.addtourmonthlist')}}" class="btn btn-link btn-soft-light bg-primary ">
                         Add cate
                         </a>
                     </div>
@@ -46,8 +46,7 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Keyword</th>
-                        <th>Description</th>
-                        <th>Image</th>
+                        <th>Language</th>
                         <th>Level</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -55,7 +54,7 @@
                             </thead>
                             <tbody>
                     <?php     
-   foreach ($categorie as $value){  
+   foreach ($cate as $value){  
     ?>
 
 
@@ -63,10 +62,8 @@
                         <td scope="row">{{ $value["id"]}}</td>
                         <td>{{ $value["name"]}}</td>
                         <td>{{ $value["keyword"]}}</td>
-                        <td>{{ $value["desc"]}}</td>
-                        <td>
-                            <img width="100" height="100" src="{{asset('public/file/img/img_category/'.$value->image)}}" alt="">
-                        </td>
+                        <td>{{ $value["language"]}}</td>
+                        
                         <td>{{ $value["level"]}}</td>
                         <td>
                             @if($value->status == 1)
@@ -77,9 +74,9 @@
 
                         </td>
                         <td>
-                            <a href="{{route('ht.categorieupdate',$value['id'])}}" class="btn "><i
+                            <a href="{{route('ht.updatetourmonthlist',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-                            <a href="{{route('ht.categoriedelete',$value['id'])}}" class="btn "><i
+                            <a href="{{route('ht.deletetourmonthlist',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-trash-can" style="color: red;"></i></a>
                         </td>
                     </tr>
