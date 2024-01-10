@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',255);
-            $table->string('image',255)->nullable();
-            $table->string('keyword',255)->nullable();
-            $table->string('desc',255)->nullable();
-            $table->string('level',10)->nullable();
-            $table->string('status')->nullable();
-        });
+        // Schema::create('category', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name',255);
+        //     $table->string('image',255)->nullable();
+        //     $table->string('keyword',255)->nullable();
+        //     $table->string('desc',255)->nullable();
+        //     $table->string('level',10)->nullable();
+        //     $table->string('status')->nullable();
+        // });
     }
 
     /**

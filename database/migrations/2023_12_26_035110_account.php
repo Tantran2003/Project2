@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('account', function (Blueprint $table) {
-            $table->id();
-            $table->string('fullname',255)->nullable();
-            $table->string('phone',255)->nullable();
-            $table->string('address',255)->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->tinyInteger('role');  
-            $table->tinyInteger('status')->default(1);
-            $table->rememberToken();
-        });
+        // Schema::create('account', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('fullname',255)->nullable();
+        //     $table->string('phone',255)->nullable();
+        //     $table->string('address',255)->nullable();
+        //     $table->string('email')->unique();
+        //     $table->string('password');
+        //     $table->tinyInteger('role');  
+        //     $table->tinyInteger('status')->default(1);
+        //     $table->rememberToken();
+        // });
     }
 
     /**

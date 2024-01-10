@@ -55,9 +55,10 @@
 
 
                         <h6 class="pt-3">Ngày đi</h6>
-                        <input type="date" name="departureday" class="form-control" value="{{ $departureDate ?? '' }}"
-                            min="{{ now()->format('Y-m-d') }}">
+                        <input type="date" name="departureday" class="form-control"
+                            value="{{ isset($departureday) ? $departureday : '' }}" min="{{ now()->format('Y-m-d') }}">
                         <button type="submit" class="mt-2 btn btn-primary">Chọn</button>
+
                     </form>
                     <!-- Filter by Price Range using Checkboxes -->
 
@@ -73,76 +74,101 @@
                         <h1 class="mb-5">Du lịch</h1>
                     </div>
                     <!-- Bạn có thể thêm thẻ card vào đây -->
-                    <?php foreach($loadproduct as $item){ ?>
+                    @foreach($loadproduct as $item)
+                    @php
+                    $dateStart = $dateStart ?? now()->toDateString(); // Gán giá trị mặc định nếu không tồn tại
+                    @endphp
+                    @if(count($item->schedule) > 0)
+                    @foreach($item->schedule as $tourDate)
+                    <div class="col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
 
-                    <div class=" col-lg-4 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-
-
-
-                        <div class="card product-item package-item  mb-4 h-100  ">
+                        <div class="card product-item package-item mb-4 ">
                             <div
-                                class="custom-image-container card-header   product-img position-relative overflow-hidden bg-transparent border p-0 ">
-                                <a href=""> <img class="card-img-top img-fluid w-100 h-100 "
+                                class="custom-image-container card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <a href=""><img class="card-img-top img-fluid w-100 h-100"
                                         src="{{asset('public/file/')}}/img/img_product/{{$item->image}}" alt=""></a>
                             </div>
-                            <div class=" card-body p-4 p-0 pt-4 pb-1">
-                                <div class="d-flex justify-content-between">
-                                    <p><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày
-                                        đi:{{$item->departureday}} </p>
-                                    <p>{{$item->keyword}}</p>
-                                </div>
-                                <div class="">
-                                    <a href="">
-                                        <h5 class="card-title  text-break mb-0"
-                                            style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                                            {{$item->name}}</h5>
-                                    </a>
-                                </div>
-                                <div>
-                                    <p class="flex-fill pt-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>Điểm
-                                        khởi hành: {{$item->departurelocation}}</p>
-                                    <h5 class="flex-fill pt-2" style="color:#e01600;">{{$item->price}}</h5>
+                            <div class="card-body p-4 p-0 pt-4">
+                                <div class=" mb-4">
+                                    <div class="d-flex justify-content-between">
+                                        <p><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi:
+                                            {{ $tourDate->date_start }}</p>
+
+                                    </div>
+                                    <div class="">
+                                        <a href="">
+                                            <h5 class="card-title text-break mb-0"
+                                                style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                                {{$item->name}}</h5>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <p class="flex-fill pt-3"><i
+                                                class="fa fa-map-marker-alt text-primary me-2"></i>Điểm
+                                            khởi hành: {{$item->departurelocation}}</p>
+                                        <h5 class="flex-fill pt-2" style="color:#e01600;">{{$item->price}}</h5>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="px-4 pb-4 card-footer d-flex justify-content-between border-none"
                                 style="background-color:white;">
-                                <a href="" class="btn btn-sm  px-3 border border-info text-info"><i
-                                        class="fas fa-eye  mr-1"></i>&nbsp; Thông tin</a>
+                                <a href="{{ route('gd.details_tour', ['key' => $item->id, 'dateStart' => $tourDate->date_start]) }}"
+                                    class="btn btn-sm px-3 border border-info text-info"><i
+                                        class="fas fa-eye mr-1"></i>&nbsp;
+                                    Thông tin</a>
                                 <a href="" class="btn btn-sm btn-primary px-3"><i
-                                        class="fas fa-shopping-cart mr-1"></i>&nbsp; Đặt ngay</a>
+                                        class="fas fa-shopping-cart mr-1"></i>&nbsp;
+                                    Đặt ngay</a>
                             </div>
                         </div>
-                        <!-- <divss class="package-item h-100 ">
-                            <div class="custom-image-container overflow-hidden flex-fill ">
-                                <a href=""> <img class=" img-fluid h-100"
-                                        src="{{asset('public/file/')}}/img/img_product/{{$item->image}}" alt=""></a>
-                            </div>
-
-                            <div class=" p-4 flex-fill">
-                                <div class="d-flex justify-content-between h-100">
-                                    <p><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi:
-                                        {{$item->departureday}} </p>
-                                    <p>{{$item->keyword}}</p>
-                                </div>
-                                <a class="d-block" href="">
-                                    <h5 class="text-break mb-0">{{$item->name}}</h5>
-                                </a>
-                                <div class="mb-3 row d-flex flex-column h-50">
-                                    <p class="flex-fill py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>Điểm
-                                        khởi hành: {{$item->departurelocation}}</p>
-                                    <h5 class="flex-fill py-2" style="color:#e01600;">{{$item->price}}</h5>
-                                </div>
-
-                                <div class=" d-flex justify-content-between mt-2 mb-2">
-                                    <a href="#" class="btn btn-sm border border-info text-info px-3">Thông tin</a>
-                                    <a href="#" class="btn btn-sm btn-primary px-3">Đặt ngay</a>
-                                </div>
-                            </div>
-                        </divss> -->
                     </div>
+                    @endforeach
+                    @else
+                    <!-- <div class="card product-item package-item mb-4 ">
+                <div class="custom-image-container card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                    <a href=""><img class="card-img-top img-fluid w-100 h-100"
+                            src="{{asset('public/file/')}}/img/img_product/{{$item->image}}" alt=""></a>
+                </div>
+                <div class="card-body p-4 p-0 pt-4">
+                    <div class=" mb-4">
+                        <p><i class="fa fa-calendar-alt text-primary me-2"></i>Không có ngày đi</p>
+                        <div class="">
+                            <a href="">
+                                <h5 class="card-title text-break mb-0"
+                                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                    {{$item->name}}</h5>
+                            </a>
+                        </div>
+                        <div>
+                            <p class="flex-fill pt-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>Điểm
+                                khởi hành: {{$item->departurelocation}}</p>
+                            <h5 class="flex-fill pt-2" style="color:#e01600;">{{$item->price}}</h5>
+                        </div>
+                    </div>
+                </div>
 
-                    <?php } ?>
+                <div class="px-4 pb-4 card-footer d-flex justify-content-between border-none"
+                    style="background-color:white;">
+                    <a href="{{route('gd.details_tour',$item->id)}}"
+                        class="btn btn-sm px-3 border border-info text-info"><i class="fas fa-eye mr-1"></i>&nbsp;
+                        Thông tin</a>
+                    <a href="" class="btn btn-sm btn-primary px-3"><i class="fas fa-shopping-cart mr-1"></i>&nbsp;
+                        Đặt ngay</a>
+                </div>
+            </div> -->
+                    @endif
+
+                    @endforeach
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

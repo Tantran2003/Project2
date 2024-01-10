@@ -12,10 +12,11 @@ class TourlistController extends Controller
    public function index($id=null){
 try {
    if($id == 0){
-      $data['loadproduct'] =Products::all();  
+      $data['loadproduct'] =Products::with('schedule')->get();  
    }else{
       $data['loadproduct'] =Products::where('idcat',$id)->get();
    }
+   
    return view('interface/pages/tour',$data);
 } catch (\Throwable $th) {
    return redirect()->route('gd.home');
@@ -52,13 +53,17 @@ try {
        } elseif ($filterBy === 'highToLow') {
            $loadproduct->orderByRaw('CAST(REPLACE(REPLACE(price, ".", ""), " vnđ", "") AS UNSIGNED) DESC'); //CAST(... AS UNSIGNED) chuyển sang số nguyên ko dấu
        }
-       if ($departureDate) {
-         // Convert departureDate to a valid format for MySQL date
-         $formattedDepartureDate = date('Y-m-d', strtotime($departureDate));
-     
-         // Add filter for departureDate
-         $loadproduct->whereDate('departureday', '=', $formattedDepartureDate);
-     }
+   // ...
+
+ 
+  $loadproduct->with(['schedule' => function ($query) use ($departureDate) {
+   if ($departureDate) {
+       $formattedDepartureDate = date('Y-m-d', strtotime($departureDate));
+       $query->whereDate('date_start', '=', $formattedDepartureDate);
+   }
+}]);
+// ...
+
 
        $loadproduct = $loadproduct->get();
    

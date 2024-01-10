@@ -21,12 +21,21 @@ class ProductsController extends Controller
         "name" => "required",
         "keyword" => "required",
         "desc" => "required",
+        "vehicle" => "required",
+
         // "content" => "required",
         "price" => "required",
+        "price1" => "required",
+        "price2" => "required",
+        "price3" => "required",
+
         'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
         'images.*'=>'mimes:jpeg,bmp,png,gif,jpg|max:4096',
         //"idcat" => "required",
         "departuredate" => 'required|date_format:Y-m-d\TH:i',
+        "arrivallocation" => "required",
+        "departurelocation" => "required",
+
         // "dateedit" => "required",
         // "status" => "required",
       ]);
@@ -35,7 +44,10 @@ class ProductsController extends Controller
       $prod->keyword = $request->keyword;
       $prod->desc = $request->desc;
       $prod->content = $request->content;
-      $prod->price = $request->price;
+      $prod->price = $request->price;       
+      $prod->price1 = $request->price1;
+      $prod->price2 = $request->price2;
+      $prod->price3 = $request->price3;
       if ($request->hasFile("image")) {
         $img = $request->file("image");
         $nameimage = time() . "_" . $img->getClientOriginalName();
@@ -57,6 +69,11 @@ class ProductsController extends Controller
       $prod->idcat = $request->idcat;
       $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
       $prod->departurelocation = $request->departurelocation;
+      $prod->arrivallocation = $request->arrivallocation;
+      $prod->vehicle = $request->vehicle;
+     
+
+      
       $prod->status = $request->status;
       $prod->save();
       toastr()->success('Thêm thành công!');
@@ -78,8 +95,15 @@ class ProductsController extends Controller
         "keyword" => "required",
         "desc" => "required",
         "price" => "required",
+        "price1" => "required",
+        "price2" => "required",
+        "price3" => "required",
         'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
         "departuredate" => 'required|date_format:Y-m-d\TH:i',
+        "vehicle" => "required",
+        "arrivallocation" => "required",
+        "departurelocation" => "required",
+
       ]);
       $edit = Products::find($id);
       $edit->name = $request->name;
@@ -111,9 +135,14 @@ class ProductsController extends Controller
         $edit->images=json_encode($image);
 }
       $edit->price = $request->price;
+      $edit->price1 = $request->price1;
+      $edit->price2 = $request->price2;
+      $edit->price3 = $request->price3;
       $edit->idcat = $request->idcat;
       $edit->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
       $edit->departurelocation = $request->departurelocation;
+      $edit->arrivallocation = $request->arrivallocation;
+      $edit->vehicle = $request->vehicle;
       $edit->status = $request->status;
       $edit->content = $request->content;
       $edit->save();

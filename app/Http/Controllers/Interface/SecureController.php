@@ -70,6 +70,7 @@ class SecureController extends Controller
             "email.required" => 'Vui lòng nhập email',
             "phone.required" => 'Vui lòng nhập số điện thoại',
             "password.required" => 'Vui lòng nhập mật khẩu',
+            'password.min' => 'Mật khẩu ít nhất có 6 ký tự',
 
         ];
         if ($request->isMethod('post')) {
@@ -77,7 +78,7 @@ class SecureController extends Controller
                 "fullname" => "required|min:6|max:32",
                 "address" => "required|min:6|max:150",
                 "email" => "required|unique:account,email",
-                "password" => "required",
+                "password" => "required|alpha_num|min:6|max:32",
                 "phone" => "required",
 
             ], $messages);

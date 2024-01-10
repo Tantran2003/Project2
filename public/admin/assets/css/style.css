@@ -556,3 +556,8 @@ body.uikit .btn-download {
 .top-1 {
   top: 1rem;
 }
+.required-field::after {
+  content: '(*)';
+  color: red;
+  margin-left: 2px; /* Để tạo khoảng cách giữa * và nội dung trường */
+}

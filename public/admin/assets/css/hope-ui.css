@@ -115,7 +115,7 @@ body {
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
+  color: var(--bs-dark);
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
@@ -15554,9 +15554,9 @@ textarea.form-control-lg {
   vertical-align: middle;
 }
 
-thead, tbody, tfoot, tr, td, th {
+/* thead, tbody, tfoot, tr, td, th {
   white-space: nowrap;
-}
+} */
 
 .tooltip-inner {
   -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);

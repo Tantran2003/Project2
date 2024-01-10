@@ -7,13 +7,13 @@
             <div class="col-md-12">
                 <div class="flex-wrap d-flex justify-content-between align-items-center">
                     <div>
-                        <h2 class="text-dark">Danh mục</h2>
-                        <small class="text-dark">Hệ thống<a class="text-primary" href="">/Danh mục</a></small>
+                        <h2 class="text-dark">Lịch trình</h2>
+                        <small class="text-dark">Hệ thống<a class="text-primary" href="">/Lịch trình</a></small>
 
                     </div>
                     <div>
-                        <a href="{{route('ht.categorieadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                       Thêm danh mục
+                        <a href="{{route('ht.scheduleadd')}}" class="btn btn-link btn-soft-light bg-primary ">
+                         Tạo mới
                         </a>
                     </div>
                 </div>
@@ -38,37 +38,40 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    
+
                     <div class="table-responsive">
                         <table id="datatable" class="table " data-toggle="data-table">
                             <thead>
-                            <tr>
-                        <th>No</th>
-                        <th>Tên</th>
-                        <!-- <th>Từ khóa</th> -->
-                        <!-- <th>Mô tả</th> -->
-                        <th>Hình ảnh</th>
-                        <!-- <th>Cấp bậc</th> -->
-                        <th>Trạng thái</th>
-                        <th></th>
-                    </tr>
+                                <tr>
+                                    <th>No</th>
+                                   
+                                    <!-- <th>Từ khóa</th> -->
+                                    <!-- <th>Mô tả</th> -->
+                                    <th>Ngày đi</th>
+                                    <!-- <th>Cấp bậc</th> -->
+                                    <th>Ngày về</th>
+                                    <th>Mã tour</th>
+                                    <th>Trạng thái</th>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody>
-                    <?php     
-   foreach ($categorie as $value){  
+                                <?php     
+   foreach ($schedule as $value){  
     ?>
 
 
-                    <tr>
-                        <td scope="row">{{ $value["id"]}}</td>
-                        <td>{{ $value["name"]}}</td>
-                        <!-- <td>{{ $value["keyword"]}}</td> -->
-                        <!-- <td>{{ $value["desc"]}}</td> -->
-                        <td>
-                            <img width="100" height="100" src="{{asset('public/file/img/img_category/'.$value->image)}}" alt="">
-                        </td>
-                        <!-- <td>{{ $value["level"]}}</td> -->
-                        <td>
+                                <tr>
+                                    <td scope="row">{{ $value["id"]}}</td>
+                                  
+                                    <!-- <td>{{ $value["keyword"]}}</td> -->
+                                    <!-- <td>{{ $value["desc"]}}</td> -->
+
+                                    <td>{{ $value["date_start"]}}</td>
+
+                                    <td>{{ $value["date_end"]}}</td>
+                                    <td>{{ $value["tour_code"]}}</td>
+                                    <td>
                             @if($value->status == 1)
                             <span style="font-weight:bold;  border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Mở</span>
                             @else
@@ -76,17 +79,19 @@
                             @endif
 
                         </td>
-                        <td>
-                            <a href="{{route('ht.categorieupdate',$value['id'])}}" class="btn "><i
-                                    class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-                            <a href="{{route('ht.categoriedelete',$value['id'])}}" class="btn "><i
-                                    class="fa-regular fa-trash-can" style="color: red;"></i></a>
-                        </td>
-                    </tr>
+                                    <!-- <td>{{ $value["level"]}}</td> -->
 
-                  
-                    <?php  }?>
-                </tbody>
+                                    <td>
+                                        <a href="{{route('ht.scheduleupdate',$value['id'])}}" class="btn "><i class="fa-regular fa-pen-to-square"
+                                                style="color: green;"></i></a>
+                                        <a href="{{route('ht.scheduledelete',$value['id'])}}" class="btn "><i class="fa-regular fa-trash-can"
+                                                style="color: red;"></i></a>
+                                    </td>
+                                </tr>
+
+
+                                <?php  }?>
+                            </tbody>
                         </table>
                     </div>
                 </div>

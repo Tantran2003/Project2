@@ -1,5 +1,14 @@
 @extends ('admin.layout_admin')
 @section ('content')
+<style>
+.td-table{
+   white-space: nowrap;
+}
+.text-truncate{
+max-width:150px;
+}
+
+</style>
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <div class="iq-navbar-header" style="height: 215px;">
    <div class="container-fluid iq-container">
@@ -12,7 +21,7 @@
                </div>
                <div>
                   <a href="{{route('ht.productsadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                   Thêm tour
+                     Thêm tour
                   </a>
                </div>
             </div>
@@ -39,43 +48,56 @@
             <div class="card-body">
 
                <div class="table-responsive">
-                  <table id="datatable" class="table table-striped" data-toggle="data-table">
+                  <table id="datatable" class="table " data-toggle="data-table">
                      <thead>
                         <tr>
                            <th>No</th>
                            <th>Tên </th>
 
                            <th>Hình ảnh</th>
-                           <th>Hình ảnh *</th>
+                           <!-- <th>Hình ảnh *</th> -->
                            <th>Giá</th>
-                           <th>Danh mục</th>
-                           <th>Ngày đi</th>
-                           <th>Thời gian đi</th>                          
-                           <th>Điểm khởi hành</th>
+                           <th>Lịch trình</th>
+
+                           <!-- <th>Danh mục</th> -->
                            <th>Trạng thái</th>
                            <th></th>
                         </tr>
                      </thead>
                      <tbody>
+
                         <?php     
     foreach ($products as $value){  
       ?>
-
-
+                      
                         <tr>
                            <td scope="row">{{ $value["id"]}}</td>
-                           <td>{{ $value["name"]}}</td>
-                          
+                           <td class="text-truncate"  >{{ $value["name"]}}</td>
+
                            <td>
                               <img width="100" height="100"
                                  src="{{asset('public/file/img/img_product/'.$value->image)}}" alt="">
                            </td>
-                           <td>{{ $value["images"]}}</td>
-                           <td>{{ $value["price"]}}</td>
-                           <td>{{ $value["idcat"]}}</td>
-                           <td>{{ $value["departureday"]}}</td>
-                           <td>{{ $value["keyword"]}}</td>
-                           <td>{{ $value["departurelocation"]}}</td>
+                           <!-- <td>{{ $value["images"]}}</td> -->
+                           <td class="td-table">
+                              {{ $value["price"]}} <br>
+                             <b>Giá người lớn:</b>&nbsp;{{ $value["price1"]}} <br>
+                         <b>Giá trẻ em:</b>&nbsp;{{ $value["price2"]}} <br>
+                        <b>Giá trẻ nhỏ:</b>&nbsp;{{ $value["price3"]}} <br>
+
+                           </td>
+
+                           <td class="td-table">
+                           <b>Điểm khởi hành:</b>&nbsp;{{ $value["departurelocation"]}} <br>
+                           <b>Điểm đến:</b>&nbsp;{{ $value["arrivallocation"]}} <br>
+
+                              <b> Ngày đi:</b> &nbsp; {{ $value["departureday"]}} <br>
+                              <b> Thời gian đi:</b> &nbsp; {{ $value["keyword"]}} <br>
+                              <b> Phương tiện</b> &nbsp; {{ $value["vehicle"]}} <br>
+
+                           </td>
+
+                           <!-- <td> {{ $value["idcat"]}}</td> -->
                            <td>
                               @if($value->status == 1)
                               <span
@@ -86,11 +108,13 @@
                               </span>
                               @endif
                            </td>
-                           <td>
+                           <td class="td-table">
                               <a href="{{route('ht.productsupdate',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
                               <a href="{{route('ht.productsdelete',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-trash-can" style="color: red;"></i></a>
+                                    <a href="" class="btn "> <i class="fa-solid fa-eye" style="color: #1663e9;"></i></a>
+
                            </td>
                         </tr>
 

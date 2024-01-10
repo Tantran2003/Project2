@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{asset('public')}}/admin/assets/css/dark.min.css">
   <link rel="stylesheet" href="{{asset('public')}}/admin/assets/css/style.css">
   <link rel="stylesheet" href="{{asset('public')}}/admin/assets/css/hope-ui.css">
+  <script src="{{asset('public')}}/editor/ckeditor/ckeditor.js"></script>
 
 
 </head>

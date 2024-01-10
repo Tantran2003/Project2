@@ -92,3 +92,24 @@
     
 })(jQuery);
 
+//xem them rut gon text
+window.onload = function () {
+    // Gọi hàm khi trang đã tải xong
+    toggleContent();
+};
+
+function toggleContent() {
+    var x = document.getElementById("myDIV");
+    var xemthemBtn = document.getElementById("xemthem");
+    var collapseBtn = document.getElementById("collapseBtn");
+
+    if (x.style.maxHeight) {
+        x.style.maxHeight = null;
+        collapseBtn.style.display = "block";
+        xemthemBtn.style.display = "none";
+    } else {
+        x.style.maxHeight = "170px";
+        collapseBtn.style.display = "none";
+        xemthemBtn.style.display = "block";
+    }
+}
