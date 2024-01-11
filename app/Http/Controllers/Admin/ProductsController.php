@@ -20,8 +20,9 @@ class ProductsController extends Controller
       $this->validate($request, [
         "name" => "required",
         "keyword" => "required",
-        "desc" => "required",
         "vehicle" => "required",
+        "desc" => "required",
+
 
         // "content" => "required",
         "price" => "required",
@@ -37,11 +38,12 @@ class ProductsController extends Controller
         "departurelocation" => "required",
 
         // "dateedit" => "required",
-        // "status" => "required",
+        "status" => "required",
       ]);
       $prod = new Products();
       $prod->name = $request->name;
       $prod->keyword = $request->keyword;
+      $prod->vehicle = $request->vehicle;
       $prod->desc = $request->desc;
       $prod->content = $request->content;
       $prod->price = $request->price;       
@@ -64,7 +66,7 @@ class ProductsController extends Controller
           
         }
         $prod->images=json_encode($image);
-}
+      }
       // $prod->images = $request->images;
       $prod->idcat = $request->idcat;
       // $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
@@ -88,12 +90,14 @@ class ProductsController extends Controller
   }
   public function update(Request $request, $id)
   {
-    $data["load"] = Products::find($id);
+    $data["products"] = Products::find($id);
     if ($request->isMethod("post")) {
       $this->validate($request, [
         "name" => "required",
         "keyword" => "required",
+        "vehicle" => "required",
         "desc" => "required",
+        "content" => "required",
         "price" => "required",
         "price1" => "required",
         "price2" => "required",
@@ -105,10 +109,16 @@ class ProductsController extends Controller
         "departurelocation" => "required",
 
       ]);
-      $edit = Products::find($id);
+      $edit = new Products();
       $edit->name = $request->name;
       $edit->keyword = $request->keyword;
+      $edit->vehicle = $request->vehicle;
       $edit->desc = $request->desc;
+      $edit->content = $request->content;
+      $edit->price = $request->price;
+      $edit->price1 = $request->price1;
+      $edit->price2 = $request->price2;
+      $edit->price3 = $request->price3;
       if ($request->hasFile("image")) {
         $img = $request->file("image");
         $nameimage = time() . "_" . $img->getClientOriginalName();
@@ -119,7 +129,6 @@ class ProductsController extends Controller
         //gan ten hinh anh vao cot image
         $edit->image = $nameimage;
       }
-
       if($request->hasfile('images')) {
         if($edit->images!=""){
           foreach (json_decode($edit->images) as $key) {
