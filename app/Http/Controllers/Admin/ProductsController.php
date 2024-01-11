@@ -32,7 +32,7 @@ class ProductsController extends Controller
         'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
         'images.*'=>'mimes:jpeg,bmp,png,gif,jpg|max:4096',
         //"idcat" => "required",
-        "departuredate" => 'required|date_format:Y-m-d\TH:i',
+        // "departuredate" => 'required|date_format:Y-m-d\TH:i',
         "arrivallocation" => "required",
         "departurelocation" => "required",
 
@@ -67,7 +67,7 @@ class ProductsController extends Controller
 }
       // $prod->images = $request->images;
       $prod->idcat = $request->idcat;
-      $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
+      // $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
       $prod->departurelocation = $request->departurelocation;
       $prod->arrivallocation = $request->arrivallocation;
       $prod->vehicle = $request->vehicle;
@@ -99,7 +99,7 @@ class ProductsController extends Controller
         "price2" => "required",
         "price3" => "required",
         'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
-        "departuredate" => 'required|date_format:Y-m-d\TH:i',
+        // "departuredate" => 'required|date_format:Y-m-d\TH:i',
         "vehicle" => "required",
         "arrivallocation" => "required",
         "departurelocation" => "required",
@@ -139,7 +139,7 @@ class ProductsController extends Controller
       $edit->price2 = $request->price2;
       $edit->price3 = $request->price3;
       $edit->idcat = $request->idcat;
-      $edit->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
+      // $edit->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
       $edit->departurelocation = $request->departurelocation;
       $edit->arrivallocation = $request->arrivallocation;
       $edit->vehicle = $request->vehicle;

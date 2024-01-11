@@ -30,8 +30,16 @@ try {
        $priceRange = $request->input('priceRange');
        $departureDate = $request->input('departureday');
        // Khởi tạo một câu truy vấn sử dụng Eloquent ORM cho model 
-       $loadproduct = Products::query();
+       $loadproduct = Products::query()->where('status', 1)
+       ->whereHas('schedule', function ($query) {
+         $query->where(function ($subquery) {
+            $subquery->where('status', 1)
+                     ->orWhereNull('status');
+        })
+        ->whereNotNull('tour_code');
+       });
    
+      
        // chọn khoảng giá hay chọn all giá nếu chọn all giá thì load all giá còn ko thì tiếp tục xử lý
        if ($priceRange && $priceRange !== '0-all') {
            // Tách chuỗi khoảng giá thành một mảng, ví dụ: "5000000-10000000" trở thành [$minPrice, $maxPrice]

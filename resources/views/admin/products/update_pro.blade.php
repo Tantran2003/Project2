@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="mb-3 row">
-            <div class="col-sm-3 col-6  offset-sm ">
+            <div class="col-sm-4 col-6  offset-sm ">
                 <label for="inputPassword" class="col-sm-6 col-form-label">Danh mục</label>
                 <select class="form-control form-select" aria-label="Default select example" name="idcat" id="">
                     @foreach($cate as $item)
@@ -61,7 +61,7 @@
                 {!! $errors->first('vehicle', '<div class="has-error text-danger">:message</div>') !!}
 
             </div>
-            <div class="col-sm-2 col-6 offset-sm">
+            <!-- <disv class="col-sm-2 col-6 offset-sm">
                 <label for="inputPassword" class="col-sm-6 col-form-label">Ngày đi</label>
 
                 <input type="datetime-local" class="form-control"
@@ -69,8 +69,8 @@
                     name="departuredate" min="{{ now()->format('Y-m-d\TH:i') }}">
                 {!!$errors->first('departuredate','<div class="has-error text-danger">:message</div>')!!}
 
-            </div>
-            <div class="col-sm-3 col-6 offset-sm">
+            </disv> -->
+            <div class="col-sm-4 col-6 offset-sm">
                 <label for="inputPassword" class="col-sm-6 col-form-label">Thời gian đi</label>
 
                 <select class="form-select" name="keyword"  value=" {{old('keyword',isset($load ->keyword)?$load ->keyword:null)}}">
@@ -180,12 +180,12 @@
             <div class="form-check form-check-inline ">
                 <input class="form-check-input" type="radio" name="status" <?php if($load-> status==1){echo
                 "checked";}else{echo"";} ?> value=1>
-                <label class="form-check-label">Active</label>
+                <label class="form-check-label">Mở</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="status" <?php if($load-> status==0){echo
                 "checked";}else{echo"";} ?> value=0>
-                <label class="form-check-label">Deactivate</label>
+                <label class="form-check-label">Khóa</label>
             </div>
 
         </div>
@@ -193,8 +193,8 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
-                <button class="btn btn-success" type="submit" href="" role="button">Update</button>
-                <a class="btn btn-secondary" href="{{route('ht.products')}}" role="button">Back</a>
+                <button class="btn btn-success" type="submit" href="" role="button">Cập nhật</button>
+                <a class="btn btn-secondary" href="{{route('ht.products')}}" role="button">Quay lại</a>
 
             </div>
         </div>

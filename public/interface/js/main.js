@@ -108,7 +108,7 @@ function toggleContent() {
         collapseBtn.style.display = "block";
         xemthemBtn.style.display = "none";
     } else {
-        x.style.maxHeight = "170px";
+        x.style.maxHeight = "240px";
         collapseBtn.style.display = "none";
         xemthemBtn.style.display = "block";
     }

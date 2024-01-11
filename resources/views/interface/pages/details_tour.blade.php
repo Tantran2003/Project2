@@ -45,7 +45,7 @@
 
     #myDIV {
         overflow: hidden;
-        max-height: 400px;
+        max-height: 100%;
         transition: max-height 0.5s ease;
     }
 
@@ -85,7 +85,9 @@
         <div class="d-md-flex  flex-md-row flex-column justify-content-between align-items-center pb-5">
             <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s"
                 style="max-width: 100%; overflow-wrap: break-word;">
+           
                 <h3 class="mb-5 text-break">{{$details->name}}</h3>
+                
             </div>
 
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
@@ -163,7 +165,7 @@
                 </div>
             </div>
         </div>
-
+     
 
 
 
@@ -173,12 +175,17 @@
 
                 <table class="mt-3">
                     <tbody>
+                    <tr>
+                            <td><i class="fa fa-barcode text-primary me-2"></i>Mã tour: </td>
+                            <td> {{$tourcode}}</td>
+                        </tr>
                         <tr>
                             <td><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi: </td>
-                      
                             <td>{{ $dateStart }}</td>
-                        
-                         
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày về: </td>
+                            <td>{{ $dateEnd }}</td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-map-marker-alt text-primary me-2"></i>Điểm khởi hành:</td>
@@ -193,7 +200,7 @@
                             <td>{{$details->keyword}}</td>
                         </tr>
                         <tr>
-                            <td><i class="fa fa-paper-plane text-primary me-2" ></i>Phương tiện đi:</td>
+                            <td><i class="fa fa-paper-plane text-primary me-2"></i>Phương tiện đi:</td>
                             <td>{{$details->vehicle}}</td>
                         </tr>
                     </tbody>
@@ -220,7 +227,7 @@
         <div class="row gx-5 gy-2 ">
             <h3 class="mt-5">Lịch trình di chuyển</h3>
             <div class="col-lg-9 col-md-12 wow fadeInUp   rounded" data-wow-delay="0.3s">
-                <p class="example-text  fw-bold" >
+                <p class="example-text  fw-bold">
                     {!!$details->content!!}
                 </p>
             </div>

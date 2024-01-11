@@ -91,7 +91,7 @@ max-width:150px;
                            <b>Điểm khởi hành:</b>&nbsp;{{ $value["departurelocation"]}} <br>
                            <b>Điểm đến:</b>&nbsp;{{ $value["arrivallocation"]}} <br>
 
-                              <b> Ngày đi:</b> &nbsp; {{ $value["departureday"]}} <br>
+                          
                               <b> Thời gian đi:</b> &nbsp; {{ $value["keyword"]}} <br>
                               <b> Phương tiện</b> &nbsp; {{ $value["vehicle"]}} <br>
 

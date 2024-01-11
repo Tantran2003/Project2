@@ -12,6 +12,7 @@
     <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
+    
     <link href="{{asset('public/interface')}}/css/style.css" rel="stylesheet">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">

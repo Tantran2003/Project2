@@ -16,7 +16,7 @@ Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
 Route::get("/tour-list/{key}", [TourlistController::class, 'index'])->name("gd.index_tour");
 //details
-Route::get("/details/{key}/{dateStart?}", [DetailsController::class, 'index'])->name("gd.details_tour");
+Route::get("/details/{key}/{dateStart?}/{dateEnd?}/{tourcode?}", [DetailsController::class, 'index'])->name("gd.details_tour");
 //comments
 Route::get("/comments", [CommentsController::class, 'index'])->name ('gd.comments');
 //search

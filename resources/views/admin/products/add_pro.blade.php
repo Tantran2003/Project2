@@ -41,7 +41,7 @@
         </div>
 
         <div class="mb-3 row">
-            <div class="col-sm-3 col-6  offset-sm ">
+            <div class="col-sm-4 col-6  offset-sm ">
                 <label for="inputPassword" class="col-sm-6 col-form-label">Danh mục</label>
                 <select class="form-control form-select" aria-label="Default select example" name="idcat" id="">
                     @foreach($cate as $item)
@@ -61,15 +61,15 @@
                 {!! $errors->first('vehicle', '<div class="has-error text-danger">:message</div>') !!}
 
             </div>
-            <div class="col-sm-2 col-6 offset-sm">
+            <!-- <divfd class="col-sm-2 col-6 offset-sm">
                 <label for="inputPassword" class="col-sm-6 col-form-label required-field">Ngày đi</label>
 
                 <input type="datetime-local" class="form-control" value="{{old('departuredate')}}" name="departuredate"
                     min="{{ now()->format('Y-m-d\TH:i') }}" >
                 {!!$errors->first('departuredate','<div class="has-error text-danger">:message</div>')!!}
 
-            </div>
-            <div class="col-sm-3 col-6 offset-sm">
+            </divfd> -->
+            <div class="col-sm-4 col-6 offset-sm">
                 <label for="inputPassword" class="col-sm-6 col-form-label required-field">Thời gian đi</label>
 
                 <select class="form-select" name="keyword" value="{{old('keyword')}}">
