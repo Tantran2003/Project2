@@ -104,7 +104,7 @@ class ProductsController extends Controller
         "price3" => "required",
         'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
         // "departuredate" => 'required|date_format:Y-m-d\TH:i',
-        "vehicle" => "required",
+     
         "arrivallocation" => "required",
         "departurelocation" => "required",
 
