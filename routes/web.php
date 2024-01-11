@@ -1,24 +1,25 @@
 <?php
 
+use App\Http\Controllers\AdminScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
-use App\Http\Controllers\Interface\DetailsController;
-use App\http\Controllers\Interface\CommentsController;
-use App\http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Interface\UserTourController; 
+
+//Checkout
+Route::get('/checkout/{scheid}',[UserTourController::class,'index'])->name('gd.checkout');
+Route::get('/paymentPost',[UserTourController::class,'paymentPost']);
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
 Route::get("/tour-list/{key}", [TourlistController::class, 'index'])->name("gd.index_tour");
-//details
-Route::get("/details/{key}/{dateStart?}", [DetailsController::class, 'index'])->name("gd.details_tour");
-//comments
-Route::get("/comments", [CommentsController::class, 'index'])->name ('gd.comments');
+Route::get("/tour-detail/{key}", [TourlistController::class, 'index'])->name("gd.details_tour");
 //search
 Route::get("/search/{key?}", [HomeController::class, 'search'])->name("gd.search"); //{key?} ? la nhap gi cung dc
 // Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
@@ -53,10 +54,10 @@ Route::prefix("system")->group(function () {
     Route::match(['get', 'post'], '/products/add', [ProductsController::class, 'add'])->name('ht.productsadd');
     Route::match(['get', 'post'], '/products/update/{key}', [ProductsController::class, 'update'])->name('ht.productsupdate');
     Route::get('/products/delete/{key}', [ProductsController::class, 'delete'])->name('ht.productsdelete');
-//schedule
-Route::get("/schedule", [ScheduleController::class, 'schedule'])->name('ht.schedule');
-Route::match(['get', 'post'], '/schedule/add', [ScheduleController::class, 'add'])->name('ht.scheduleadd');
-Route::match(['get', 'post'], '/schedule/update/{key}', [ScheduleController::class, 'update'])->name('ht.scheduleupdate');
-Route::get('/schedule/delete/{key}', [ScheduleController::class, 'delete'])->name('ht.scheduledelete');
+    //Schedule
+    Route::get("/schedule", [ScheduleController::class, 'schedule'])->name('ht.schedule');
+    Route::match(['get', 'post'], '/schedule/add', [ScheduleController::class, 'add'])->name('ht.scheduleadd');
+    Route::match(['get', 'post'], '/schedule/update/{key}', [ScheduleController::class, 'update'])->name('ht.scheduleupdate');
+    Route::get('/schedule/delete/{key}', [ScheduleController::class, 'delete'])->name('ht.scheduledelete');
 
 });

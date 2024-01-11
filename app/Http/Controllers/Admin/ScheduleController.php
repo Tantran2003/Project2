@@ -17,22 +17,15 @@ class ScheduleController extends Controller
             $this->validate($request, [
               "date_start" => "required",
               "date_end" => "required",
-              "tour_code" => "required",
-              
-      
-              
+              "tour_code" => "required",  
             ]);
             $sche = new Schedule();
-         
-      
-       
             // $prod->images = $request->images;
             $sche->tour_id = $request->tour_id;
             $sche->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
             $sche->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
             $sche->status = $request->status;
             $sche->tour_code = $request->tour_code;
-
             $sche->save();
             toastr()->success('Thêm thành công!');
             // Session::flash('note','Successfully !');
