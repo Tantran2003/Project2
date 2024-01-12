@@ -7,8 +7,8 @@
          <div class="col-md-12">
             <div class="flex-wrap d-flex justify-content-between align-items-center">
                <div>
-                  <h2 class="text-dark">Tour Schedule</h2>
-                  <small class="text-dark">System<a class="text-primary" href="">/Tour</a></small>
+                  <h2 class="text-dark">Lịch trình</h2>
+                  <small class="text-dark">System<a class="text-primary" href="">/Lịch trình</a></small>
                </div>
                <div>
                   <a href="{{route('ht.scheduleadd')}}" class="btn btn-link btn-soft-light bg-primary ">
@@ -43,15 +43,10 @@
                      <thead>
                         <tr>
                            <th>No</th>
-                           <th>Tên </th>
-
-                           <th>Hình ảnh</th>
-                           <th>Hình ảnh *</th>
-                           <th>Giá</th>
+                        
                            <th>Danh mục</th>
                            <th>Ngày đi</th>
                            <th>Thời gian đi</th>                          
-                           <th>Điểm khởi hành</th>
                            <th>Trạng thái</th>
                            <th></th>
                         </tr>
@@ -64,18 +59,13 @@
 
                         <tr>
                            <td scope="row">{{ $value["id"]}}</td>
-                           <td>{{ $value["name"]}}</td>
+                  
                           
-                           <td>
-                              <img width="100" height="100"
-                                 src="{{asset('public/file/img/img_product/'.$value->image)}}" alt="">
-                           </td>
-                           <td>{{ $value["images"]}}</td>
-                           <td>{{ $value["price"]}}</td>
-                           <td>{{ $value["idcat"]}}</td>
-                           <td>{{ $value["departureday"]}}</td>
-                           <td>{{ $value["keyword"]}}</td>
-                           <td>{{ $value["departurelocation"]}}</td>
+                         
+       
+                           <td>{{ $value["date_start"]}}</td>
+                           <td>{{ $value["date_end"]}}</td>
+                           <td>{{ $value["tour_code"]}}</td>
                            <td>
                               @if($value->status == 1)
                               <span

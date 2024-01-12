@@ -488,3 +488,82 @@ color: #FFFFFF !important;
     color: red;
     margin-left: 5px; /* Để tạo khoảng cách giữa * và nội dung trường */
 }
+/* css details ////////////////////*/
+.img-container {
+    padding-top: 75%;
+    
+
+}
+
+.img-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.example-text {
+    line-height: 2.5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+@media only screen and (max-width: 600px) {
+
+    th,
+    td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+#myDIV {
+    overflow: hidden;
+    max-height: 100%;
+    transition: max-height 0.5s ease;
+}
+
+.example-text {
+
+    overflow: hidden;
+    position: relative;
+
+}
+
+#myDIV:first-child:first-letter {
+    font-size: 1.5em;
+
+    color: #e74c3c;
+
+    font-weight: bold;
+
+}
+
+.rounded-image {
+    border-radius: 15px;
+}
+
+#xemthem {
+    cursor: pointer;
+    color: #46b2d6;
+}
+
+#collapseBtn {
+    cursor: pointer;
+    color: #46b2d6;
+}
+/* end css details ////////////////*/

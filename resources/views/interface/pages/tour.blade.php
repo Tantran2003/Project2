@@ -4,10 +4,10 @@
     .custom-image-container {
         position: relative;
         width: 100%;
-      
+
         overflow: hidden;
         margin: 0;
-       
+
     }
 
     .custom-image-container a img {
@@ -16,15 +16,17 @@
         object-fit: cover;
         display: block;
         margin: 0;
-     /
+
     }
-    .rounded{
-        border-radius:1rem !important;
+
+    .rounded {
+        border-radius: 1rem !important;
     }
-.rounded-image{
-    border-top-left-radius: 1rem !important;
-    border-bottom-left-radius: 1rem !important;
-}
+
+    .rounded-image {
+        border-top-left-radius: 1rem !important;
+        border-bottom-left-radius: 1rem !important;
+    }
 </style>
 <?php
 
@@ -86,7 +88,7 @@
                         <h1 class="mb-5">Du lịch</h1>
                     </div>
                     <!-- Bạn có thể thêm thẻ card vào đây -->
-        <?php  foreach($loadproduct as $item) { ?>          
+                    <?php  foreach($loadproduct as $item) { ?>
                     @php
                     $dateStart = $dateStart ?? now()->toDateString(); // Gán giá trị mặc định nếu không tồn tại
                     @endphp
@@ -131,7 +133,7 @@
 
                                         </div>
                                         <div class="">
-                                            <a href="{{ route('gd.details_tour', ['key' => $item->id, 'dateStart' => $tourDate->date_start,'dateEnd' => $tourDate->date_end,'tourcode' => $tourDate->tour_code]) }}"
+                                            <a href="{{ route('gd.details_tour', [ $item->id,$tourDate->id,khongdau($item->name) ]) }}"
                                                 class="btn btn-sm px-3 border border-info text-info "><i
                                                     class="fas fa-eye mr-1"></i>&nbsp;
                                                 Thông tin</a>
@@ -146,9 +148,9 @@
                     </div>
                     @endforeach
                     @else
-              
+
                     @endif
-                   <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
 

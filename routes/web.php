@@ -10,7 +10,8 @@ use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
 use App\Http\Controllers\Interface\UserTourController; 
-
+use App\Http\Controllers\Interface\DetailsController;
+use App\Http\Controllers\Interface\CommentsController;
 //Checkout
 Route::get('/checkout/{scheid}',[UserTourController::class,'index'])->name('gd.checkout');
 Route::get('/paymentPost',[UserTourController::class,'paymentPost']);
@@ -20,12 +21,12 @@ Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
 Route::get("/tour-list/{key}", [TourlistController::class, 'index'])->name("gd.index_tour");
 //details
-Route::get("/details/{key}/{dateStart?}/{dateEnd?}/{tourcode?}", [DetailsController::class, 'index'])->name("gd.details_tour");
-//comments
+Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("gd.details_tour");
+//comments {dateStart?}/{dateEnd?}/{tourcode?}
 Route::get("/comments", [CommentsController::class, 'index'])->name ('gd.comments');
 //search
-Route::get("/search/{key?}", [HomeController::class, 'search'])->name("gd.search"); //{key?} ? la nhap gi cung dc
-// Route::post('/autocomplete-ajax','HomeController@autocomplete_ajax');
+Route::post("/search/{key?}", [HomeController::class, 'search'])->name("gd.search"); //{key?} ? la nhap gi cung dc
+
 //filter
 Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->name('filter.products');
 //login
