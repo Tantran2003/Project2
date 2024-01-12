@@ -17,7 +17,7 @@ try {
       $data['loadproduct'] =Products::where('idcat',$id)->get();
    }  
    
-   return view('interface/pages/tour',compact('data', 'scheid'));
+   return view('interface/pages/tour',$data);
 } catch (\Throwable $th) {
    return redirect()->route('gd.home');
 }

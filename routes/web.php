@@ -10,6 +10,8 @@ use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
 use App\Http\Controllers\Interface\UserTourController; 
+use App\Http\Controllers\Interface\DetailsController;
+use App\Http\Controllers\Interface\CommentsController;
 
 //Checkout
 Route::get('/checkout/{scheid}',[UserTourController::class,'index'])->name('gd.checkout');
