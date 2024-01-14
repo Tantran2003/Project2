@@ -1,42 +1,41 @@
+
+
 @extends('interface.layout_interface')
 
 @section('content')
-@foreach ($data as $d)
-    <div class="container my-5">
+@foreach ($checkout as $d)
 
-        <div class="row my-4">
-            <h4><strong class="text-muted">Enter Infomation & Payment</strong></h4>
+<div class="container my-5">
+
+    <div class="row my-4">
+        <h4><strong class="text-muted">Enter Information & Payment</strong></h4>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <a href=""><img width="500px" height="300px" style="border:1px solid rgba(0, 0, 0, 0);border-radius:10px"
+                    src="{{ $d->image }}" alt="Tour Image"></a>
         </div>
-        <hr>
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <a href=""><img width="500px" height="300px"
-                            style="border:1px solid rgba(0, 0, 0, 0);border-radius:10px"
-                            src="" alt=""></a>
-                </div>
-                <div class="col-sm-8 bg-light">
-                    <div class="m-4">
-                        <h5><strong>{{ $d->name }}</strong></h5> <br><br>
-                        @php
-                            $date = strtotime($d->departureday);
-                        @endphp
-                        <small>Date Start</small> <strong>{{ date('d-m-y', $date) }}</strong> <br><br>
-                        <small>Duration </small> <strong>{{ $d->keyword }}days</strong> <br><br>
-                        <small>Place Start</small> <strong>{{ $d->departurelocation }}</strong>
-                    </div>
-                </div>
+        <div class="col-sm-8 bg-light">
+            <div class="m-4">
+                <h5><strong>{{ $d->name }}</strong></h5> <br><br>
+                <small>Date Start</small> <strong>{{ date('d-m-y', strtotime($d->date_start)) }}</strong> <br><br>
+                <small>Duration </small> <strong>{{ $d->keyword }} days</strong> <br><br>
+                <small>Place Start</small> <strong>{{ $d->departurelocation }}</strong>
             </div>
-
+        </div>
     </div>
 
-    <div class="container mb-5">
+    <div class="container my-5">
         <h5><strong class="text-muted">Communications</strong></h5>
 
         <div class="row">
             <div class="col-sm-7 bg-light p-3">
-                <form action="{{url('interface/pages/paymentPost')}}" onsubmit="return validateForm()" name="form">
-                    <input type="hidden" name="schedule_id" value="{{$d->schedule_id}}">
+                <form action="{{ url('interface/pages/paymentPost') }}" method='post' onsubmit="return validateForm()"
+                    name="form">
+                    @csrf
+                    <input type="hidden" name="id" value="{{$d->id}}">
                     <input type="hidden" name="departurelocation" value="{{$d->departurelocation}}">
                     <input type="hidden" name="date_start" value="{{$d->date_start}}">
                     <input type="hidden" name="date_end" value="{{$d->date_end}}">
@@ -50,16 +49,17 @@
                     <input type="hidden" name="price1" value="{{$d->price1}}">
                     <input type="hidden" name="price2" value="{{$d->price2}}">
                     <input type="hidden" name="price3" value="{{$d->price3}}">
+
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            Name<input type="name" class="form-control" placeholder="Enter name" name="name"
-                                value="{{ session('userName') }}" id="name">
-
+                            <label for="name">Name</label>
+                            <input type="name" class="form-control" placeholder="Enter name" name="name"
+                                value="{{ old('name', session('userName')) }}" id="name" required>
                         </div>
                         <div class="col-sm-6">
-                            Email<input type="email" class="form-control" placeholder="Enter email" name="email"
-                                value="{{ session('userEmail') }}" id="email">
-
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" placeholder="Enter email" name="email"
+                                value="{{ old('email', session('userEmail')) }}" id="email" required>
                         </div>
                     </div>
                     <div class="row p-3">
@@ -75,7 +75,6 @@
                         </div>
 
                     </div>
-
                     <h5><strong class="text-muted">Passenger</strong></h5>
                     <div class="row p-3">
                         <div class="col-sm-6">
@@ -149,84 +148,118 @@
                     </div>
                 </form>
             </div>
-            @endforeach
+            <div class="col-sm-7 bg-light p-3">
+                <div>
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Tour</h5>
+                        <div class="d-flex justify-content-between">
+                            <p>{{$d->name}}</p>
+                            <p>${{$d->price}}</p>
+                        </div>
 
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Subtotal</h6>
+                            <h6 class="font-weight-medium"></h6>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">Flat Rate <br> Fixed Rate $50 </h6>
+
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">$</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Trip Summary Section -->
             @isset($passenger)
             <div class="col-sm-4 ml-3 p-3"
-            style="background-color: aliceblue;border:1px solid rgba(0, 0, 0, 0);border-radius:5px">
-            <h4 class="text-danger">Trip summary</h4>
+                style="background-color: aliceblue;border:1px solid rgba(0, 0, 0, 0);border-radius:5px">
+                <h4 class="text-danger">Trip summary</h4>
 
-            <div class="row mt-5 mb-2">
-                <div class="col-sm-3">
-                    <a href=""><img width="100px" style="border:1px solid rgba(0, 0, 0, 0);border-radius:3px"
-                            src="https://media.travel.com.vn/tour/tfd_220512092523_383290.jpg" alt=""></a>
+                <div class="row mt-5 mb-2">
+                    <div class="col-sm-3">
+                        <a href=""><img width="100px" style="border:1px solid rgba(0, 0, 0, 0);border-radius:3px"
+                                src="https://media.travel.com.vn/tour/tfd_220512092523_383290.jpg" alt=""></a>
+                    </div>
+                    <div class="col-sm-9">
+                        <span style="font-weight: bold">{{$tour_name}}</span>
+                    </div>
                 </div>
-                <div class="col-sm-9">
-                    <span style="font-weight: bold">{{$tour_name}}</span>
-                </div>
-            </div>
 
-            <div class="row mt-5 mb-5">
-                <div class="col-sm-5"><span>Passenger</span></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5"> <strong class="badge bg-danger"><span
-                            style="font-size: 15px">{{$passenger}}</span></strong> <strong> Passenger </strong></div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm-5"><span style="font-size: 20px">Adults</span></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5"><strong>{{$person1}} x {{$price1}}.00$</strong></div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm-5"><span style="font-size: 20px">Children</span></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5"><strong>{{$person2}} x {{$price2}}.00$</strong></div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm-5"><span style="font-size: 20px">Young</span></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5"><strong>{{$person3}} x {{$price3}}.00$</strong></div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-sm-5"><span style="font-size: 20px">Baby</span></div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5"><strong>{{$person4}} x {{$price4}}.00$</strong></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                    <hr>
+                <div class="row mt-5 mb-5">
+                    <div class="col-sm-5"><span>Passenger</span></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5"> <strong class="badge bg-danger"><span
+                                style="font-size: 15px">{{$passenger}}</span></strong> <strong> Passenger
+                        </strong></div>
                 </div>
-                <div class="col-sm-1"></div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-sm-5">
-                    <h4><strong>AMOUNT</strong></h4>
+                <div class="row mt-3">
+                    <div class="col-sm-5"><span style="font-size: 20px">Adults</span></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5"><strong>{{$person1}} x {{$price1}}.00$</strong></div>
                 </div>
-                <div class="col-sm-2"></div>
-                <div class="col-sm-5">
-                    <h3><strong class="text-danger">{{$amount}}.00$</strong></h3>
+                <div class="row mt-3">
+                    <div class="col-sm-5"><span style="font-size: 20px">Children</span></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5"><strong>{{$person2}} x {{$price2}}.00$</strong></div>
                 </div>
-            </div>
+                <div class="row mt-3">
+                    <div class="col-sm-5"><span style="font-size: 20px">Young</span></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5"><strong>{{$person3}} x {{$price3}}.00$</strong></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-5"><span style="font-size: 20px">Baby</span></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5"><strong>{{$person4}} x {{$price4}}.00$</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <hr>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-sm-5">
+                        <h4><strong>AMOUT</strong></h4>
+                    </div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5">
+                        <h3><strong class="text-danger">{{$amount}}.00$</strong></h3>
+                    </div>
+                </div>
 
-            <div class="row mt-5">
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                    <h3 style="text-align: center" class="alert alert-success">BOOKING SUCCSESS!!!</h3>
+                <div class="row mt-5">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <h3 style="text-align: center" class="alert alert-success">BOOKING SUCCSESS!!!</h3>
+                    </div>
+                    <div class="col-sm-1"></div>
                 </div>
-                <div class="col-sm-1"></div>
-            </div>
 
-        </div>
+            </div>
             @endisset
 
         </div>
-
     </div>
+</div>
+
+@endforeach
+
 @endsection
 
 @section('title')
-    Payment
+Payment
 @endsection
 
 @section('linkcss')
@@ -237,15 +270,18 @@
 
 @section('page-script')
 <script>
-   function validateForm() {
-  let name = document.forms["form"]["name"].value;
-  let email = document.forms["form"]["email"].value;
-  let phone = document.forms["form"]["phone"].value;
-  let address = document.forms["form"]["address"].value;
-  if (name == "" || email == "" || phone == "" || address == "") {
-    alert("All communication must be filled out");
-    return false;
-  }
-}
+    function validateForm() {
+        let name = document.forms["form"]["name"].value;
+        let email = document.forms["form"]["email"].value;
+        let phone = document.forms["form"]["phone"].value;
+        let address = document.forms["form"]["address"].value;
+
+        if (name == "" || email == "" || phone == "" || address == "") {
+            alert("All communication fields must be filled out");
+            return false;
+        }
+
+        return true; // Form is valid
+    }
 </script>
 @endsection

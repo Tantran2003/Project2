@@ -13,8 +13,8 @@ use App\Http\Controllers\Interface\UserTourController;
 use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\CommentsController;
 //Checkout
-Route::get('/checkout/{scheid}',[UserTourController::class,'index'])->name('gd.checkout');
-Route::get('/paymentPost',[UserTourController::class,'paymentPost']);
+Route::get('/checkout/{key}/{name}',[UserTourController::class,'index'])->name('gd.checkout');
+Route::get('/paymentPost/{key}/{name}',[UserTourController::class,'paymentPost'])->name('gd.payment');
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
