@@ -1,32 +1,37 @@
-
-
 @extends('interface.layout_interface')
 
 @section('content')
 @foreach ($checkout as $d)
 
-<div class="container my-5">
+<div class="container-xxl my-5" style=" max-width: 1320px;">
 
     <div class="row my-4">
         <h4><strong class="text-muted">Enter Information & Payment</strong></h4>
     </div>
     <hr>
-
     <div class="row">
         <div class="col-sm-4">
-            <a href=""><img width="500px" height="300px" style="border:1px solid rgba(0, 0, 0, 0);border-radius:10px"
-                    src="{{ $d->image }}" alt="Tour Image"></a>
+            <img width="500px" height="315px" style="border:1px solid rgba(0, 0, 0, 0);border-radius:10px"
+                    src="{{asset('public/file/')}}/img/img_product/{{$d->image}}" alt="Tour Image">
         </div>
         <div class="col-sm-8 bg-light">
             <div class="m-4">
-                <h5><strong>{{ $d->name }}</strong></h5> <br><br>
-                <small>Date Start</small> <strong>{{ date('d-m-y', strtotime($d->date_start)) }}</strong> <br><br>
-                <small>Duration </small> <strong>{{ $d->keyword }} days</strong> <br><br>
-                <small>Place Start</small> <strong>{{ $d->departurelocation }}</strong>
+
+                <div>
+                    <h5><strong>{{ $d->name }}</strong></h5>
+                </div>
+                <div class="pt-3"><small>Mã tour </small>&nbsp; <strong>{{ $d->tour_code }} </strong></div> 
+                <div class="pt-3" > <small>Ngày đi</small> &nbsp; <strong>{{ date('d-m-Y', strtotime($d->date_start)) }}</strong></div>
+           
+                <div class="pt-3"> <small>Ngày về</small> &nbsp; <strong>{{ date('d-m-Y', strtotime($d->date_end)) }}</strong></div>
+                <div class="pt-3"><small>Thời gian đi </small>&nbsp;  <strong>{{ $d->keyword }} </strong></div>
+                <div class="pt-3"> <small>Điểm khởi hành</small> &nbsp; <strong>{{ $d->departurelocation }}</strong> </div>
+                <div class="pt-3"> <small>Điểm đến</small> &nbsp; <strong>{{ $d->arrivallocation }}</strong></div>
+                <div class="pt-3"> <small>Phương tiện di chuyển</small>&nbsp;  <strong>{{ $d->vehicle }}</strong></div>
+
             </div>
         </div>
     </div>
-
     <div class="container my-5">
         <h5><strong class="text-muted">Communications</strong></h5>
 
@@ -79,8 +84,8 @@
                     <div class="row p-3">
                         <div class="col-sm-6">
 
-                            Adults<input type="number" min="1" value="1" class="form-control"
-                                placeholder="Enter Adults" name="person1">
+                            Adults<input type="number" min="1" value="1" class="form-control" placeholder="Enter Adults"
+                                name="person1">
                         </div>
                         <div class="col-sm-6">
                             Children<input type="number" min="0" value="0" class="form-control"
@@ -93,17 +98,18 @@
                                 placeholder="Enter Young Children" name="person3">
                         </div>
                         <div class="col-sm-6 mt-3">
-                            Baby<input type="number" min="0" value="0" class="form-control"
-                                placeholder="Enter Baby" name="person4">
+                            Baby<input type="number" min="0" value="0" class="form-control" placeholder="Enter Baby"
+                                name="person4">
                         </div>
                     </div>
 
                     <div class="row mt-3 alert alert-secondary">
-                        <div style="font-size: 15px" class="col-sm-6">. Adults born before <strong >July 23, 2010
+                        <div style="font-size: 15px" class="col-sm-6">. Adults born before <strong>July 23, 2010
                             </strong></div>
                         <div style="font-size: 15px" class="col-sm-6">. Children born from<strong> July 23, 2017 to July
                                 23, 2020</strong></div>
-                        <div style="font-size: 15px" class="col-sm-6">. Young Children born from<strong> July 23, 2010 to July
+                        <div style="font-size: 15px" class="col-sm-6">. Young Children born from<strong> July 23, 2010
+                                to July
                                 24, 2017</strong></div>
                         <div style="font-size: 15px" class="col-sm-6">. Baby born from<strong> 23/07/2020 to
                                 24/07/2022</strong></div>
@@ -120,8 +126,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="radio2" name="payment"
-                                    value="card">
+                                <input type="radio" class="form-check-input" id="radio2" name="payment" value="card">
                                 <label class="form-check-label" for="radio2">Credit Card Payment</label>
                             </div>
                         </div>
@@ -139,16 +144,10 @@
                         <textarea name="" id="" cols="5" rows="5"></textarea>
                     </div>
 
-                    <div class="row mb-3 mt-5">
-                        <div class="col-sm-8"></div>
-                        <div class="col-sm-4"><a href="{{url('user/paymentPost')}}"><button class="btn btn-primary btn-lg"><strong> <small
-                                            class="text-primary">----</small> BOOK <small
-                                            class="text-primary">----</small> </strong></button></a></div>
 
-                    </div>
                 </form>
             </div>
-            <div class="col-sm-7 bg-light p-3">
+            <div class="col-sm-5 bg-light p-3">
                 <div>
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Order Total</h4>
@@ -176,6 +175,12 @@
                             <h5 class="font-weight-bold">Total</h5>
                             <h5 class="font-weight-bold">$</h5>
                         </div>
+                    </div>
+                    <div class="d-flex justify-content-end ">
+
+                        <div class=" "><a href="{{url('user/paymentPost')}}"><button
+                                    class="btn btn-primary btn-lg   "><strong> Đặt ngay </strong></button></a></div>
+
                     </div>
                 </div>
             </div>
