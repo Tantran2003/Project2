@@ -15,4 +15,8 @@ class Schedule extends Model
     {
         return $this->belongsTo(Products::class, 'tour_id', 'id');
     }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'schedule_id', 'id');
+    }
 }
