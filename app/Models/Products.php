@@ -12,10 +12,14 @@ class Products extends Model
     // protected $casts = [
     //     'departuredate' => 'datetime',
     // ];
-    protected $primarykey = "id";
+    protected $primaryKey = "id";
     public $timestamps = false;
     public function schedule()
     {
         return $this->hasMany(Schedule::class, 'tour_id', 'id');
+    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'packageID', 'id');
     }
 }

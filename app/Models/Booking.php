@@ -8,14 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $table = 'booking';
+    protected $fillable = [
+        'packageID',
+        'bookingdate',
+        'adults',
+        'children',
+        'youngchildren',
+        'babies',
+        'specialrequests',
+        'contactname',
+        'contactemail',
+        'contactphone',
+        'paymentmethod',
+        'totalcost',
+    ];
     protected $primaryKey = 'book_id';
     public $timestamps = false;
-    public function schedule()
+    public function participants()
     {
-        return $this->belongsTo(Schedule::class, 'schedule_id', 'id');
-    }
-    public function product()
-    {
-        return $this->belongsTo(Products::class, 'tour_id', 'id');
+        return $this->hasMany(Participant::class);
     }
 }

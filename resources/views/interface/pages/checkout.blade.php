@@ -184,104 +184,79 @@
 
                 </form>
             </div>
-            <div class="col-sm-5 bg-light p-3">
-                <div>
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="font-weight-medium mb-3">Tour</h5>
-                        <div class="d-flex justify-content-between">
-                            <p><p>{{$d->name}}</p></p>
-                            <p>${{$d->price}}</p>
-                        </div>
-
-                        <hr class="mt-0">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium"></h6>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">Flat Rate <br> Fixed Rate $50 </h6>
-
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$</h5>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end ">
-
-                        <div class=" "><a href="{{url('user/paymentPost')}}"><button
-                                    class="btn btn-primary btn-lg   "><strong> Đặt ngay </strong></button></a></div>
-
-                    </div>
-                </div>
-            </div>
+                        
             @endforeach
             <!-- Trip Summary Section -->
-            
-            @isset($passenger)
-            <div class="col-sm-4 ml-3 p-3"
-                style="background-color: aliceblue;border:1px solid rgba(0, 0, 0, 0);border-radius:5px">
-                <h4 class="text-danger">Trip summary</h4>
-                <div class="row mt-5 mb-5">
-                    <div class="col-sm-5"><span>Passenger</span></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5"> <strong class="badge bg-danger"><span
-                                style="font-size: 15px">{{$passenger}}</span></strong> <strong> Passenger
-                        </strong></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-5"><span style="font-size: 20px">Adults</span></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5"><strong>{{$person1}} x {{$price}}.00$</strong></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-5"><span style="font-size: 20px">Children</span></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5"><strong>{{$person2}} x {{$price1}}.00$</strong></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-5"><span style="font-size: 20px">Young</span></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5"><strong>{{$person3}} x {{$price2}}.00$</strong></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-sm-5"><span style="font-size: 20px">Baby</span></div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5"><strong>{{$person4}} x {{$price3}}.00$</strong></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <hr>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-sm-5">
-                        <h4><strong>AMOUT</strong></h4>
-                    </div>
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-5">
-                        <h3><strong class="text-danger">${{$amount}}</strong></h3>
-                    </div>
-                </div>
+            @if(isset($passenger))
+        <div class="col-sm-4 ml-3 p-3" style="background-color: aliceblue;border:1px solid rgba(0, 0, 0, 0);border-radius:5px">
+            <!-- Trip Summary Content -->
+            <h4 class="text-danger">Trip summary</h4>
+            <!-- ... Your existing code ... -->
 
-                <div class="row mt-5">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-10">
-                        <h3 style="text-align: center" class="alert alert-success">BOOKING SUCCSESS!!!</h3>
-                    </div>
-                    <div class="col-sm-1"></div>
-                </div>
+            <!-- Dynamic Price Adjustment using JavaScript -->
+            <script>
+                function updateTotalAmount() {
+                    // Get quantities and prices
+                    var person1 = parseInt(document.getElementById('person1').value);
+                    var person2 = parseInt(document.getElementById('person2').value);
+                    var person3 = parseInt(document.getElementById('person3').value);
+                    var person4 = parseInt(document.getElementById('person4').value);
 
+                    var price = parseFloat("{{ $price }}");
+                    var price1 = parseFloat("{{ $price1 }}");
+                    var price2 = parseFloat("{{ $price2 }}");
+                    var price3 = parseFloat("{{ $price3 }}");
+
+                    // Calculate total amount
+                    var amount = (person1 * price) + (person2 * price1) + (person3 * price2) + (person4 * price3);
+
+                    // Update the total amount on the page
+                    document.getElementById('totalAmount').innerText = "$" + amount.toFixed(2);
+                }
+            </script>
+
+            <div class="row p-3">
+                <div class="col-sm-6">
+                    <label for="person1">Adults</label>
+                    <input type="number" min="0" value="1" class="form-control" placeholder="Enter Adults" name="person1" id="person1" onchange="updateTotalAmount()">
+                </div>
+                <div class="col-sm-6">
+                    <label for="person2">Children</label>
+                    <input type="number" min="0" value="0" class="form-control" placeholder="Enter Children" name="person2" id="person2" onchange="updateTotalAmount()">
+                </div>
+                <div class="col-sm-6">
+                    <label for="person2">Young Children</label>
+                    <input type="number" min="0" value="0" class="form-control" placeholder="Enter Young Children" name="person3" id="person3" onchange="updateTotalAmount()">
+                </div>
+                <div class="col-sm-6">
+                    <label for="person2">Baby</label>
+                    <input type="number" min="0" value="0" class="form-control" placeholder="Enter Baby" name="person4" id="person4" onchange="updateTotalAmount()">
+                </div>
             </div>
-            @endisset
+            <!-- ... Add similar rows for Young Children and Baby ... -->
+
+            <div class="row mt-5">
+                <div class="col-sm-5">
+                    <h4><strong>AMOUNT</strong></h4>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5">
+                    <h3><strong id="totalAmount" class="text-danger">${{$amount}}</strong></h3>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <h3 style="text-align: center" class="alert alert-success">BOOKING SUCCESS!!!</h3>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </div>
+        @endif
+
+            
+            
 
         </div>
     </div>
@@ -312,10 +287,8 @@ Payment
         if (name == "" || email == "" || phone == "" || address == "") {
             alert("All communication fields must be filled out");
             return false;
-        }
-
         return true; // Form is valid
     }
-
+    }
 </script>
 @endsection

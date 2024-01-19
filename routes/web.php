@@ -9,13 +9,13 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
-use App\Http\Controllers\Interface\UserTourController; 
+use App\Http\Controllers\Interface\BookingController; 
 use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\CommentsController;
 //Checkout
-Route::match(['get', 'post'],'/checkout/{key}/{name}',[UserTourController::class,'index'])->name('gd.checkout');
-Route::match(['get', 'post'], '/interface/paymentgate', [UserTourController::class,'paymentPost'])->name('gd.payment');
-
+Route::match(['get', 'post'],'/booking/{key}/{name}', [BookingController::class, 'create'])->name('gd.createform');
+Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("gd.details_tour");
+Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("gd.details_tour");
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
