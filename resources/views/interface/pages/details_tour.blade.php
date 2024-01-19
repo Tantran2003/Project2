@@ -17,8 +17,8 @@
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
                 data-wow-delay="0.1s">
                 <div class="  ">
-                    <button class="btn btn-primary btn-lg btn-block px-5">Đặt Ngay</button>
-
+                    <a href="{{ route('gd.createform',[$detail->id,khongdau($detail->name)])}}" class="btn btn-primary btn-lg btn-block px-5">Đặt Ngay</a>
+               
 
                     <h4 class="text-danger pt-4">{{$detail->price}}<span class="text-dark fs-6">/khách</span></h4>
 
