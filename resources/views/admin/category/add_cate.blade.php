@@ -37,14 +37,7 @@
                 {!!$errors->first('image','<div class="has-error text-danger">:message</div>')!!}
             </div>
         </div>
-        <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Level</label>
-            <div class="col-sm-5">
-                <input type="text" class="form-control" value="{{old('level')}}" name="level">
-                {!!$errors->first('level','<div class="has-error text-danger">:message</div>')!!}
-
-            </div>
-        </div>
+        
         <div class="mb-3  ">
             <label for="" class="col-sm-2 col-form-label">Status</label>
             <div class="form-check form-check-inline ">

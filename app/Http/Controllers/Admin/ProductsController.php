@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
@@ -22,8 +23,6 @@ class ProductsController extends Controller
         "keyword" => "required",
         "vehicle" => "required",
         "desc" => "required",
-
-
         // "content" => "required",
         "price" => "required",
         "price1" => "required",
@@ -50,6 +49,10 @@ class ProductsController extends Controller
       $prod->price1 = $request->price1;
       $prod->price2 = $request->price2;
       $prod->price3 = $request->price3;
+      $prod->idcat = $request->idcat;
+      $prod->departurelocation = $request->departurelocation;
+      $prod->arrivallocation = $request->arrivallocation;
+      $prod->status = $request->status;
       if ($request->hasFile("image")) {
         $img = $request->file("image");
         $nameimage = time() . "_" . $img->getClientOriginalName();
@@ -68,15 +71,7 @@ class ProductsController extends Controller
         $prod->images=json_encode($image);
       }
       // $prod->images = $request->images;
-      $prod->idcat = $request->idcat;
       // $prod->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
-      $prod->departurelocation = $request->departurelocation;
-      $prod->arrivallocation = $request->arrivallocation;
-      $prod->vehicle = $request->vehicle;
-     
-
-      
-      $prod->status = $request->status;
       $prod->save();
       toastr()->success('Thêm thành công!');
       // Session::flash('note','Successfully !');
@@ -90,14 +85,14 @@ class ProductsController extends Controller
   }
   public function update(Request $request, $id)
   {
-    $data["products"] = Products::find($id);
+    $data["load"] = Products::find($id);
     if ($request->isMethod("post")) {
       $this->validate($request, [
         "name" => "required",
         "keyword" => "required",
         "vehicle" => "required",
         "desc" => "required",
-        "content" => "required",
+      
         "price" => "required",
         "price1" => "required",
         "price2" => "required",
@@ -109,7 +104,7 @@ class ProductsController extends Controller
         "departurelocation" => "required",
 
       ]);
-      $edit = new Products();
+      $edit = Products::find($id);
       $edit->name = $request->name;
       $edit->keyword = $request->keyword;
       $edit->vehicle = $request->vehicle;
@@ -129,6 +124,7 @@ class ProductsController extends Controller
         //gan ten hinh anh vao cot image
         $edit->image = $nameimage;
       }
+
       if($request->hasfile('images')) {
         if($edit->images!=""){
           foreach (json_decode($edit->images) as $key) {
@@ -143,19 +139,14 @@ class ProductsController extends Controller
         }
         $edit->images=json_encode($image);
 }
-      $edit->price = $request->price;
-      $edit->price1 = $request->price1;
-      $edit->price2 = $request->price2;
-      $edit->price3 = $request->price3;
+ 
       $edit->idcat = $request->idcat;
       // $edit->departureday = date('Y-m-d H:i:s', strtotime($request->departuredate));
       $edit->departurelocation = $request->departurelocation;
       $edit->arrivallocation = $request->arrivallocation;
-      $edit->vehicle = $request->vehicle;
       $edit->status = $request->status;
-      $edit->content = $request->content;
       $edit->save();
-      toastr()->success(' Update success!');
+      toastr()->success('Cập nhật thành công!');
       return redirect()->route("ht.products");
     } else {
       $data["cate"] = Category::where("status", 1)->get();
@@ -164,17 +155,33 @@ class ProductsController extends Controller
 
   }
   public function delete($id)
-  {
+{
     try {
-      $load = Products::find($id);
-      @unlink('public/file/img/img_product/'.$load->image);
-      Products::destroy($id);
-      toastr()->success('Delete success !');
-      return redirect()->route('ht.products'); //chuyen ve trang category
-    } catch (\Throwable $th) {
+        if (Schedule::where('tour_id', $id)->exists()) {
+        
+            toastr()->error('Vui lòng xóa hết lịch trình của chuyến tour này trước khi xóa tour');
+            return redirect()->route('ht.products');
+        }
+        $delete = Products::find($id);
 
-      return redirect()->route('ht.products'); //chuyen ve trang category
+        @unlink('public/file/img/img_product/' . $delete->image);
+        if ($delete->images != "") {
+          // Giải mã JSON để có danh sách tên file hình ảnh
+          $images = json_decode($delete->images);
+
+          // Xóa hình ảnh
+          foreach ($images as $key) {
+              @unlink('public/file/img/img_product/' . $key);
+          }
+      }
+        Products::destroy($id);
+
+        toastr()->success('Xóa thành công !');
+        return redirect()->route('ht.products');
+    } catch (\Throwable $th) {
+        return redirect()->route('ht.products');
     }
-  }
+}
+
 
 }

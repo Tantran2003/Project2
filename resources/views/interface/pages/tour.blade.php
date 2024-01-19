@@ -110,8 +110,10 @@
                                     <div class="card-body p-4 p-0 pt-4">
                                         <div class="mb-4">
                                             <div class="d-flex justify-content-between">
-                                                <p><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi: {{
-                                                    $tourDate->date_start }}</p>
+                                                <p><i class="fa fa-calendar-alt text-primary me-2"></i><b>Ngày đi:</b>
+                                                    &nbsp;{{ date('d-m-Y', strtotime($tourDate->date_start)) }}
+                                                    &nbsp;<b>Giờ đi:</b> &nbsp;{{ date('H:i',
+                                                    strtotime($tourDate->date_start)) }}</p>
                                                 <p> {{$item->keyword}}</p>
                                             </div>
                                             <p><b>Mã tour:</b> {{ $tourDate->tour_code }}</p>
@@ -137,7 +139,8 @@
                                                 class="btn btn-sm px-3 border border-info text-info "><i
                                                     class="fas fa-eye mr-1"></i>&nbsp;
                                                 Thông tin</a>
-                                            <a href="{{route('gd.checkout',[$item->id,$tourDate->id,khongdau($item->name) ])}}" class="btn btn-sm btn-primary px-3 mx-2"><i
+                                            <a href="{{route('gd.checkout',[$item->id,$tourDate->id,khongdau($item->name) ])}}"
+                                                class="btn btn-sm btn-primary px-3 mx-2"><i
                                                     class="fas fa-shopping-cart mr-1"></i>&nbsp;
                                                 Đặt ngay</a>
                                         </div>

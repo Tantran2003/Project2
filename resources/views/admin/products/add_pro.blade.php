@@ -109,6 +109,7 @@
                     </option>
                     <option value="Đà Nẵng" {{ old('arrivallocation')=='Đà Nẵng' ? 'selected' : '' }}>Đà Nẵng</option>
                     <option value="Đà Lạt" {{ old('arrivallocation')=='Đà Lạt' ? 'selected' : '' }}>Đà Lạt</option>
+                    <option value="Quảng Bình" {{ old('arrivallocation')=='Quảng Bình' ? 'selected' : '' }}>Quảng Bình</option>
 
                     <!-- Thêm các option khác nếu cần -->
                 </select>
@@ -182,7 +183,7 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
-                <button class="btn btn-success" type="submit" href="" role="button">Thêm</button>
+                <button class="btn btn-success" type="submit" >Thêm</button>
                 <a class="btn btn-secondary" href="{{route('ht.products')}}" role="button">Quay lại</a>
 
             </div>

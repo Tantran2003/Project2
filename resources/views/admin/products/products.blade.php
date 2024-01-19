@@ -9,6 +9,8 @@ max-width:150px;
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 <div class="iq-navbar-header" style="height: 215px;">
    <div class="container-fluid iq-container">
@@ -21,7 +23,7 @@ max-width:150px;
                </div>
                <div>
                   <a href="{{route('ht.productsadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                     Thêm tour
+                     Tạo mới
                   </a>
                </div>
             </div>
@@ -111,9 +113,9 @@ max-width:150px;
                            <td class="td-table">
                               <a href="{{route('ht.productsupdate',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-                              <a href="{{route('ht.productsdelete',$value['id'])}}" class="btn "><i
-                                    class="fa-regular fa-trash-can" style="color: red;"></i></a>
-                                    <a href="" class="btn "> <i class="fa-solid fa-eye" style="color: #1663e9;"></i></a>
+                              <a href="{{route('ht.productsdelete',$value['id'])}}" class="btn" onclick="confirmation(event)"><i
+                                    class="fa-regular fa-trash-can" style="color: red;" ></i></a>
+                                    <!-- <a href="" class="btn "> <i class="fa-solid fa-eye" style="color: #1663e9;"></i></a> -->
 
                            </td>
                         </tr>
@@ -128,6 +130,30 @@ max-width:150px;
       </div>
    </div>
 </div>
+<script>
+    function confirmation(ev) {
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');
+        console.log(urlToRedirect);
+        Swal.fire({
+            title: 'Bạn có chắc muốn xóa không?',
+            text: 'Dữ liệu sẽ bị mất vĩnh viễn!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#009900',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy',
+            customClass: {
+                container: 'custom-swal'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = urlToRedirect;
+            }
+        });
+    }
+</script>
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
