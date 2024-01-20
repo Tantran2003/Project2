@@ -14,8 +14,8 @@ use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\CommentsController;
 //Checkout
 Route::match(['get', 'post'],'/booking/{key}/{name}', [BookingController::class, 'create'])->name('gd.createform');
-Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("gd.details_tour");
-Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("gd.details_tour");
+Route::get("/details/{key}/{name}", [BookingController::class, 'showBookingDetails'])->name("gd.bookingdetail");
+Route::match(['put', 'patch'],"/update/{key}/{name}", [BookingController::class, 'updateBooking'])->name("gd.bookingupdate");
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour

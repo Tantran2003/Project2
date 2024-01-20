@@ -19,7 +19,7 @@ class BookingController extends Controller
 
         // Fetch the tour's prices from the Products model
         $tourPackage = Products::where('id', $key)->firstOrFail();
-        $name = 
+        
         // Calculate total cost based on prices and quantities
         $totalCost = ($request->input('adults') * $tourPackage->price) +
                      ($request->input('children') * $tourPackage->price1) +
@@ -52,12 +52,13 @@ class BookingController extends Controller
         }
 
         // return redirect()->route('gd.createform', ['key' => $tourPackage->id, 'name' => $tourPackage->name]);
-        return view('gd.createform', ['booking' => $booking]);
+        return view('interface/bookingform', ['booking' => $booking]);
     }
 
     public function showBookingDetails($bookingId)
     {
         $booking = Booking::with('participants')->findOrFail($bookingId);
+
 
         // Assuming you have a view named 'booking_details' to display booking details
         return view('interface/bookingconfirmation', ['booking' => $booking]);
@@ -66,8 +67,8 @@ class BookingController extends Controller
     public function updateBooking(Request $request, $bookingId)
     {
         // Validate the incoming request, you might want to create a specific request for this
-
-        $booking = Booking::findOrFail($bookingId);
+       
+        $booking = Booking::where('key', $bookingId)->firstOrFail();
 
         // Update booking details
         $booking->update([
