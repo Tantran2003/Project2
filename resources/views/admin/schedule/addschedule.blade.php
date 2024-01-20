@@ -61,8 +61,8 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
-                <button class="btn btn-success" type="submit" href="" role="button">Add</button>
-                <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Back</a>
+                <button class="btn btn-success" type="submit" href="" role="button">Lưu</button>
+                <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Quay lại</a>
             </div>
         </div>
     </form>

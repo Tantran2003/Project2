@@ -110,8 +110,10 @@
                                     <div class="card-body p-4 p-0 pt-4">
                                         <div class="mb-4">
                                             <div class="d-flex justify-content-between">
-                                                <p><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi: {{
-                                                    $tourDate->date_start }}</p>
+                                                <p><i class="fa fa-calendar-alt text-primary me-2"></i><b>Ngày đi:</b>
+                                                    &nbsp;{{ date('d-m-Y', strtotime($tourDate->date_start)) }}
+                                                    &nbsp;<b>Giờ đi:</b> &nbsp;{{ date('H:i',
+                                                    strtotime($tourDate->date_start)) }}</p>
                                                 <p> {{$item->keyword}}</p>
                                             </div>
                                             <p><b>Mã tour:</b> {{ $tourDate->tour_code }}</p>

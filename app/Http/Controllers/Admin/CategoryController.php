@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Session;
 use Intervention\Image\Facades\Image as ResizeImage;
@@ -24,14 +25,14 @@ class CategoryController extends Controller
           "keyword" => "required",
           'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
           "desc" => "required",
-          "level" => "required|numeric",
+        
   
         ]);
         $cate = new Category();
         $cate->name = $request->name;
         $cate->keyword = $request->keyword;
         $cate->desc = $request->desc;
-        $cate->level = $request->level;
+      
         $cate->status = $request->status;
         if ($request->hasFile("image")) {
           $img = $request->file("image");
@@ -69,7 +70,7 @@ class CategoryController extends Controller
           "keyword" => "required",
           'image' => 'mimes:jpeg,png,gif,jpg,ico|max:4096',
           "desc" => "required",
-          "level" => "required|numeric",
+         
         ]);
         $edit = Category::find($id);
         $edit->name = $request->name;
@@ -87,7 +88,7 @@ class CategoryController extends Controller
           $edit->image=$olddata["display"]->image;
         }
         $edit->desc = $request->desc;
-        $edit->level = $request->level;
+       
         $edit->status = $request->status;
         $edit->save();
         toastr()->success(' Update success!');
@@ -100,6 +101,11 @@ class CategoryController extends Controller
     public function delete($id)
     {
       try {
+        if (Products::where('idcat', $id)->exists()) {
+        
+          toastr()->error('Vui lòng xóa hết tour trước khi xóa danh mục tour');
+          return redirect()->route('ht.categorie');
+      }
         $load = Category::find($id);
         @unlink('public/file/img/img_category/'.$load->image);
         Category::destroy($id);

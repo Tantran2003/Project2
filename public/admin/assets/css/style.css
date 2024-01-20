@@ -561,3 +561,35 @@ body.uikit .btn-download {
   color: red;
   margin-left: 2px; /* Để tạo khoảng cách giữa * và nội dung trường */
 }
+
+/* css alert js */
+.swal2-popup {
+  width: 300px; /* Kích thước chiều rộng */
+  height: 200px; /* Kích thước chiều cao */
+}
+
+.swal2-title {
+  font-size: 18px; /* Kích thước font cho tiêu đề */
+}
+
+.swal2-content {
+  font-size: 16px; /* Kích thước font cho nội dung */
+}
+
+.swal2-actions {
+  margin-top: 10px; /* Khoảng cách từ nút đến nội dung */
+}
+
+.swal2-confirm {
+  font-size: 14px; /* Kích thước font cho nút xác nhận */
+}
+
+.swal2-cancel {
+  font-size: 14px; /* Kích thước font cho nút hủy */
+}
+.swal2-icon.swal2-warning {
+  color: red;
+  border-color: red;
+  font-size: 6px; /* Điều chỉnh kích thước font của biểu tượng "!" */
+}
+
