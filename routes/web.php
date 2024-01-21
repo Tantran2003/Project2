@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\FeedbackController;
 
+use App\Http\Controllers\Interface\ContactController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
@@ -42,6 +44,11 @@ Route::match(['get','post'],"/register", [SecureController::class, 'register'])-
 Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
 Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');
 Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd.editprofile');
+
+
+//contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 //end login
@@ -82,4 +89,11 @@ Route::middleware('Decentralization')->prefix("system")->group(function () {
     Route::match(['get', 'post'], '/account/add', [AccountController::class, 'add'])->name('ht.accountadd');
     Route::match(['get', 'post'], '/account/update/{key}', [AccountController::class, 'update'])->name('ht.accountupdate');
     Route::get('/account/delete/{key}', [AccountController::class, 'delete'])->name('ht.accountdelete');
+
+    //contact
+    
+
+Route::prefix('admin')->group(function () {
+    Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('admin.contact.index');
+});
 })->middleware(Decentralization::class);
