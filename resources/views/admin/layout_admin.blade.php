@@ -98,21 +98,22 @@
             </a>
           </li>
           <li class="nav-item">
-<<<<<<< Updated upstream
             <a class="nav-link" aria-current="page" href="{{route('admin.contact.index')}}">
               <i class="icon">
               <i class="fa-solid fa-calendar-days"  width="20"></i>
               </i>
               <span class="item-name">Contact</span>
-=======
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.comments')}}">
               <i class="icon">
               <i class="fa fa-comment" width="20"></i>
               </i>
               <span class="item-name">Bình luận</span>
->>>>>>> Stashed changes
             </a>
           </li>
+
         </ul>
         <!-- Sidebar Menu End -->
       </div>

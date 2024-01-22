@@ -9,13 +9,13 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
-<<<<<<< Updated upstream
+// <<<<<<< Updated upstream
 use App\Http\Controllers\Admin\FeedbackController;
 
 use App\Http\Controllers\Interface\ContactController;
-=======
+
 use App\Http\Controllers\Admin\CommentsadminController;
->>>>>>> Stashed changes
+// >>>>>>> Stashed changes
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
@@ -96,7 +96,7 @@ Route::middleware('Decentralization')->prefix("system")->group(function () {
     Route::match(['get', 'post'], '/account/add', [AccountController::class, 'add'])->name('ht.accountadd');
     Route::match(['get', 'post'], '/account/update/{key}', [AccountController::class, 'update'])->name('ht.accountupdate');
     Route::get('/account/delete/{key}', [AccountController::class, 'delete'])->name('ht.accountdelete');
-<<<<<<< Updated upstream
+
 
     //contact
     
@@ -104,10 +104,10 @@ Route::middleware('Decentralization')->prefix("system")->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('admin.contact.index');
 });
-=======
+
     //comments 
     Route::get("/comments", [CommentsadminController::class, 'comments'])->name("ht.comments");
     Route::get('/comments/delete/{key}', [CommentsadminController::class, 'delete'])->name('ht.commentsdelete');
 
->>>>>>> Stashed changes
+
 })->middleware(Decentralization::class);
