@@ -13,7 +13,7 @@
                </div>
                <div>
                   <a href="{{route('ht.scheduleadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                   Thêm tour
+                  Tạo mới
                   </a>
                </div>
             </div>
@@ -45,9 +45,9 @@
                         <tr>
                            <th>No</th>
                         
-                           <th>Danh mục</th>
                            <th>Ngày đi</th>
-                           <th>Thời gian đi</th>                          
+                           <th>Ngày về</th>
+                           <th>Mã tour</th>                          
                            <th>Trạng thái</th>
                            <th></th>
                         </tr>

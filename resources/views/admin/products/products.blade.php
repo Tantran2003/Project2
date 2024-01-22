@@ -115,7 +115,7 @@ max-width:150px;
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
                               <a href="{{route('ht.productsdelete',$value['id'])}}" class="btn" onclick="confirmation(event)"><i
                                     class="fa-regular fa-trash-can" style="color: red;" ></i></a>
-                                    <!-- <a href="" class="btn "> <i class="fa-solid fa-eye" style="color: #1663e9;"></i></a> -->
+                                    <a href="{{route('ht.viewdetails')}}" class="btn "> <i class="fa-solid fa-eye" style="color: #1663e9;"></i></a>
 
                            </td>
                         </tr>

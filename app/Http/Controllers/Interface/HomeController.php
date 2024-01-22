@@ -6,33 +6,67 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Products;
+use App\Models\Schedule;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $destinations = Products::select('arrivallocation')->distinct()->get();
+        $data['destinations'] = $destinations;
+
         $data["category"] = Category::take(6)->get();     //lấy 6 danh mục từ bảng category
-        return view ("interface/pages/home",$data);
+        return view("interface/pages/home", $data);
+    }
+
+    
+
+public function search(Request $request)
+{
+    $departureDate = $request->input('departure_date');
+    $arrivalLocation = $request->input('arrivallocation');
+
+    // Kiểm tra cả hai trường đều trống
+    if (empty($departureDate) && empty($arrivalLocation)) {
+        return redirect()->route('gd.home');
+    }
+
+    $query = Products::query();
+
+    if (!empty($departureDate)) {
+        $formattedDepartureDate = date('Y-m-d', strtotime($departureDate));
+        $query->whereHas('schedule', function ($q) use ($formattedDepartureDate) {
+            $q->whereDate('date_start', '=', $formattedDepartureDate);
+        });
+    }
+
+    if (!empty($arrivalLocation)) {
+        $query->where('arrivallocation', '=', $arrivalLocation);
+    }
+
+    if (isset($formattedDepartureDate)) {
+        $query->with(['schedule' => function ($q) use ($formattedDepartureDate) {
+            $q->whereDate('date_start', '=', $formattedDepartureDate);
+        }]);
+    } else {
+        $query->with('schedule');
+    }
+    $loadproduct = $query->get();
+    $data['search'] = $loadproduct;
+    $data['destinations'] = DB::table('products')->select('arrivallocation')->get();
+    if ($data['search']->isEmpty()) {
+        return redirect()->route('gd.noresults');
+    }
+    return view("interface/pages/search", $data);
+}
+
+    public function noresults(){
+        return view("interface/pages/no_results");
     }
     
-    public function search(Request $request)
-    {
-
-        $search = $request->input('keyword');
-        if (empty($search)) {                         // dùng empty kiểm tra xem biến search có trống ko
-            return redirect()->route('gd.home');
-        }
-        $data['search'] = Products::where('status', 1)
-            ->where('name', 'like','%'.$search.'%')
-            ->orWhere('desc', 'LIKE', "%{$search}%")
-            ->orWhere('keyword', 'LIKE', "%{$search}%")
-            ->orWhere('departurelocation', 'LIKE', '%'.$search.'%') 
-            ->orWhere('content', 'LIKE', "%{$search}%")
-            ->get();
-        if ($data['search']->count() > 0) {               
-            return view("interface/pages/search", $data);
-        } else {
-            return view("interface/pages/home", ['search' => $data['search'], 'request' => $request]);
-        }
-    }
+    
+    
 
     // public function autocomplete_ajax(Request $request){
     //     $data=$request->all();
@@ -46,8 +80,8 @@ class HomeController extends Controller
     //         echo $output;
     //     }
     // }
-    
-        
+
+
 
 
 }

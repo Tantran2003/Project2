@@ -9,19 +9,19 @@ use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 class TourlistController extends Controller
 {
+
    public function index($id = null){
-try {
-   if($id == 0){
-      $data['loadproduct'] =Products::with('schedule')->get();  
-   }else{
-      $data['loadproduct'] =Products::where('idcat',$id)->get();
-   }  
-   
-   return view('interface/pages/tour',$data);
-} catch (\Throwable $th) {
-   return redirect()->route('gd.home');
-}
-   
+      try {
+         if($id == 0){
+            $data['loadproduct'] =Products::with('schedule')->get();  
+         }else{
+            $data['loadproduct'] =Products::where('idcat',$id)->get();
+         }  
+         
+         return view('interface/pages/tour',$data);
+      } catch (\Throwable $th) {
+         return redirect()->route('gd.home');
+      }  
    }
    public function filterProducts(Request $request)
    {
