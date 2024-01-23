@@ -1,6 +1,9 @@
 @extends('admin.layout_admin')
 @section('content')
 <div class="container-fluid px-4 mt-4">
+<div class="row justify-content-center">
+        <div class="col-sm-10">
+            <div style="background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin: 0 auto;">
     <ol class="breadcrumb mb-4">
         <h3 class="breadcrumb-item active">Thay đổi lịch trình</h3>
     </ol>
@@ -61,10 +64,13 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
-                <button class="btn btn-success" type="submit" href="" role="button">Add</button>
+                <button class="btn btn-success" type="submit" href="" role="button"><i class="fa fa-floppy-disk"></i>&nbsp;Lưu</button>
                 <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Back</a>
             </div>
         </div>
     </form>
+    </div>
+        </div>
+    </div>
 </div>
 @endsection

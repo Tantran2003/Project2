@@ -85,19 +85,24 @@ class AccountController extends Controller
     
     public function delete($id)
     {
-      try {
-       
-        Account::destroy($id);
-        toastr()->success('Xóa thành công!');
-        return redirect()->route('ht.account'); //chuyen ve trang category
-      } catch (\Throwable $th) {
-  
-        return redirect()->route('ht.account'); //chuyen ve trang category
-      }
+        try {
+           
+            $loggedInUserId = auth()->user()->id;
+    
+            if ($id == $loggedInUserId) {
+                toastr()->error('Bạn không thể tự xóa chính mình!');
+                return redirect()->route('ht.account'); 
+            }
+    
+          
+            Account::destroy($id);
+    
+            toastr()->success('Xóa thành công!');
+            return redirect()->route('ht.account'); 
+        } catch (\Throwable $th) {
+            toastr()->error('Đã xảy ra lỗi khi xóa tài khoản.');
+            return redirect()->route('ht.account'); 
+        }
     }
-    public function adminList()
-    {
-        $admins = Account::where('email', '!=', 'superadmin@gmail.com')->where('role_id', 1)->paginate(15);
-        return view('admin.users.adminList', compact('admins'));
-    }
+    
 }

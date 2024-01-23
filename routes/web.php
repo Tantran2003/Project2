@@ -40,6 +40,7 @@ Route::get("/details/{key}/{name}", [DetailsController::class, 'index'])->name("
 Route::get('/delete/{id}', [DetailsController::class, 'delete'])->name("gd.delete_comments");
 //search
 Route::post("/search/{key?}", [HomeController::class, 'search'])->name("gd.search"); //{key?} ? la nhap gi cung dc
+Route::get("/no-results", [HomeController::class, 'noresults'])->name("gd.noresults");
 
 //filter
 Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->name('filter.products');
@@ -51,6 +52,11 @@ Route::match(['get','post'],"/register", [SecureController::class, 'register'])-
 Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
 Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');
 Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd.editprofile');
+
+
+//contact
+Route::get('/contact', [ContactController::class, 'index'])->name('gd.contactindex');
+Route::match(['get','post'],"/contact-form", [ContactController::class, 'contact'])->name("gd.contact");
 
 
 //end login
@@ -98,6 +104,8 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
     Route::match(['get', 'post'], '/products/add', [ProductsController::class, 'add'])->name('ht.productsadd');
     Route::match(['get', 'post'], '/products/update/{key}', [ProductsController::class, 'update'])->name('ht.productsupdate');
     Route::get('/products/delete/{key}', [ProductsController::class, 'delete'])->name('ht.productsdelete');
+    Route::get('/viewsproducts/{id}', [ProductsController::class, 'viewdetails'])->name('ht.viewdetails');
+
     //Schedule
     Route::get("/schedule", [ScheduleController::class, 'schedule'])->name('ht.schedule');
     Route::match(['get', 'post'], '/schedule/add', [ScheduleController::class, 'add'])->name('ht.scheduleadd');

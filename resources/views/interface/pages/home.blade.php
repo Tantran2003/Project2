@@ -5,7 +5,7 @@
  $category=App\Models\Category::where('status',1)->get();
 
 ?>
-<div class="container-fluid  py-5 mb-5 hero-header"
+<div class="container-fluid py-5 mb-5 hero-header"
     style="background: linear-gradient(rgba(20, 20, 31, .3), rgba(20, 20, 31, .3)), url({{asset('public/interface')}}/img/bg123.jpg);">
     <div class="container py-5">
         <div class="row justify-content-center py-5">
@@ -15,18 +15,39 @@
                 <form action="{{route('gd.search')}}" method="post">
                     {{csrf_field()}}
                     <div class="position-relative w-75 mx-auto animated slideInDown">
-                        <input name="keyword" id="keywords" class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Bạn muốn đi đâu?">
-                           
-                        <button type="submit"
-                            class="btn btn-primary rounded-pill py-2 px-4 position-absolute top-0 end-0 me-2"
-                            style="margin-top: 7px;">Search</button>
+                        <div class="row g-2">
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input placeholder="Chọn ngày đi" name="departure_date" id="departure_date"
+                                        class="form-control rounded-2 py-3" type="date"
+                                        min="{{ now()->format('Y-m-d') }}">
+
+                                    <select name="arrivallocation" id="destination" class="form-select rounded-2 py-3 ms-2">
+                                        <option value="" selected>Chọn điểm đến</option>
+                                        @foreach($destinations as $destination)
+                                        <option value="{{ $destination->arrivallocation }}">{{
+                                            $destination->arrivallocation }}</option>
+                                        @endforeach
+                                        <!-- Thêm các tùy chọn khác nếu cần -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary rounded-2 py-3 px-4 w-100">Tìm
+                                    kiếm</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
 
 
 
@@ -247,31 +268,3 @@
 {!! Toastr::message() !!}
 
 @endsection
-<!-- @pushOnce('scripts')
-<script type="text/javascript">
-('#keywords').keyup(function(){
-var query =$(this).val();
-if (query = '')
-{
-var _token= $('input[name="_token"]').val();
-$.ajax({
-url:"{{url('/autocomplete-ajax')}}",
-method: "POST",
-data: {query:query,token:_token},
-success: function(data) {
-$('#search_ajax').fadeIn();
-('#search_ajax').html(data);
-}
-});
-}else{
-$('#search_ajax').fadeOut();
-}
-});
-$(document).on('click', 'li', function(){ 
-    $('#keywords ').val($(this).text());
-    $('#search_ajax').fadeOut();
-});
-</script>
-@endPushOnce -->
-
-

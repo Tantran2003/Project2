@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +6,8 @@
     <title>Document</title>
 </head>
 <body>
- <?php foreach($post as $posts){ ?>  
-
-        <h1>{{$posts->title}}</h1>
-
-        <h3>{{$posts->description}}</h3>
-    
- <?php } ?>
- <livewire:comments :model="$posts"/>
+   
+    <h3>Vui lòng bấm vào đây để tạo mới mật khẩu</h3>
+    <a href="{{route('gd.resetPassword',$token)}}">Nhấn vào đây</a>
 </body>
 </html>
