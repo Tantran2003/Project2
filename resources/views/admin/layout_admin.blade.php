@@ -97,7 +97,16 @@
               <span class="item-name">Lịch trình</span>
             </a>
           </li>
-          
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{{route('admin.contact.index')}}">
+              <i class="icon">
+              <i class="fa-solid fa-calendar-days"  width="20"></i>
+              </i>
+              <span class="item-name">Contact</span>
+            </a>
+          </li>
+
           <li class="nav-item">
           <a href="{{ route('ht.guideindex') }}" class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}">
               <i class="icon">
