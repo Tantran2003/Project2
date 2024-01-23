@@ -10,14 +10,15 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
-use App\Http\Controllers\Admin\AdminBookingController; 
-
+use App\Http\Controllers\Admin\AdminBookingController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
 use App\Http\Controllers\Interface\DetailsController;
-use App\Http\Controllers\Interface\CommentsController;
 use App\Http\Controllers\Interface\BookingController;
+use App\Http\Controllers\Interface\ContactController;
+
 //Guide
 Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
 Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.guidedetail');
@@ -58,7 +59,7 @@ Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd
 
 //contact
 Route::get('/contact', [ContactController::class, 'index'])->name('gd.contactindex');
-Route::match(['get','post'],"/contact-form", [ContactController::class, 'contact'])->name("gd.contact");
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 //end login
@@ -129,4 +130,10 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
     Route::get('tour-history/list', [AdminBookingController::class, 'tourHistory'])->name('ht.tourhistory');
     //guide
     
+
+    //contact
+
+Route::prefix('admin')->group(function () {
+    Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('admin.contact.index');
+});
 })->middleware(Decentralization::class);

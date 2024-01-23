@@ -9,7 +9,7 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $contact = Contact::latest()->get();
+        $contact = Contact::get();
 
         return view('admin.contact.index', compact('contact'));
     }

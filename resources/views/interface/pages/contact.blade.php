@@ -49,29 +49,41 @@
                     width="600" height="450" style="min-height: 300px; border:0;" aria-hidden="false" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
+           
             <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                <form action="{{route('gd.contact')}}" method="post">
+            @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            
+                @endif
+                <form action="{{ route('contact.store') }}" method="POST">
+                @csrf
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control" name="name" placeholder="Tên">
-                                {!!$errors->first('name','<p class="help-block text-danger">:message</p>')!!}
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Tên" required>
                                 <label for="name">Tên</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
-                                {!!$errors->first('email','<p class="help-block text-danger">:message</p>')!!}
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                                 <label for="email"> Email</label>
                             </div>
                         </div>
-
                         <div class="col-12">
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Nội dung" name="content"
+                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" required>
+                                        <label for="phone"> Phone</label>
+                                </div>
+                        </div>
+                        <div class="col-12">
+                            
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Nội dung" name="comment" id="comment"
+                                required
                                     style="height: 100px"></textarea>
-                                {!! $errors->first('comment', '<div class="has-error text-danger">:message</div>') !!}
                                 <label for="content"> Nội dung</label>
 
                             </div>
@@ -82,6 +94,8 @@
                     </div>
                 </form>
             </div>
+
+               
         </div>
     </div>
 </div>

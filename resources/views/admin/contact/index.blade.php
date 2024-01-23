@@ -10,6 +10,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Message</th>
+                    <th>Phone</th>
                     <th>Submitted At</th>
                 </tr>
             </thead>
@@ -18,7 +19,8 @@
                     <tr>
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->message }}</td>
+                        <td>{{ $contact->comment }}</td>
+                        <td>{{ $contact->phone }}</td>
                         <td>{{ $contact->created_at }}</td>
                     </tr>
                 @empty
