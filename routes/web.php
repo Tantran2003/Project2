@@ -23,8 +23,10 @@ Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
 Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.guidedetail');
 
 //Booking
-Route::get('/tour-booking/{id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
+Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
+
 Route::get('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
+
 // Auth::routes(['verify' => true]);
 Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('tour.history');
 Route::get('booking-request/list', [BookingController::class, 'pendingBookingList'])->name('pending.booking');
