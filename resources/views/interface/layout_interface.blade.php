@@ -97,7 +97,7 @@
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
                     </div>
-                    <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Contact</a>
+                    <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Liên hệ</a>
                 </div>
                 @if(Auth::check())
                 <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{ Auth::user()->fullname}}</a>
