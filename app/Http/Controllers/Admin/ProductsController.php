@@ -182,10 +182,15 @@ class ProductsController extends Controller
         return redirect()->route('ht.products');
     }
 }
-public function viewdetails(){
-  // $data["cate"] = Category::where("status", 1)->get();
-  $data["viewproducts"] = Products::get();
+public function viewdetails($id = null){
+  $data["viewproducts"] = Products::where('id', '=', $id)->get();
   return view("admin/products/viewdetails", $data);
 }
 
+// public function show($id)
+//     {
+//         $news = News:
+//         $des = html_entity_decode($news->description);
+//         return view('/admin/news_detail', compact('news', 'des'));
+//     }
 }

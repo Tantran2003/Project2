@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\Interface;
-use App\Models\Contact;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Models\Contact;
+use Illuminate\Support\Carbon;
 class ContactController extends Controller
 {
     public function index()
@@ -11,7 +13,7 @@ class ContactController extends Controller
         return view('interface/contact/contact');
     }
 
-    public function store(Request $request)
+    public function contact(Request $request)
     {
         $validate = $request->validate([
             'name' => 'required',
@@ -31,4 +33,3 @@ class ContactController extends Controller
         return redirect()->route('interface/contact/contact')->with('msg','Contact successfully !!! ');
     }
 }
-

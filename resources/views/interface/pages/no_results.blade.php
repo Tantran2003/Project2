@@ -85,7 +85,7 @@
             <div class="col-lg-9 col-md-12 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="row g-4">
                     <div class="text-center">
-                        ko có kq
+                <h2>  Không có kết quả </h2>
                     </div>
                 </div>
             </div>

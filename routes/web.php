@@ -9,13 +9,10 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
-// <<<<<<< Updated upstream
 use App\Http\Controllers\Admin\FeedbackController;
-
-use App\Http\Controllers\Interface\ContactController;
-
 use App\Http\Controllers\Admin\CommentsadminController;
-// >>>>>>> Stashed changes
+//interface
+use App\Http\Controllers\Interface\ContactController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
@@ -52,8 +49,8 @@ Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd
 
 
 //contact
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact', [ContactController::class, 'index'])->name('gd.contactindex');
+Route::match(['get','post'],"/contact-form", [ContactController::class, 'contact'])->name("gd.contact");
 
 
 //end login
@@ -84,7 +81,7 @@ Route::middleware('Decentralization')->prefix("system")->group(function () {
     Route::match(['get', 'post'], '/products/add', [ProductsController::class, 'add'])->name('ht.productsadd');
     Route::match(['get', 'post'], '/products/update/{key}', [ProductsController::class, 'update'])->name('ht.productsupdate');
     Route::get('/products/delete/{key}', [ProductsController::class, 'delete'])->name('ht.productsdelete');
-    Route::get('/viewsproducts', [ProductsController::class, 'viewdetails'])->name('ht.viewdetails');
+    Route::get('/viewsproducts/{id}', [ProductsController::class, 'viewdetails'])->name('ht.viewdetails');
 
     //Schedule
     Route::get("/schedule", [ScheduleController::class, 'schedule'])->name('ht.schedule');
