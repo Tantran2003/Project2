@@ -9,14 +9,17 @@ class Schedule extends Model
 {
     protected $table = "schedule";
     protected $fillable = ["tour_id", "date_start", "date_end", "tour_code"];
-    protected $primarykey = "id";
+    protected $primaryKey = "id";
     public $timestamps = false;
+
     public function product()
     {
         return $this->belongsTo(Products::class, 'tour_id', 'id');
     }
+
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'schedule_id', 'id');
     }
 }
+

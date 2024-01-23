@@ -1,20 +1,19 @@
-@extends('interface.layout_interface')
-
+@extends ('interface/layout_interface')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center py-5">
-        <h1><strong>Please Tell Us When will you go</strong></h1>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-5">
-                <div class="card-header">
-                    <strong>Fill up this form</strong>
-                </div>
-                <div class="card-body">
-                    @include('partial.errors')
-                    @include('partial.successMessage')
-                    <form action="{{ route('gd.storetourbooking') }}" method="get">
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+
+<section class="vh-100" style="margin:100px 0 10px 0;" style="">
+<div class="d-flex justify-content-center align-items-center pb-4"><h1 class="font-weight-bold">Đăng nhập</h1></div>
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        
+      <div class="col-md-9 col-lg-6 col-xl-5" style=" box-shadow: rgba(0, 0, 0, 0.35) 0px 15px 15px;">
+        <img src="{{asset('public/interface')}}/img/login.jpg"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="form-login  col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+      <form action="{{ route('gd.storetourbooking', ['product_id' => $package->id, 'schedule_id' => $schedule->id]) }}" method="get">
                         @csrf
                         <div class="form-group">
                             <select name="guide" class="form-control">
@@ -31,7 +30,7 @@
                             <label for="date">Select a date</label>
                             @php
                                 // Assuming $package is an instance of Products model
-                                $schedule = $package->schedule()->first();
+                                $schedule = $package->schedules()->first();
                                 $date_start = $schedule ? $schedule->date_start : null;
                             @endphp
                             <input type="text" name="date" id="date" class="form-control" value="{{ old('date', $date_start) }}">
@@ -47,27 +46,20 @@
                             <button type="submit" class="btn btn-success ">Submit</button>
                             <a href="{{ route('gd.home') }}" class="btn btn-danger">Back</a>
                         </div>
-
+                        
                     </form>
-                </div>
-
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+  
+</section>
 
-</div>
+
+
+
+
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 @endsection
 
-@section('scripts')
-<script src="{{ asset('js/flatpickr.js') }}"></script>
-<script>
-    flatpickr('#date', {
-        minDate: "today",
-        dateFormat: "F d, Y",
-    })
-</script>
-@endsection
-
-@section('css')
-<link href="{{ asset('css/flatpickr.min.css') }}" rel="stylesheet">
-@endsection

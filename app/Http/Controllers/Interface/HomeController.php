@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\Booking;
 use App\Models\Guide;
 use Auth;
+use DB;
 class HomeController extends Controller
 {
     public function index()
@@ -69,17 +70,26 @@ public function search(Request $request)
     
     
 
-    public function packageBooking($id){
+    public function packageBooking($product_id, $schedule_id) {
         $guides = Guide::where('status', 1)->get();
-        $package = Schedule::where('id', $id)->first();
     
-        if (!$package) {
-            // Handle the case where the product with the given ID is not found
-            abort(404);
+        $details = DB::table('products')
+            ->join('schedule', 'products.id', '=', 'schedule.tour_id')
+            ->select('products.*', 'schedule.*')
+            ->where('products.id', '=', $product_id)
+            ->where('schedule.id', '=', $schedule_id)
+            ->first(); // Use first() instead of get() to retrieve a single record
+    
+        if (!$details) {
+            // Handle the case where the details are not found, for example, redirect back or show an error message
+            return redirect()->back()->with('error', 'Details not found.');
         }
     
-        return response()->view('interface/pages/bookingForm', compact('guides', 'package'));
+        return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
     }
+    
+    
+    
     
 
     public function storeBookingRequest(Request $request){
