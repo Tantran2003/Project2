@@ -97,6 +97,43 @@
               <span class="item-name">Lịch trình</span>
             </a>
           </li>
+          
+          <li class="nav-item">
+          <a href="{{ route('ht.guideindex') }}" class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}">
+              <i class="icon">
+              <i class="fa fa-user" width="20">
+              </i>
+              <span class="item-name">Guide</span>
+            </a>
+          </li >
+          <li class="nav-item">
+          <a href="{{ route('ht.pendingbooking') }}" class="nav-link ">
+            <i class="fas fa-chalkboard" width="20"></i>
+              <p class="ml-2">
+                  Booking Request
+            </p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="{{ route('ht.packagerunning') }}" class="nav-link">
+            <i class="fas fa-box" width="20"></i>
+              <p class="ml-2">
+                  Running Package
+            </p>
+          </a>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="{{ route('ht.tourhistory') }}" class="nav-link ">
+            <i class="fas fa-history" width="20"></i>
+              <p class="ml-2">
+                  Tour History
+            </p>
+          </a>
+        </li>
         </ul>
         <!-- Sidebar Menu End -->
       </div>

@@ -20,6 +20,6 @@ class Products extends Model
     }
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'packageID', 'id');
+        return $this->hasMany(Booking::class, 'package_id', 'id');
     }
 }

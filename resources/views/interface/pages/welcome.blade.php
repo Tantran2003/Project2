@@ -1,4 +1,5 @@
-@extends('layouts.frontend.master')
+@extends ('interface/layout_interface')
+
 
 @section('css')
 <style>
@@ -8,9 +9,6 @@
     }
 </style>
 @endsection
-
-
-
 @section('content')
 {{-- start banner --}}
 <section id="banner">

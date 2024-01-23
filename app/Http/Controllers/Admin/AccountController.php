@@ -95,4 +95,9 @@ class AccountController extends Controller
         return redirect()->route('ht.account'); //chuyen ve trang category
       }
     }
+    public function adminList()
+    {
+        $admins = Account::where('email', '!=', 'superadmin@gmail.com')->where('role_id', 1)->paginate(15);
+        return view('admin.users.adminList', compact('admins'));
+    }
 }

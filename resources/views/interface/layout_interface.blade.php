@@ -87,6 +87,8 @@
                     <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
                     <a href="service.html" class="nav-item nav-link">Services</a>
                     <a href="package.html" class="nav-item nav-link">Packages</a>
+                    <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a>
+
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0">

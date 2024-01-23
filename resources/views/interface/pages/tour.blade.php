@@ -137,11 +137,16 @@
                                         <div class="">
                                             <a href="{{ route('gd.details_tour', [$item->id,$tourDate->id,khongdau($item->name) ]) }}"
                                                 class="btn btn-sm px-3 border border-info text-info "><i
-                                                    class="fas fa-eye mr-1"></i>&nbsp;
-                                                Thông tin</a>
-                                            <a href="{{route('gd.createform',[$item->id,$tourDate->id,khongdau($item->name) ])}}" class="btn btn-sm btn-primary px-3 mx-2"><i
-                                                    class="fas fa-shopping-cart mr-1"></i>&nbsp;
-                                                Đặt ngay</a>
+                                                    class="fas fa-eye mr-1"></i>&nbsp;Thông tin</a>
+                                                @auth
+                                                @if (Auth::user()->role_id == 0)
+                                                    <a href="{{ route('gd.tourbooking', $item->id) }}" class="btn btn-success">Book Now</a>
+                                                @endif
+                                                @endauth
+
+                                                @guest
+                                                    <a href="{{ route('gd.tourbooking', $item->id) }}" class="btn btn-success">Book Now</a>
+                                                @endguest
                                         </div>
                                     </div>
                                 </div>

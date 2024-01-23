@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Middleware\Decentralization;
 use Illuminate\Support\Facades\Route;
@@ -9,18 +10,26 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
+use App\Http\Controllers\Admin\AdminBookingController; 
 
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
-use App\Http\Controllers\Interface\BookingController; 
 use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\CommentsController;
+use App\Http\Controllers\Interface\BookingController;
+//Guide
+Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
+Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.guidedetail');
 
-//Checkout
-Route::match(['get', 'post'],'/booking/{key}/{name}', [BookingController::class, 'create'])->name('gd.createform');
-Route::get("/details/{key}/{name}", [BookingController::class, 'showBookingDetails'])->name("gd.bookingdetail");
-Route::match(['put', 'patch'],"/update/{key}/{name}", [BookingController::class, 'updateBooking'])->name("gd.bookingupdate");
+//Booking
+Route::get('/tour-booking/{id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
+Route::get('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
+// Auth::routes(['verify' => true]);
+Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('tour.history');
+Route::get('booking-request/list', [BookingController::class, 'pendingBookingList'])->name('pending.booking');
+Route::post('booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
+
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
@@ -60,7 +69,24 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
 });
 //end login vào admin
 
-Route::middleware('Decentralization')->prefix("system")->group(function () {
+Route::middleware('Decentralization')->prefix('system')->group(function () {
+    Route::resource('guides', GuideController::class)->names([
+        'index' => 'ht.guideindex',
+        'create' => 'ht.guideadd',
+        'store' => 'admin.guide.store',
+        'show' => 'admin.guide.show',
+        'edit' => 'admin.guide.edit',
+        'update' => 'admin.guide.update',
+        'destroy' => 'admin.guide.destroy',
+    ]);
+    Route::get('guides/{guide}', [GuideController::class, 'show'])->name('admin.guide.show');
+    Route::get('guides/{guide}/edit', [GuideController::class, 'edit'])->name('admin.guide.edit');
+    // //Guide
+    // Route::get("/products", [GuideController::class, 'index'])->name('ht.products');
+    // Route::match(['get', 'post'], '/products/add', [GuideController::class, 'create'])->name('ht.guideadd');
+    // Route::match(['get', 'post'], '/products/update/{key}', [GuideController::class, 'update'])->name('ht.guideupdate');
+    // Route::get('/products/delete/{key}', [GuideController::class, 'delete'])->name('ht.guidedelete');
+
     Route::get("/admin", [AdminController::class, 'index'])->name("ht.admin");
     //routes category
     Route::get("/categorie", [CategoryController::class, 'categorie'])->name("ht.categorie");
@@ -82,4 +108,15 @@ Route::middleware('Decentralization')->prefix("system")->group(function () {
     Route::match(['get', 'post'], '/account/add', [AccountController::class, 'add'])->name('ht.accountadd');
     Route::match(['get', 'post'], '/account/update/{key}', [AccountController::class, 'update'])->name('ht.accountupdate');
     Route::get('/account/delete/{key}', [AccountController::class, 'delete'])->name('ht.accountdelete');
+    //booking
+    Route::get('list', [AccountController::class,'adminList'])->name('list');
+
+    Route::get('booking-request/list', [AdminBookingController::class, 'pendingBookingList'])->name('ht.pendingbooking');
+    Route::post('booking-request/approve/{id}', [AdminBookingController::class, 'bookingApprove'])->name('ht.bookingapprove');
+    Route::post('booking-request/remove/{id}', [AdminBookingController::class, 'bookingRemoveByAdmin'])->name('ht.bookingremove');
+    Route::get('running/packages/', [AdminBookingController::class, 'runningPackage'])->name('ht.packagerunning');
+    Route::post('running/package/complete/{id}', [AdminBookingController::class, 'runningPackageComplete'])->name('ht.packagerunningcomplete');
+    Route::get('tour-history/list', [AdminBookingController::class, 'tourHistory'])->name('ht.tourhistory');
+    //guide
+    
 })->middleware(Decentralization::class);

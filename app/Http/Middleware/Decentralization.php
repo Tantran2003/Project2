@@ -13,7 +13,7 @@ class Decentralization
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): mixed
     {
         if(Auth::check()){
             if(Auth::user()->role==1){
