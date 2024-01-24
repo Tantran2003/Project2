@@ -27,7 +27,8 @@ Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.g
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
 
 Route::get('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
-
+//VNPAY
+Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
 // Auth::routes(['verify' => true]);
 Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('tour.history');
 Route::get('booking-request/list', [BookingController::class, 'pendingBookingList'])->name('pending.booking');

@@ -140,12 +140,12 @@
                                                     class="fas fa-eye mr-1"></i>&nbsp;Thông tin</a>
                                                 @auth
                                                 @if (Auth::user()->role_id == 0)
-                                                    <a href="{{ route('gd.tourbooking', $item->id) }}" class="btn btn-success">Book Now</a>
+                                                    <a href="{{ route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name)])}}" class="btn btn-success">Book Now</a>
                                                 @endif
                                                 @endauth
 
                                                 @guest
-                                                    <a href="{{ route('gd.tourbooking', $item->id) }}" class="btn btn-success">Book Now</a>
+                                                    <a href="{{ route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name)])}}" class="btn btn-success">Book Now</a>
                                                 @endguest
                                         </div>
                                     </div>

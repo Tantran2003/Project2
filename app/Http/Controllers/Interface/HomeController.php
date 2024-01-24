@@ -70,25 +70,25 @@ public function search(Request $request)
     
     
 
-    public function packageBooking($product_id, $schedule_id) {
-        $guides = Guide::where('status', 1)->get();
+    // public function packageBooking($product_id, $schedule_id) {
+    //     $guides = Guide::where('status', 1)->get();
     
-        $details = DB::table('products')
-            ->join('schedule', 'products.id', '=', 'schedule.tour_id')
-            ->select('products.*', 'schedule.*')
-            ->where('products.id', '=', $product_id)
-            ->where('schedule.id', '=', $schedule_id)
-            ->first(); // Use first() instead of get() to retrieve a single record
+    //     // $details = DB::table('products')
+    //     //     ->join('schedule', 'products.id', '=', 'schedule.tour_id')
+    //     //     ->select('products.*', 'schedule.*')
+    //     //     ->where('products.id', '=', $product_id)
+    //     //     ->where('schedule.id', '=', $schedule_id)
+    //     //     ->first(); // Use first() instead of get() to retrieve a single record
     
-        if (!$details) {
-            // Handle the case where the details are not found, for example, redirect back or show an error message
-            return redirect()->back()->with('error', 'Details not found.');
-        }
+    //     // if (!$details) {
+    //         // Handle the case where the details are not found, for example, redirect back or show an error message
+    //         // return redirect()->back()->with('error', 'Details not found.');
+    //     }
     
-        return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
-    }
+        // return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
+    // }
     
-    
+
     
     
 
