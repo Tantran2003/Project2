@@ -25,14 +25,8 @@ $schedules = $item->schedule ?? [];
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
                 data-wow-delay="0.1s">
                 <div class="  ">
-<<<<<<< HEAD
-                    <a href="{{ route('gd.tourbooking', [$detail->id,$tourDate->id,khongdau($detail->name)]) }}"
-                        class="btn btn-primary btn-lg btn-block px-5">Book now</a>
-
-=======
                     <a href="" class="btn btn-primary btn-lg btn-block px-5">Đặt ngay</a>
                
->>>>>>> 3296c950a7cdf1a6d384d69a14e569436865a054
 
                     <h4 class="text-danger pt-4">{{$detail->price}}<span class="text-dark fs-6">/khách</span></h4>
 

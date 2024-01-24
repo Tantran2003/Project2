@@ -86,7 +86,7 @@
                     <a href="{{route('gd.home')}}" class="nav-item nav-link ">Trang chủ</a>
                     <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
                     <a href="service.html" class="nav-item nav-link">Services</a>
-                    <a href="package.html" class="nav-item nav-link">Packages</a>
+                    <a href="{{route('blog.index')}}" class="nav-item nav-link">Blog</a>
                     <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a>
 
                     <div class="nav-item dropdown">

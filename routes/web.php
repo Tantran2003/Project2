@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\LoginAdminController;
 use App\Http\Controllers\Admin\AdminBookingController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Interface\BlogController;
 use App\Http\Controllers\Interface\HomeController;
 use App\Http\Controllers\Interface\SecureController;
 use App\Http\Controllers\Interface\TourlistController; 
@@ -62,6 +63,9 @@ Route::post('/edit-profile', [SecureController::class, 'editProfile'])->name('gd
 Route::get('/contact', [ContactController::class, 'index'])->name('gd.contactindex');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+// blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{id}', [BlogController::class, 'detail'])->name('blog.detail');
 
 //end login
 //reset password
@@ -131,6 +135,13 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
     Route::get('tour-history/list', [AdminBookingController::class, 'tourHistory'])->name('ht.tourhistory');
     //guide
     
+
+    // blog
+    Route::get('/blog/list', [BlogController::class, 'adminIndex'])->name('blog.admin.index');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+    
+    Route::get('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
     //contact
 

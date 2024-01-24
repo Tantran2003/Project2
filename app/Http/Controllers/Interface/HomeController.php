@@ -70,22 +70,6 @@ public function search(Request $request)
     
     
 
-<<<<<<< HEAD
-    // public function packageBooking($product_id, $schedule_id) {
-    //     $guides = Guide::where('status', 1)->get();
-    
-    //     // $details = DB::table('products')
-    //     //     ->join('schedule', 'products.id', '=', 'schedule.tour_id')
-    //     //     ->select('products.*', 'schedule.*')
-    //     //     ->where('products.id', '=', $product_id)
-    //     //     ->where('schedule.id', '=', $schedule_id)
-    //     //     ->first(); // Use first() instead of get() to retrieve a single record
-    
-    //     // if (!$details) {
-    //         // Handle the case where the details are not found, for example, redirect back or show an error message
-    //         // return redirect()->back()->with('error', 'Details not found.');
-    //     }
-=======
    
     
     public function packageBooking($product_id, $schedule_id) {
@@ -105,12 +89,8 @@ public function search(Request $request)
     
         return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
     }
->>>>>>> 3296c950a7cdf1a6d384d69a14e569436865a054
     
-        // return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
-    // }
     
-
     
     
     

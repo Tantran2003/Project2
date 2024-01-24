@@ -138,21 +138,9 @@
                                             <a href="{{ route('gd.details_tour', [$item->id,$tourDate->id,khongdau($item->name) ]) }}"
                                                 class="btn btn-sm px-3 border border-info text-info "><i
                                                     class="fas fa-eye mr-1"></i>&nbsp;Thông tin</a>
-<<<<<<< HEAD
-                                                @auth
-                                                @if (Auth::user()->role_id == 0)
-                                                    <a href="{{ route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name)])}}" class="btn btn-success">Book Now</a>
-                                                @endif
-                                                @endauth
-
-                                                @guest
-                                                    <a href="{{ route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name)])}}" class="btn btn-success">Book Now</a>
-                                                @endguest
-=======
                                            
                                                     <a href="{{route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name) ])}}"    class="btn btn-sm px-3 border border-info  btn-primary "><i class="fas fa-shopping-cart"></i>&nbsp;Đặt ngay</a>
                                              
->>>>>>> 3296c950a7cdf1a6d384d69a14e569436865a054
                                         </div>
                                     </div>
                                 </div>
