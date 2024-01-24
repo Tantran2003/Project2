@@ -9,7 +9,7 @@ class Schedule extends Model
 {
     protected $table = "schedule";
     protected $fillable = ["tour_id", "date_start", "date_end", "tour_code"];
-    protected $primaryKey = "id";
+    protected $primarykey = "id";
     public $timestamps = false;
 
     public function product()

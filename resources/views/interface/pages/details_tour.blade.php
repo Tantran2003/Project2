@@ -1,8 +1,11 @@
 @extends ('interface/layout_interface')
 @section('content')
 
+
 <!-- Destination Start -->
 @foreach($details as $detail)
+
+
 <div class="container-xxl py-5 mt-5 destination" style=" max-width: 1320px;">
     <div class="container">
         <div class="d-md-flex  flex-md-row flex-column justify-content-between align-items-center pb-5">
@@ -17,13 +20,14 @@
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
                 data-wow-delay="0.1s">
                 <div class="  ">
-                    <a href="{{ route('gd.tourbooking', $detail->id) }}" class="btn btn-primary btn-lg btn-block px-5">Book now</a>
+                    <a href="" class="btn btn-primary btn-lg btn-block px-5">Đặt ngay</a>
                
 
                     <h4 class="text-danger pt-4">{{$detail->price}}<span class="text-dark fs-6">/khách</span></h4>
 
 
                 </div>
+                
             </div>
         </div>
 
@@ -186,6 +190,8 @@
 </div>
 @endforeach
 
+
+
 <!-- rating form -->
 <div class="container-xxl py-5" style=" max-width: 1320px;">
     <div class="container">
@@ -198,9 +204,10 @@
 
                 <div class="mt-4"> <strong>{{ $rating->username }}</strong> <small>{{ date('d-m-Y',
                         strtotime($rating->created_at)) }}</small> &nbsp;
-                        @if (Auth::user() && (Auth::user()->id == $rating->user_id))
-                         <a  href="{{route('gd.delete_comments',$rating->id)}}"> <i class="fa fa-trash"></i></a>
-                        @endif</div>
+                    @if (Auth::user() && (Auth::user()->id == $rating->user_id))
+                    <a href="{{route('gd.delete_comments',$rating->id)}}"> <i class="fa fa-trash"></i></a>
+                    @endif
+                </div>
                 @if($rating->rating > 0)
                 <?php 
                 $count=1;

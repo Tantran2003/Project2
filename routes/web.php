@@ -26,13 +26,14 @@ Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.g
 
 //Booking
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
+Route::post('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
 
-Route::get('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
-
+//VNPAY
+Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
 // Auth::routes(['verify' => true]);
-Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('tour.history');
-Route::get('booking-request/list', [BookingController::class, 'pendingBookingList'])->name('pending.booking');
-Route::post('booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
+Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
+Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
+Route::post('booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");

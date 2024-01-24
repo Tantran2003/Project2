@@ -12,7 +12,7 @@ class Products extends Model
     protected $primaryKey = "id";
     public $timestamps = false;
 
-    public function schedules()
+    public function schedule()
     {
         return $this->hasMany(Schedule::class, 'tour_id', 'id');
     }

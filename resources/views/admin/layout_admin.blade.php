@@ -57,7 +57,7 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.admin')}}">
               <i class="icon">
-              <i class="fa-solid fa-chart-column" width="20"></i>
+                <i class="fa-solid fa-chart-column" width="20"></i>
               </i>
               <span class="item-name">Trang chủ</span>
             </a>
@@ -65,8 +65,8 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.account')}}">
               <i class="icon">
-              <i class="fa-solid fa-user" width="20"></i>
-               
+                <i class="fa-solid fa-user" width="20"></i>
+
               </i>
               <span class="item-name">Tài khoản</span>
             </a>
@@ -74,25 +74,25 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.categorie')}}">
               <i class="icon">
-              <i class="fa-solid fa-bars" width="20"></i>
-               
+                <i class="fa-solid fa-bars" width="20"></i>
+
               </i>
-              <span class="item-name" >Danh mục tour</span>
+              <span class="item-name">Danh mục tour</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.products')}}">
               <i class="icon">
-              <i class="fa-solid fa-map-location-dot" width="20"></i>
+                <i class="fa-solid fa-map-location-dot" width="20"></i>
               </i>
-              <span class="item-name" >Tour</span>
+              <span class="item-name">Tour</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.schedule')}}">
               <i class="icon">
-              <i class="fa-solid fa-calendar-days"  width="20"></i>
+                <i class="fa-solid fa-calendar-days" width="20"></i>
               </i>
               <span class="item-name">Lịch trình</span>
             </a>
@@ -101,7 +101,7 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('blog.admin.index')}}">
               <i class="icon">
-              <i class="fa-solid fa-calendar-days"  width="20"></i>
+                <i class="fa-solid fa-calendar-days" width="20"></i>
               </i>
               <span class="item-name">Blogs</span>
             </a>
@@ -110,48 +110,46 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('admin.contact.index')}}">
               <i class="icon">
-              <i class="fa-solid fa-calendar-days"  width="20"></i>
+                <i class="fa-solid fa-calendar-days" width="20"></i>
               </i>
               <span class="item-name">Contact</span>
             </a>
           </li>
-
           <li class="nav-item">
-          <a href="{{ route('ht.guideindex') }}" class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}">
+            <a class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}" aria-current="page"
+              href="{{ route('ht.guideindex') }}">
               <i class="icon">
-              <i class="fa fa-user" width="20">
+                <i class="fa-solid fa-calendar-days" width="20"></i>
               </i>
               <span class="item-name">Guide</span>
             </a>
-          </li >
+          </li>
+
           <li class="nav-item">
-          <a href="{{ route('ht.pendingbooking') }}" class="nav-link ">
-            <i class="fas fa-chalkboard" width="20"></i>
-              <p class="ml-2">
-                  Booking Request
-            </p>
-          </a>
-        </li>
-
-
-        <li class="nav-item">
-          <a href="{{ route('ht.packagerunning') }}" class="nav-link">
-            <i class="fas fa-box" width="20"></i>
-              <p class="ml-2">
-                  Running Package
-            </p>
-          </a>
-        </li>
-
-
-        <li class="nav-item">
-          <a href="{{ route('ht.tourhistory') }}" class="nav-link ">
-            <i class="fas fa-history" width="20"></i>
-              <p class="ml-2">
-                  Tour History
-            </p>
-          </a>
-        </li>
+            <a class="nav-link" aria-current="page" href="{{ route('ht.pendingbooking') }}">
+              <i class="icon">
+                <i class="fa-solid fa-calendar-days" width="20"></i>
+              </i>
+              <span class="item-name"> Booking Request</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('ht.packagerunning') }}" aria-current="page" class="nav-link">
+              <i class="icon">
+                <i class="fa-solid fa-calendar-days" width="20"></i>
+              </i>
+              <span class="item-name"> Running Package</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('ht.tourhistory') }}" aria-current="page" class="nav-link">
+              <i class="icon">
+                <i class="fa-solid fa-calendar-days" width="20"></i>
+              </i>
+              <span class="item-name"> Tour History</span>
+            </a>
+          </li>
+         
         </ul>
         <!-- Sidebar Menu End -->
       </div>
@@ -206,15 +204,15 @@
                   <img src="{{asset('public/admin/assets')}}/images/unnamed.png" alt="User-Profile"
                     class=" img-fluid avatar avatar-35 avatar-rounded">
                   <div class="caption ms-3 d-none d-md-block ">
-                  @if(Auth::check())  
+                    @if(Auth::check())
                     <h6 class="mb-0 caption-title">{{ Auth::user()->fullname}}</h6>
-                    @endif 
+                    @endif
                     <p class="mb-0 caption-sub-title"> Quản trị viên</p>
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                 
-              
+
+
                   <li><a class="dropdown-item" href="{{route('ht.logout')}}">Thoát</a></li>
                 </ul>
               </li>

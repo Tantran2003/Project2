@@ -167,13 +167,7 @@
                                 <label class="form-check-label" for="radio2">Credit Card Payment</label>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-check">
-                                <input type="radio" class="form-check-input" id="radio3" name="payment"
-                                    value="transfer">
-                                <label class="form-check-label" for="radio3">Transfer Payments</label>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <h5><strong class="text-muted"> If you have any notes, please tell us!</strong></h5>
