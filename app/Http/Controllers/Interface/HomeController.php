@@ -70,6 +70,7 @@ public function search(Request $request)
     
     
 
+<<<<<<< HEAD
     // public function packageBooking($product_id, $schedule_id) {
     //     $guides = Guide::where('status', 1)->get();
     
@@ -84,11 +85,34 @@ public function search(Request $request)
     //         // Handle the case where the details are not found, for example, redirect back or show an error message
     //         // return redirect()->back()->with('error', 'Details not found.');
     //     }
+=======
+   
+    
+    public function packageBooking($product_id, $schedule_id) {
+        $guides = Guide::where('status', 1)->get();
+    
+        $product = Products::find($product_id);
+    
+        if (!$product) {
+            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
+        }
+    
+        $schedule = Schedule::find($schedule_id);
+    
+        if (!$schedule) {
+            return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
+        }
+    
+        return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
+    }
+>>>>>>> 3296c950a7cdf1a6d384d69a14e569436865a054
     
         // return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
     // }
     
 
+    
+    
     
     
 
