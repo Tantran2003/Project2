@@ -70,23 +70,27 @@ public function search(Request $request)
     
     
 
+   
+    
     public function packageBooking($product_id, $schedule_id) {
         $guides = Guide::where('status', 1)->get();
     
-        $details = DB::table('products')
-            ->join('schedule', 'products.id', '=', 'schedule.tour_id')
-            ->select('products.*', 'schedule.*')
-            ->where('products.id', '=', $product_id)
-            ->where('schedule.id', '=', $schedule_id)
-            ->first(); // Use first() instead of get() to retrieve a single record
+        $product = Products::find($product_id);
     
-        if (!$details) {
-            // Handle the case where the details are not found, for example, redirect back or show an error message
-            return redirect()->back()->with('error', 'Details not found.');
+        if (!$product) {
+            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
         }
     
-        return view('interface/pages/bookingForm', compact('guides', 'details', 'product_id'));
+        $schedule = Schedule::find($schedule_id);
+    
+        if (!$schedule) {
+            return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
+        }
+    
+        return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
     }
+    
+    
     
     
     

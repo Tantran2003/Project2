@@ -17,7 +17,7 @@
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
                 data-wow-delay="0.1s">
                 <div class="  ">
-                    <a href="{{ route('gd.tourbooking', $detail->id) }}" class="btn btn-primary btn-lg btn-block px-5">Book now</a>
+                    <a href="" class="btn btn-primary btn-lg btn-block px-5">Đặt ngay</a>
                
 
                     <h4 class="text-danger pt-4">{{$detail->price}}<span class="text-dark fs-6">/khách</span></h4>
