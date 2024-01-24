@@ -4,13 +4,8 @@
 
 <!-- Destination Start -->
 @foreach($details as $detail)
-@foreach ($loadproduct as $item)
-@php
-//Assuming $item->schedule is the array of schedules for the current $item
-$schedules = $item->schedule ?? [];
-@endphp
 
-@foreach ($schedules as $tourDate)
+
 <div class="container-xxl py-5 mt-5 destination" style=" max-width: 1320px;">
     <div class="container">
         <div class="d-md-flex  flex-md-row flex-column justify-content-between align-items-center pb-5">
@@ -32,14 +27,7 @@ $schedules = $item->schedule ?? [];
 
 
                 </div>
-                <div class="col-sm-4">
-                    <div class="form-check">
-                        <form action="{{route('')}}">
-                            @csrf
-
-                        </form>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
@@ -201,8 +189,8 @@ $schedules = $item->schedule ?? [];
     </div>
 </div>
 @endforeach
-@endforeach
-@endforeach
+
+
 
 <!-- rating form -->
 <div class="container-xxl py-5" style=" max-width: 1320px;">

@@ -14,14 +14,14 @@
         <img src="{{asset('public/interface')}}/img/login.jpg" class="img-fluid" alt="Sample image">
       </div>
       <div class="form-login  col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form action="{{ route('gd.storetourbooking', ['id' => $product->id]) }}" method="get">
+        <form action="{{ route('gd.storetourbooking', ['id' => $product->id]) }}" method="post">
           @csrf
           <div class="form-group">
             <select name="guide" class="form-control">
               <option value="">select any guide</option>
 
               @foreach ($guides as $guide)
-              <option value="{{ $guide->id }}">{{ $guide->name }}</option>
+              <option value="{{ $guide->id }}">{{$guide->name}}</option>
               @endforeach
 
             </select>
@@ -32,14 +32,14 @@
             @php
             $date_start = $schedule ? $schedule->date_start : null;
             @endphp
-            <input type="text" name="date" id="date" class="form-control" value="{{ old('date', $date_start) }}">
+            
           </div>
 
           <input type="text" name="date" id="date" class="form-control" value="{{ old('date', $date_start) }}">
-<input type="hidden" name="package_id" value="{{ $product->id }}">
-<input type="hidden" name="package_name" value="{{ $product->name }}">
-<input type="hidden" name="package_price" value="{{ $product->price }}">
-<input type="hidden" name="day" value="{{ $product->day }}">
+          <input type="hidden" name="package_id" value="{{ $product->id }}">
+          <input type="text" name="package_name" value="{{ $product->name }}">
+          <input type="text" name="package_price" value="{{ $product->price }}">
+          <input type="text" name="day" value="{{ $product->keyword }}">
 
 
           <div class="form-group">

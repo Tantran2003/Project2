@@ -16,4 +16,7 @@ class Account extends Authenticatable
     protected $hidden =["password","remember_token" ];
     public $timestamps = false;
 
+    public function booking(){
+        return $this->hasMany(Booking::class, 'tourist_id','id');
+    }
 }
