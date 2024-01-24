@@ -29,13 +29,44 @@ class BlogController extends Controller
     {
         return view('admin/blog/blogCreate');
     }
-    
+
+    public function update(Request $request, $id)
+    {
+        $blogDetail = Blog::find($id);
+        if ($request->isMethod("post")) {
+            // $this->validate($request, [
+            //   "title" => "required",
+            //   "description" => "required"
+            // ]);
+            $edit = Blog::find($id);
+            $edit->title = $request->title;
+            $edit->description = $request->description;
+            if ($request->hasFile("image")) {
+              $img = $request->file("image");
+              $nameimage = time() . "_" . $img->getClientOriginalName();
+              //xoa hinh cu
+              @unlink('public/file/img/img_blog/'.$blogDetail->image);
+              //move vao thu vien public
+              $img->move('public/file/img/img_blog/',$nameimage);
+              //gan ten hinh anh vao cot image
+              $edit->image = $nameimage;
+            }else{
+              $edit->image=$blogDetail->image;
+            }
+            $edit->save();
+            toastr()->success(' Update success!');
+            return redirect()->route("blog.admin.index");
+          } else {
+            return view('admin/blog/blogUpdate', compact('blogDetail'));
+          }
+    }
+
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
+        // $request->validate([
+        //     'title' => 'required',
+        //     'description' => 'required',
+        // ]);
 
         $imagePath = null;
 
@@ -52,13 +83,13 @@ class BlogController extends Controller
             'image' => $imagePath
         ]);
 
-        return redirect()->route('blog.index')->with('success', 'Blog created successfully.');
+        return redirect()->route('blog.admin.index');
     }
 
     public function destroy(Blog $blog)
     {
         $blog->delete();
-        return redirect()->route('blog.index')->with('success', 'Blog deleted successfully.');
+        return redirect()->route('blog.admin.index');
     }
 
 }

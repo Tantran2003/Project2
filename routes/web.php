@@ -138,6 +138,8 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
     // blog
     Route::get('/blog/list', [BlogController::class, 'adminIndex'])->name('blog.admin.index');
     Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::get('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::post('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
     
     Route::get('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
