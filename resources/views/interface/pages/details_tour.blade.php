@@ -267,11 +267,3 @@
 
 @endsection
 
-@foreach($ratings as $rating)
-<!-- <li>
-            <strong>Tên người dùng:</strong> {{ $rating->username }}<br>
-            <strong>Bình luận:</strong> {{ $rating->comment }}<br>
-
-        </li>
-        <hr> -->
-@endforeach

@@ -1,5 +1,7 @@
 @extends ('admin.layout_admin')
 @section ('content')
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
 <div class="container-fluid px-4 mt-4">
 <div class="row justify-content-center">
         <div class="col-sm-10">
@@ -82,4 +84,7 @@
     </div>
 </div>
 </div>
+<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
 @endsection

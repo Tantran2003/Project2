@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use Bcrypt;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -39,7 +40,7 @@ class AccountController extends Controller
         $account->email = $request->email;
         $account->phone = $request->phone;
         $account->address = $request->address;
-        $account->password = $request->password;
+        $account->password =  bcrypt($request->password);
         $account->role = $request->role;
         $account->status = $request->status;
    
@@ -66,12 +67,12 @@ class AccountController extends Controller
             ]);
     
             $edit = Account::find($id);
+         
             $edit->fullname = $request->fullname;
             $edit->phone = $request->phone;
             $edit->address = $request->address;   
-            $edit->role = $request->role;
             $edit->status = $request->status;
-    
+            $edit->role = $request->role;
             $edit->email = $olddata["display"]->email;
             $edit->password = $olddata["display"]->password;
     
