@@ -31,9 +31,9 @@ Route::post('/store-tour-booking/{id}', [HomeController::class, 'storeBookingReq
 //VNPAY
 Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
 // Auth::routes(['verify' => true]);
-Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
+Route::get('/tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
 Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
-Route::post('booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
+Route::post('/booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
