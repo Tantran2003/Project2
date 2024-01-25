@@ -38,17 +38,16 @@
                           </td>
                           <td>{{ $list->price }}</td>
                           <td>{{ $list->date }}</td>
-                          <td>{{ $list->created_at->format('F d, Y') }}</td>
+                          <td>{{ date('d-m-Y', strtotime($list->created_at)) }}</td>
                           <td>
                               @isset($list->guide->name)
                                  {{ $list->guide->name }}
                               @else 
                                   His info is deleted by Admin
                               @endisset
-                              
+                          
                           </td>
-                          <td>{{ $list->tourist->name }}</td>
-                          <td>{{ $list->tourist->contact }}</td>
+                       
                           <td> 
                             <button type="submit" onclick="handleApprove( {{ $list->id }}) " class="btn btn-info btn-sm mb-1">Approve</button>
 
