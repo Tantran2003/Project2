@@ -35,8 +35,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Tài khoản</h4>
-                        <small class="text-dark">Hệ thống<a class="text-primary" href="">/Tài khoản</a></small>
+                        <h4 class="card-title">Blogs</h4>
                     </div>
                    <div>
                    <a href="{{route('blog.create')}}" class="btn btn-link btn-soft-light bg-primary text-white ">
@@ -65,15 +64,13 @@
                                     <td scope="row"><img class="img-fluid" style="height: 100px;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Blog Image"></td>
                                     <td>{{ $value["title"]}}</td>
                                     <td style="width:150px;">
-                                        <a href="{{route('ht.accountupdate',$value['id'])}}" class="btn "><i
+                                        <a href="{{route('blog.update',$value['id'])}}" class="btn "><i
                                                 class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
                                         <a href="{{route('blog.destroy',$value)}}" class="btn "
                                             onclick="confirmation(event)"><i class="fa-regular fa-trash-can"
                                                 style="color: red;"></i></a>
                                     </td>
                                 </tr>
-
-
                                 <?php  }?>
                             </tbody>
                         </table>

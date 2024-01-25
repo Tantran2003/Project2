@@ -26,13 +26,14 @@ Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.g
 
 //Booking
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
+Route::post('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
 
-Route::get('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
-
+//VNPAY
+Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
 // Auth::routes(['verify' => true]);
-Route::get('tour-history/list',[BookingController::class, 'tourHistory'])->name('tour.history');
-Route::get('booking-request/list', [BookingController::class, 'pendingBookingList'])->name('pending.booking');
-Route::post('booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
+Route::get('/tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
+Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
+Route::post('/booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
@@ -138,6 +139,8 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
     // blog
     Route::get('/blog/list', [BlogController::class, 'adminIndex'])->name('blog.admin.index');
     Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::get('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::post('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
     
     Route::get('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');

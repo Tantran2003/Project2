@@ -10,9 +10,8 @@
             <h1><strong>{{$blogDetail -> title}}</strong></h1>
         </div>
         <div>
-          <p style="white-space: pre;">
-            {{$blogDetail->description}}
-          </p>
+          <div style="white-space: pre;text-wrap:wrap;">
+          {!! $blogDetail->description !!}
         </div>
     </div>
 </div>

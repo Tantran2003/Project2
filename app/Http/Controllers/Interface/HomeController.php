@@ -111,10 +111,11 @@ public function search(Request $request)
         $package_id = $request->package_id;
         $package_name = $request->package_name;
         $package_price = $request->package_price;
-        $day = $request->day;
+        $day = $request->keyword;
 
 
         $book = new Booking();
+        $book->approved_status = false; 
         $book->package_name = $package_name;
         $book->price = $package_price;
         $book->date = $date;
@@ -129,7 +130,7 @@ public function search(Request $request)
         $guide->save();
 
         session()->flash('success', 'Your Booking Request Send Successfully, Please wait for admin approval');
-        return redirect()->back();
+        return redirect(route('gd.pendingbooking'));
 
 
     }

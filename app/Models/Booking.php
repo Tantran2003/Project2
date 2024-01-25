@@ -19,12 +19,16 @@ class Booking extends Model
         'tourist_id',
         'is_completed',
         'approved_status',
+        
     ];
     protected $primarykey = "id";
+    public $timestamps = false;
+    protected $casts = [
+        'approved_status' => 'boolean',
+    ];
     public function tourist(){
         return $this->belongsTo(Account::class, 'tourist_id');
     }
-
     public function guide(){
         return $this->belongsTo(Guide::class, 'guide_id');
     }
