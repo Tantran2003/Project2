@@ -14,7 +14,9 @@ class Booking extends Model
         'price',
         'date',
         'day',
+        'departure_date',
         'package_id',
+        'sche_id',
         'guide_id',
         'tourist_id',
         'is_completed',
@@ -26,8 +28,8 @@ class Booking extends Model
     protected $casts = [
         'approved_status' => 'boolean',
     ];
-    public function tourist(){
-        return $this->belongsTo(Account::class, 'tourist_id');
+    public function account(){
+        return $this->belongsTo(Account::class, 'tourist_id','id');
     }
     public function guide(){
         return $this->belongsTo(Guide::class, 'guide_id');
@@ -36,5 +38,9 @@ class Booking extends Model
     public function product()
     {
         return $this->belongsTo(Products::class, 'package_id', 'id');
+    } 
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'sche_id', 'id');
     } 
 }

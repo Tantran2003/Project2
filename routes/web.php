@@ -83,7 +83,18 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
 });
 //end login vào admin
 
-Route::middleware('Decentralization')->prefix('system')->group(function () {
+
+
+////////////////////////////
+// Route::middleware('Decentralization')->prefix('system')->group(function () {
+    Route::group([ 
+        
+        'prefix' => 'system', 
+        'namespace' => 'Admin', 
+        'middleware' => [ 
+        'Decentralization'
+        ]
+    ], function () {
     Route::resource('guides', GuideController::class)->names([
         'index' => 'ht.guideindex',
         'create' => 'ht.guideadd',
@@ -150,4 +161,4 @@ Route::middleware('Decentralization')->prefix('system')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('admin.contact.index');
 });
-})->middleware(Decentralization::class);
+});

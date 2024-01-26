@@ -12,7 +12,7 @@
     <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    
+
     <link href="{{asset('public/interface')}}/css/style.css" rel="stylesheet">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -33,7 +33,7 @@
     <link href="{{asset('public/interface')}}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="{{asset('public/interface')}}/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
         rel="stylesheet" />
-        
+
 </head>
 
 <body>
@@ -84,7 +84,14 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{{route('gd.home')}}" class="nav-item nav-link ">Trang chủ</a>
-                    <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tour</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{{route('gd.index_tour',0)}}" class="dropdown-item">Tour List</a>
+                            <a href="{{ route('gd.pendingbooking') }}" class="dropdown-item">Pending Booking</a>
+                            <a href="{{ route('gd.tourhistory') }}" class="dropdown-item">History Booking</a>
+                        </div>
+                    </div>
                     <a href="service.html" class="nav-item nav-link">Services</a>
                     <a href="{{route('blog.index')}}" class="nav-item nav-link">Blog</a>
                     <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a>
@@ -102,7 +109,8 @@
                     <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Liên hệ</a>
                 </div>
                 @if(Auth::check())
-                <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{ Auth::user()->fullname}}</a>
+                <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{
+                    Auth::user()->fullname}}</a>
                 <a class="nav-link" href="{{route('gd.logout')}}">Thoát</a>
                 @else
                 <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>

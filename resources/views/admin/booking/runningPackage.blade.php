@@ -36,7 +36,7 @@
                           <td>{{ $list->package_name }}</td>
                           <td>{{ $list->price }}</td>
                           <td>{{ $list->date }}</td>
-                          <td>{{ $list->created_at->format('F d, Y') }}</td>
+                          <td>{{ $list->created_at}}</td>
                           <td>
                               @isset($list->guide->name)
                                  {{ $list->guide->name }}
@@ -45,8 +45,8 @@
                               @endisset
                               
                           </td>
-                          <td>{{ $list->tourist->name }}</td>
-                          <td>{{ $list->tourist->contact }}</td>
+                          <td>{{ $list->fullname }}</td>
+                          <td>{{ $list->contact }}</td>
                           <td> 
                             
                             <button type="submit" onclick="handleTourComplete( {{ $list->id }}) " class="btn btn-success btn-sm">Complete</button>
