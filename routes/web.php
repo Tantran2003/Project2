@@ -154,7 +154,7 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
     Route::post('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
     
-    Route::get('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
+    Route::get('/blog/delete/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
     //contact
 

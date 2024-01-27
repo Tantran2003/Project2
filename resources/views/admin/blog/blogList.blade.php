@@ -56,7 +56,6 @@
     function confirmation(ev) {
         ev.preventDefault();
         var urlToRedirect = ev.currentTarget.getAttribute('href');
-        console.log(urlToRedirect);
 
         Swal.fire({
             title: 'Bạn có chắc muốn xóa không?',
