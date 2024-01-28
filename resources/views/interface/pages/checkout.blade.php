@@ -8,7 +8,7 @@
         border-radius: 1rem !important;
     }
 </style>
-<div class="container-xxl my-5 py-2" style=" max-width: 1320px;">
+<div class="container-xxl my-5 py-5" style=" max-width: 1320px; ">
 
     <div class="row my-4">
         <h3 class="text-muted">Thanh toán</h3>
@@ -70,7 +70,7 @@
                     ?>
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            <label for="name">Name</label>
+                            <label for="name">Tên</label>
                             <input type="name" class="form-control" placeholder="" name="fullname"
                                 value="<?php echo Auth::user()->fullname; ?>" id="name" required>
                         </div>
@@ -82,12 +82,12 @@
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
-                            Phone<input type="tel" class="form-control" placeholder="" name="phone"
+                            Số điện thoại<input type="tel" class="form-control" placeholder="" name="phone"
                                 value="<?php echo Auth::user()->phone; ?>" id="phone">
 
                         </div>
                         <div class="col-sm-6 mt-3">
-                            Address<input type="text" class="form-control" placeholder="" name="address"
+                            Địa chỉ<input type="text" class="form-control" placeholder="" name="address"
                                 value="<?php echo Auth::user()->address; ?>" id="address">
 
                         </div>
@@ -98,14 +98,14 @@
                     ?>
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            <label for="name">Name</label>
-                            <input type="name" class="form-control" placeholder="Enter name" name="fullname"
+                            <label for="name">Tên</label>
+                            <input type="name" class="form-control" placeholder="Nhập tên" name="fullname"
                                 value="{{ old('fullname') }}" id="name">
                             {!! $errors->first('fullname', '<div class="has-error text-danger">:message</div>') !!}
                         </div>
                         <div class="col-sm-6">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" placeholder="Enter email" name="email"
+                            <input type="email" class="form-control" placeholder="Nhập email" name="email"
                                 value="{{ old('email') }}" id="email">
                             {!! $errors->first('email', '<div class="has-error text-danger">:message</div>') !!}
 
@@ -113,18 +113,17 @@
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
-                            Phone<input type="tel" class="form-control" placeholder="Enter phone" name="phone"
+                            Số điện thoại<input type="tel" class="form-control" placeholder="Nhập số điện thoại" name="phone"
                                 value="{{ old('phone') }}" id="phone">
                             {!! $errors->first('phone', '<div class="has-error text-danger">:message</div>') !!}
 
                         </div>
                         <div class="col-sm-6 mt-3">
-                            Address<input type="text" class="form-control" placeholder="Enter address" name="address"
+                            Địa chỉ<input type="text" class="form-control" placeholder="Nhập địa chỉ" name="address"
                                 value="{{ old('address') }}" id="address">
                             {!! $errors->first('address', '<div class="has-error text-danger">:message</div>') !!}
 
                         </div>
-
                     </div>
                     <?php 
                         }
@@ -155,7 +154,7 @@
                     <input type="hidden" value="{{ $booking->price3 }}" name="price3">
                     <input type="hidden" value="{{ $booking->price }}" name="price0">
 
-                    <h5><strong class="text-muted"> If you have any notes, please tell us!</strong></h5>
+                    <h5><strong class="text-muted">Bạn có thể ghi chú tại đây</strong></h5>
                     <div class="row m-3">
                         <textarea name="" id="" cols="5" rows="5"></textarea>
                     </div>

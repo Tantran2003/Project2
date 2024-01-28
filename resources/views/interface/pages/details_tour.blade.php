@@ -6,7 +6,6 @@
 
 @foreach($details as $detail)
 
-
 <div class="container-xxl py-5 mt-5 destination" style=" max-width: 1320px;">
     <div class="container">
         <div class="d-md-flex  flex-md-row flex-column justify-content-between align-items-center pb-5">
@@ -21,13 +20,10 @@
             <div class="col-md-6 wow d-flex  justify-content-xl-end  justify-content-md-center align-items-center fadeInUp"
                 data-wow-delay="0.1s">
                 <div class="  ">
-                    <a href=""
+                    <a href="{{route('gd.booking_tour',[$product_id, $schedule_id, khongdau($detail->name)] )}}"
                         class="btn btn-primary btn-lg btn-block px-5">Đặt ngay</a>
 
-
                     <h4 class="text-danger pt-4">{{$detail->price}}<span class="text-dark fs-6">/khách</span></h4>
-
-
                 </div>
 
             </div>
