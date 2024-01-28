@@ -72,23 +72,23 @@ public function search(Request $request)
 
    
     
-    public function packageBooking($product_id, $schedule_id) {
-        $guides = Guide::where('status', 1)->get();
+    // public function packageBooking($product_id, $schedule_id) {
+    //     $guides = Guide::where('status', 1)->get();
     
-        $product = Products::find($product_id);
+    //     $product = Products::find($product_id);
     
-        if (!$product) {
-            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
-        }
+    //     if (!$product) {
+    //         return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
+    //     }
     
-        $schedule = Schedule::find($schedule_id);
+    //     $schedule = Schedule::find($schedule_id);
     
-        if (!$schedule) {
-            return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
-        }
+    //     if (!$schedule) {
+    //         return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
+    //     }
     
-        return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
-    }
+    //     return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
+    // }
     
     
     

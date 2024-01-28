@@ -65,7 +65,7 @@
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
                 <button class="btn btn-success" type="submit" href="" role="button"><i class="fa fa-floppy-disk"></i>&nbsp;Lưu</button>
-                <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Back</a>
+                <a class="btn btn-secondary" href="{{route('ht.schedule')}}" role="button">Back</a>
             </div>
         </div>
     </form>

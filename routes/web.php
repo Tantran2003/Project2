@@ -19,6 +19,8 @@ use App\Http\Controllers\Interface\TourlistController;
 use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\BookingController;
 use App\Http\Controllers\Interface\ContactController;
+use App\Http\Controllers\Interface\CheckoutController;
+use App\Http\Controllers\Interface\PaymentController;
 
 //Guide
 Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
@@ -27,13 +29,19 @@ Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.g
 //Booking
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
 Route::post('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
-
+//checkout
+Route::match(['get','post'],"/booking-tour/{key}/{name}", [CheckoutController::class, 'booking'])->name("gd.booking_tour");
+Route::post('/payment', [CheckoutController::class, 'save'])->name('gd.savebooking');
+// Route cho trang thanh toán
+Route::match(['get','post'],'/pay', [PaymentController::class, 'pay'])->name('gd.pay');
+Route::post("/momo_payment", [PaymentController::class, 'momo_payment'])->name("gd.momo_payment");
+Route::get('/payment/confirm', [PaymentController::class, 'confirmPayment'])->name("gd.save_momo_payment");
 //VNPAY
-Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
+// Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
 // Auth::routes(['verify' => true]);
-Route::get('/tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
-Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
-Route::post('/booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
+// Route::get('/tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
+// Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
+// Route::post('/booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
 
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
@@ -53,6 +61,8 @@ Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->n
 Route::match(['get','post'],"/login", [SecureController::class, 'login'])->name("gd.login");
 Route::get("/logout", [SecureController::class, 'logout'])->name("gd.logout");
 Route::match(['get','post'],"/register", [SecureController::class, 'register'])->name("gd.register");
+Route::get("/history-order", [SecureController::class, 'history'])->name("gd.hisroty_order");
+
 //profile user
 Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
 Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');

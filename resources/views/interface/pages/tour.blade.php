@@ -139,7 +139,8 @@
                                                 class="btn btn-sm px-3 border border-info text-info "><i
                                                     class="fas fa-eye mr-1"></i>&nbsp;Thông tin</a>
                                            
-                                                    <a href="{{route('gd.tourbooking', [$item->id,$tourDate->id,khongdau($item->name) ])}}"    class="btn btn-sm px-3 border border-info  btn-primary "><i class="fas fa-shopping-cart"></i>&nbsp;Đặt ngay</a>
+                                                    <a href="{{route('gd.booking_tour', [$item->id,$tourDate->id,khongdau($item->name) ])}}"    class="btn btn-sm px-3 border border-info  btn-primary "><i class="fas fa-shopping-cart"></i>&nbsp;Đặt ngay</a>
+
                                              
                                         </div>
                                     </div>
