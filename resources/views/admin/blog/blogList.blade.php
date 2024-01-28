@@ -2,34 +2,8 @@
 @section ('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-<!-- <div class="iq-navbar-header" style="height: 215px;">
-    <div class="container-fluid iq-container">
-        <divs class="row">
-            <div class="col-md-12">
-                <div class="flex-wrap d-flex justify-content-between align-items-center">
-                    <div>
-                        <h2 class="text-dark">Tài khoản</h2>
-                        <small class="text-dark">Hệ thống<a class="text-primary" href="">/Tài khoản</a></small>
-
-                    </div>
-                    <div>
-                        <a href="{{route('ht.accountadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                            Tạo mới
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </divs>
-    </div>
-    <div class="iq-header-img">
-        <img src="{{asset('public')}}/webadmin/assets/images/dashboard/top-header.png" alt="header"
-            class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-   
-    </div>
-</div> Nav Header Component End -->
-<!--Nav End-->
 </div>
-<div class="conatiner-fluid content-inner mt-n5 py-0 " >
+<div class="conatiner-fluid content-inner mt-n5 py-0 ">
     <div class="row">
         <div class="col-sm-12" style="padding-top:100px;">
             <div class="card">
@@ -37,44 +11,41 @@
                     <div class="header-title">
                         <h4 class="card-title">Blogs</h4>
                     </div>
-                   <div>
-                   <a href="{{route('blog.create')}}" class="btn btn-link btn-soft-light bg-primary text-white ">
+                    <div>
+                        <a href="{{route('blog.create')}}" class="btn btn-link btn-soft-light bg-primary text-white ">
                             Tạo mới
                         </a>
-                   </div>
+                    </div>
                 </div>
                 <div class="card-body">
 
-                    <div class="table-responsive">
-                        <table id="datatable" class="table " data-toggle="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php     
-   foreach ($blogList as $value){  
-    ?>
-
-
-                                <tr>
-                                    <td scope="row"><img class="img-fluid" style="height: 100px;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Blog Image"></td>
-                                    <td>{{ $value["title"]}}</td>
-                                    <td style="width:150px;">
-                                        <a href="{{route('blog.update',$value['id'])}}" class="btn "><i
-                                                class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-                                        <a href="{{route('blog.destroy',$value)}}" class="btn "
-                                            onclick="confirmation(event)"><i class="fa-regular fa-trash-can"
-                                                style="color: red;"></i></a>
-                                    </td>
-                                </tr>
-                                <?php  }?>
-                            </tbody>
-                        </table>
+                <div class="table-responsive">
+    <table id="datatable" class="table" data-toggle="data-table">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tiêu đề</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($blogList as $value)
+            <tr>
+                <td scope="row">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid" style=" width:200px; object-fit: cover;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Hình ảnh Blog">
                     </div>
+                </td>
+                <td>{{ $value["title"] }}</td>
+                <td style="width:150px;">
+                    <a href="{{ route('blog.update', $value['id']) }}" class="btn"><i class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
+                    <a href="{{ route('blog.destroy', $value) }}" class="btn" onclick="confirmation(event)"><i class="fa-regular fa-trash-can" style="color: red;"></i></a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
                 </div>
             </div>
         </div>
@@ -84,7 +55,6 @@
     function confirmation(ev) {
         ev.preventDefault();
         var urlToRedirect = ev.currentTarget.getAttribute('href');
-        console.log(urlToRedirect);
 
         Swal.fire({
             title: 'Bạn có chắc muốn xóa không?',

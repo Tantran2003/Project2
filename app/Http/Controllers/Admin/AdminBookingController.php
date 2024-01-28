@@ -9,16 +9,17 @@ use App\Notifications\PackageApproveConfirmation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+
 class AdminBookingController extends Controller
 {
     public function pendingBookingList(){
-        $pendinglists = Booking::where('approved_status', 'no')->get();
+        $pendinglists = Booking::where('approved_status', 0)->get();
         return view('admin.booking.pendinglist', compact('pendinglists'));
     }
 
     public function bookingApprove($id){
         $req = Booking::find($id);
-        $req->approved_status = "yes";
+        $req->approved_status = 1;
         $req->save();
 
         $req->tourist->notify(new PackageApproveConfirmation($req));

@@ -12,7 +12,7 @@
     <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    
+
     <link href="{{asset('public/interface')}}/css/style.css" rel="stylesheet">
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -33,7 +33,7 @@
     <link href="{{asset('public/interface')}}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="{{asset('public/interface')}}/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
         rel="stylesheet" />
-        
+
 </head>
 
 <body>
@@ -91,7 +91,8 @@
                     <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Liên hệ</a>
                 </div>
                 @if(Auth::check())
-                <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{ Auth::user()->fullname}}</a>
+                <a href="{{route('gd.profile')}}" class="btn btn-primary rounded-pill py-2 px-4">{{
+                    Auth::user()->fullname}}</a>
                 <a class="nav-link" href="{{route('gd.logout')}}">Thoát</a>
                 @else
                 <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>

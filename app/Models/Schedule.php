@@ -19,7 +19,7 @@ class Schedule extends Model
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'schedule_id', 'id');
+        return $this->hasMany(Booking::class, 'sche_id', 'id');
     }
 }
 

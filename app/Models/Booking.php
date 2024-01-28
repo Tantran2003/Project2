@@ -47,8 +47,8 @@ class Booking extends Model
     protected $casts = [
         'approved_status' => 'boolean',
     ];
-    public function tourist(){
-        return $this->belongsTo(Account::class, 'tourist_id');
+    public function account(){
+        return $this->belongsTo(Account::class, 'tourist_id','id');
     }
     public function guide(){
         return $this->belongsTo(Guide::class, 'guide_id');

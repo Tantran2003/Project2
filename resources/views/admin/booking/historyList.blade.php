@@ -36,7 +36,7 @@
                           <td>{{ $list->package_name }}</td>
                           <td>{{ $list->price }}</td>
                           <td>{{ $list->date }}</td>
-                          <td>{{ $list->created_at->format('F d, Y') }}</td>
+                          
                           <td>{{ $list->day }}</td>
                           <td>
                               @isset($list->guide->name)
