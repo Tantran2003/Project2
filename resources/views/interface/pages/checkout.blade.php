@@ -48,25 +48,23 @@
 
         <div class="row ">
             <div class="col-lg-7 bg-light p-3 mt-4">
-                <form action="{{route('gd.tourbooking',['key' => $booking->id, 'name' => $booking->name])}}"
-                    method="post" name="form">
-
+                <form action="{{route('gd.savebooking')}}" method="post" name="form">
                     @csrf
-                    <!-- <input type="hidden" name="id" value="{{$booking->id}}">
+                    <input type="hidden" name="id" value="{{$booking->id}}">
                     <input type="hidden" name="schedule_id" value="{{ $booking->id }}">
                     <input type="hidden" name="departurelocation" value="{{$booking->departurelocation}}">
+                    <input type="hidden" name="arrivallocation" value="{{$booking->arrivallocation}}">
                     <input type="hidden" name="date_start" value="{{$booking->date_start}}">
                     <input type="hidden" name="date_end" value="{{$booking->date_end}}">
                     <input type="hidden" name="vehicle" value="{{$booking->vehicle}}">
                     <input type="hidden" name="keyword" value="{{$booking->keyword}}">
                     <input type="hidden" name="status" value="{{$booking->status}}">
                     <input type="hidden" name="tour_code" value="{{$booking->tour_code}}">
-                    <input type="hidden" name="user_id" value="{{session('id')}}">
-                    <input type="hidden" name="name" value="{{$booking->name}}">
-                    <input type="hidden" name="price" value="{{$booking->price}}">
-                    <input type="hidden" name="price1" value="{{$booking->price1}}">
-                    <input type="hidden" name="price2" value="{{$booking->price2}}">
-                    <input type="hidden" name="price3" value="{{$booking->price3}}"> --> -->
+                    @if(Auth::check())
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    @endif
+
+
                     <?php 
                     if(Auth::check()){         
                     ?>
@@ -102,23 +100,28 @@
                         <div class="col-sm-6">
                             <label for="name">Name</label>
                             <input type="name" class="form-control" placeholder="Enter name" name="fullname"
-                                value="{{ old('name', session('userName')) }}" id="name" required>
+                                value="{{ old('fullname') }}" id="name">
+                            {!! $errors->first('fullname', '<div class="has-error text-danger">:message</div>') !!}
                         </div>
                         <div class="col-sm-6">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" placeholder="Enter email" name="email"
-                                value="{{ old('email', session('userEmail')) }}" id="email" required>
+                                value="{{ old('email') }}" id="email">
+                            {!! $errors->first('email', '<div class="has-error text-danger">:message</div>') !!}
+
                         </div>
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
                             Phone<input type="tel" class="form-control" placeholder="Enter phone" name="phone"
-                                value="{{ session('userPhone') }}" id="phone">
+                                value="{{ old('phone') }}" id="phone">
+                            {!! $errors->first('phone', '<div class="has-error text-danger">:message</div>') !!}
 
                         </div>
                         <div class="col-sm-6 mt-3">
                             Address<input type="text" class="form-control" placeholder="Enter address" name="address"
-                                value="{{ session('userAddress') }}" id="address">
+                                value="{{ old('address') }}" id="address">
+                            {!! $errors->first('address', '<div class="has-error text-danger">:message</div>') !!}
 
                         </div>
 
@@ -126,116 +129,93 @@
                     <?php 
                         }
                     ?>
-                    <!-- <h5><strong class="text-muted">Passenger</strong></h5> -->
-                    <!-- <div id='booking-details'>
-                        <div class="row p-3">
-                            <div class="col-sm-6">
-                                Người lớn<input type="number" min="1" value="1" class="form-control"
-                                    placeholder="Nhập số người lớn" name="person1" data-person="Người lớn"
-                                    data-price="{{ $booking->price }}">
-                            </div>
-                            <div class="col-sm-6">
-                                Trẻ em<input type="number" min="0" value="0" class="form-control "
-                                    placeholder="Nhập số trẻ em" name="person2" data-person="Trẻ em"
-                                    data-price="{{ $booking->price1 }}">
-                            </div>
-                        </div>
-                        <div class="row p-3">
-                            <div class="col-sm-6 mt-3">
-                                Trẻ nhỏ<input type="number" min="0" value="0" class="form-control"
-                                    placeholder="Nhập số trẻ nhỏ" name="person3" data-person="Trẻ nhỏ"
-                                    data-price="{{ $booking->price2}}">
-                            </div>
-                        </div>
-                    </div> -->
+                    <h5><strong class="text-muted">Passenger</strong></h5>
 
+                    <div class="row p-3">
+                        <div class="col-sm-6">
+                            Người lớn<input type="number" min="1" value="1" class="form-control"
+                                placeholder="Nhập số người lớn" name="person1" data-person="Người lớn"
+                                data-price="{{ $booking->price1 }}">
+                        </div>
+                        <div class="col-sm-6">
+                            Trẻ em<input type="number" min="0" value="0" class="form-control "
+                                placeholder="Nhập số trẻ em" name="person2" data-person="Trẻ em"
+                                data-price="{{ $booking->price2 }}">
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                        <div class="col-sm-6 mt-3">
+                            Trẻ nhỏ<input type="number" min="0" value="0" class="form-control"
+                                placeholder="Nhập số trẻ nhỏ" name="person3" data-person="Trẻ nhỏ"
+                                data-price="{{ $booking->price3 }}">
+                        </div>
+                    </div>
+                    <input type="hidden" value="{{ $booking->price1 }}" name="price1">
+                    <input type="hidden" value="{{ $booking->price2 }}" name="price2">
+                    <input type="hidden" value="{{ $booking->price3 }}" name="price3">
+                    <input type="hidden" value="{{ $booking->price }}" name="price0">
 
                     <h5><strong class="text-muted"> If you have any notes, please tell us!</strong></h5>
                     <div class="row m-3">
                         <textarea name="" id="" cols="5" rows="5"></textarea>
                     </div>
-                    <!-- Trip Summary Section -->
 
-                    <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="p-4 border border-secondary-subtle rounded">
-                            <div class="border-0">
-                                <h4 class="font-weight-semi-bold m-0">Tổng chuyến đi</h4>
-                            </div>
-                            <div class="card-body mt-5">
-                                <?php
-                                    $Subtotal=0; $total=0;
-                                    foreach(Session::get("booking") as $item ) 
-                                {?>
-                                    <div class="d-flex justify-content-between">
-                                        <p>Adults</p>
-                                        <p>${{$item['price']}}</p>
-                                        <p>Children</p>
-                                        <p>${{$item['price1']}}</p>
-                                        <p>Babies</p>
-                                        <p>${{$item['price2']}}</p>
-                                    </div>
-                                <?php 
-                                        $Subtotal=$Subtotal+$item['amount']*$item['price'] + $item['amount1']*$item['price1'] + $item['amount1']*$item['price1'];
-                                    } ?>
-                                <hr class="mt-0">
-                                <div class="d-flex justify-content-between mb-3 pt-1">
-                                    <h6 class="font-weight-medium">Subtotal</h6>
-                                    <h6 class="font-weight-medium">$<?php echo $Subtotal; ?></h6>
-                                </div>
-                                <!-- <div class="d-flex justify-content-between">
-                                    <h5>{{$booking->name}}</h5>
-                                    <h5 id="totalAmount"></h5>
-                                </div>
-                                
-                                <hr class="mt-0">
-                                <div class="  mb-3 pt-1">
-                                    div hiển thị giá và person 
-                                    <h6 id="displayText" class="font-weight-medium mt-2"></h6>
-                                    
-                                    <h6 class="font-weight-medium"></h6>
-                                </div>  -->
 
-                            </div>
-                            
+
+            </div>
+
+
+            <!-- Trip Summary Section -->
+
+            <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="p-4 border border-secondary-subtle rounded">
+                    <div class="border-0">
+                        <h4 class="font-weight-semi-bold m-0">Tổng chuyến đi</h4>
+                    </div>
+                    <div class="card-body mt-5">
+
+
+                        <div class="d-flex justify-content-between">
+                            <h5>{{$booking->name}}</h5>
+                            <h5>{{$booking->price}}</h5>
                         </div>
-                    </div>
-
-                </form>
-
-                <divs class="row my-4">
-                    <div class="col-sm-4">
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="radio1" name="payment" value="direct"
-                                checked>
-                            <label class="form-check-label" for="radio1">Direct Payment</label>
+                        @endforeach
+                        <hr class="mt-0">
+                        <div class="  mb-3 pt-1">
+                            <!-- div hiển thị giá và person -->
+                            <h6 id="displayText" class="font-weight-medium mt-2"></h6>
+                            <!--  -->
+                            <h6 class="font-weight-medium"></h6>
                         </div>
+
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="radio2" name="payment" value="card">
-                            <label class="form-check-label" for="radio2">Credit Card Payment</label>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h4 class="font-weight-bold">Total</h4>
+
+                            <h4 class="font-weight-bold text-danger" id="totalAmount"></h4>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <form action="{{route('gd.vnpay')}}" method="post" name="form">
-                            <!-- other form fields -->
-                            <label class="form-check-label" for="radio2">VN PAY</label>
-                            <!-- Add a hidden input for book_id -->
-                            <input type="hidden" name="book_id" value="{{ $book_id }}">
-
-                            <div class="card-footer border-secondary bg-transparent">
-                                <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Thanh Toan</button>
-                            </div>
-                        </form>
+                        <div class="d-flex justify-content-end mt-2">
+                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>Đặt
+                                    ngay</strong></button>
+                            </form>
+                        </div>
 
                     </div>
-                </divs>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- @if(Session::has('totalAmount'))
+    Giá trị totalAmount trong session là: {{ Session::get('totalAmount') }}
+@else
+    Session không có giá trị totalAmount
+@endif -->
+</div>
+</div>
+</div>
 @endsection
-
 <style>
     .display-item {
         display: flex;
@@ -245,13 +225,13 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-
 <script>
     $(document).ready(function () {
-        var totalPrice = parseFloat($("#booking-details").data('price')) +
-            parseFloat($("#booking-details").data('price1')) +
-            parseFloat($("#booking-details").data('price2'));
+        var mainPrice = convertPriceToNumber("{{$booking->price}}");
 
+        function convertPriceToNumber(priceString) {
+            return parseFloat(priceString.replace(/[^\d]/g, ''));
+        }
         function formatCurrency(amount) {
             return new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
@@ -259,18 +239,16 @@
                 minimumFractionDigits: 0,
             }).format(amount).replace(/₫/, 'VNĐ');
         }
-
         function updateDisplay() {
-            var totalCost = 0;
+            var totalCost = mainPrice;
             var displayString = "";
-
             $('input[type="number"]').each(function () {
                 var person = $(this).data('person');
                 var value = $(this).val();
-                var priceIndex = $(this).data('price-index');
+                var price = parseFloat($(this).data('price').replace(/[^\d]/g, ''));
 
-                if (priceIndex !== undefined && !isNaN(priceIndex) && value > 0) {
-                    var individualCost = totalPrice * value;
+                if (!isNaN(price) && value > 0) {
+                    var individualCost = price * value;
                     var formattedIndividualCost = formatCurrency(individualCost);
 
                     displayString += `<div class="display-item">
@@ -280,26 +258,11 @@
                     totalCost += individualCost;
                 }
             });
-
+            var totalAmount = totalCost;
             var formattedTotalCost = formatCurrency(totalCost);
             $("#displayText").html(displayString);
             $("#totalAmount").html(formattedTotalCost);
-
-            // Update the session with the total amount using Ajax
-            $.ajax({
-                url: "{{ route('gd.updateTotalAmountSession') }}", // Adjust the route to your actual route
-                type: "POST",
-                data: { totalAmount: totalCost },
-                success: function (response) {
-                    // Provide user feedback here, e.g., display a message
-                    console.log("Giá trị totalAmount đã được lưu vào session.");
-                },
-                error: function (xhr, status, error) {
-                    console.error("Đã xảy ra lỗi khi lưu giá trị totalAmount vào session.");
-                }
-            });
         }
-
         updateDisplay();
         $('input[type="number"]').on('input', updateDisplay);
     });

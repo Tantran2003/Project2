@@ -38,7 +38,7 @@
                             <label for="inputPassword" class="col-sm-6 col-form-label">Hình ảnh*</label>
 
                             <input type="file" class="form-control" multiple="multiple" name="images[]">
-                            {!!$errors->first('images.*','<div class="has-error text-danger">:message</div>')!!}
+                            {!!$errors->first('images[]','<div class="has-error text-danger">:message</div>')!!}
                         </div>
                     </div>
 

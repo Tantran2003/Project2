@@ -34,21 +34,6 @@
                             <input type="file" onchange="onUpload(this)" class="form-control" name="image">
                         </div>
                     </div>
-
-                    <!-- <div class="mb-3">
-                        <label for="" class="col-sm-2 col-form-label">Trạng thái</label>
-                        <div class="form-check form-check-inline ">
-                            <input class="form-check-input" type="radio" name="status"
-                                {{$blogDetail->status==1?"checked":""}} value=
-                            "1">
-                            <label class="form-check-label">Mở</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status"
-                                {{$blogDetail->status==2?"checked":""}}
-                            value="2">
-                            <label class="form-check-label">Khóa</label>
-                        </div> -->
                         <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-5 ">
