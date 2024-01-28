@@ -1,0 +1,42 @@
+<script>
+    $(document).ready(function () {
+        var mainPrice = convertPriceToNumber("{{$booking->price}}");
+
+        function convertPriceToNumber(priceString) {
+            return parseFloat(priceString.replace(/[^\d]/g, ''));
+        }
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0,
+            }).format(amount).replace(/₫/, 'VNĐ');
+        }
+        function updateDisplay() {
+            var totalCost = mainPrice;
+            var displayString = "";
+            $('input[type="number"]').each(function () {
+                var person = $(this).data('person');
+                var value = $(this).val();
+                var price = parseFloat($(this).data('price').replace(/[^\d]/g, ''));
+
+                if (!isNaN(price) && value > 0) {
+                    var individualCost = price * value;
+                    var formattedIndividualCost = formatCurrency(individualCost);
+
+                    displayString += `<div class="display-item">
+                                    <span>${person} x${value}</span>
+                                    <span>${formattedIndividualCost}<br><br></span>
+                                  </div>`;
+                    totalCost += individualCost;
+                }
+            });
+            var totalAmount = totalCost;
+            var formattedTotalCost = formatCurrency(totalCost);
+            $("#displayText").html(displayString);
+            $("#totalAmount").html(formattedTotalCost);
+        }
+        updateDisplay();
+        $('input[type="number"]').on('input', updateDisplay);
+    });
+</script>

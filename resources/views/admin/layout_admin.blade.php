@@ -54,14 +54,14 @@
               <span class="mini-icon">-</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.admin')}}">
               <i class="icon">
                 <i class="fa-solid fa-chart-column" width="20"></i>
               </i>
               <span class="item-name">Trang chủ</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('ht.account')}}">
               <i class="icon">
@@ -101,21 +101,33 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('blog.admin.index')}}">
               <i class="icon">
-                <i class="fa-solid fa-calendar-days" width="20"></i>
+          
+                <i class="fas fa-blog" width="20"></i>
               </i>
-              <span class="item-name">Blogs</span>
+              <span class="item-name">Tin tức</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{route('admin.contact.index')}}">
               <i class="icon">
-                <i class="fa-solid fa-calendar-days" width="20"></i>
+          
+                <i class="fas fa-headset"  width="20"></i>
               </i>
-              <span class="item-name">Contact</span>
+              <span class="item-name">Liên hệ</span>
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {" aria-current="page"
+              href="{{ route('ht.comments') }}">
+              <i class="icon">
+              
+                <i class="fas fa-comment"  width="20"></i>
+              </i>
+              <span class="item-name">Bình luận</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}" aria-current="page"
               href="{{ route('ht.guideindex') }}">
               <i class="icon">
@@ -123,9 +135,9 @@
               </i>
               <span class="item-name">Guide</span>
             </a>
-          </li>
+          </li> -->
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{{ route('ht.pendingbooking') }}">
               <i class="icon">
                 <i class="fa-solid fa-calendar-days" width="20"></i>
@@ -148,7 +160,7 @@
               </i>
               <span class="item-name"> Tour History</span>
             </a>
-          </li>
+          </li> -->
          
         </ul>
         <!-- Sidebar Menu End -->

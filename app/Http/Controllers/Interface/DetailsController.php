@@ -13,26 +13,32 @@ class DetailsController extends Controller
 {
    
     public function index($product_id, $schedule_id)
-{
+    {
+        $details = DB::table('products')
+            ->join('schedule', 'products.id', '=', 'schedule.tour_id')
+            ->select('products.*', 'schedule.*')
+            ->where('products.id', '=', $product_id)
+            ->where('schedule.id', '=', $schedule_id)
+            ->get();
+            
+        $ratings = ProductRating::where('product_id', $product_id)->get();
     
-
-    $data['product_id'] = $product_id;
-    $data['details'] = DB::table('products')
-        ->join('schedule', 'products.id', '=', 'schedule.tour_id')
-        ->select('products.*', 'schedule.*')
-        ->where('products.id', '=', $product_id)
-        ->where('schedule.id', '=', $schedule_id)
-        ->get();
-        $data['ratings'] = ProductRating::where('product_id', $product_id)->get();
-    // Chuyển đổi chuỗi JSON thành mảng cho trường images
-    foreach ($data['details'] as $detail) {
-        if (isset($detail->images) && is_string($detail->images)) {
-            $detail->images = json_decode($detail->images, true);
+        foreach ($details as $detail) {
+            if (isset($detail->images) && is_string($detail->images)) {
+                $detail->images = json_decode($detail->images, true);
+            }
         }
+    
+        $data = [
+            'details' => $details,
+            'ratings' => $ratings,
+            'product_id' => $product_id,
+            'schedule_id' => $schedule_id
+        ];
+    
+        return view('interface/pages/details_tour', $data);
     }
-
-    return view('interface/pages/details_tour', $data);
-}
+    
 
 public function saveRating(Request $request, $id = null)
 {

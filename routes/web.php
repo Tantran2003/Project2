@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CommentsadminController;
 use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Middleware\Decentralization;
@@ -154,9 +155,9 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
     Route::get('running/packages/', [AdminBookingController::class, 'runningPackage'])->name('ht.packagerunning');
     Route::post('running/package/complete/{id}', [AdminBookingController::class, 'runningPackageComplete'])->name('ht.packagerunningcomplete');
     Route::get('tour-history/list', [AdminBookingController::class, 'tourHistory'])->name('ht.tourhistory');
-    //guide
-    
-
+    //commments
+    Route::get('/comments', [CommentsadminController::class, 'comments'])->name('ht.comments');
+    Route::get('/comments/delete/{key}', [CommentsadminController::class, 'delete'])->name('ht.commentsdelete');
     // blog
     Route::get('/blog/list', [BlogController::class, 'adminIndex'])->name('blog.admin.index');
     Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
