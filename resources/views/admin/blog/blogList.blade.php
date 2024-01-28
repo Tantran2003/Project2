@@ -19,34 +19,33 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="table-responsive">
-                        <table id="datatable" class="table " data-toggle="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Title</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($blogList as $value) {
-                                ?>
-
-
-                                    <tr>
-                                        <td scope="row"><img class="img-fluid" style="height: 100px;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Blog Image"></td>
-                                        <td>{{ $value["title"]}}</td>
-                                        <td style="width:150px;">
-                                            <a href="{{route('blog.update',$value['id'])}}" class="btn "><i class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-
-                                            <a href="{{route('blog.destroy',$value)}}" class="btn " onclick="confirmation(event)"><i class="fa-regular fa-trash-can" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                <?php  } ?>
-                            </tbody>
-                        </table>
+                <div class="table-responsive">
+    <table id="datatable" class="table" data-toggle="data-table">
+        <thead>
+            <tr>
+                <th>Hình ảnh</th>
+                <th>Tiêu đề</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($blogList as $value)
+            <tr>
+                <td scope="row">
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid" style=" width:200px; object-fit: cover;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Hình ảnh Blog">
                     </div>
+                </td>
+                <td>{{ $value["title"] }}</td>
+                <td style="width:150px;">
+                    <a href="{{ route('blog.update', $value['id']) }}" class="btn"><i class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
+                    <a href="{{ route('blog.destroy', $value) }}" class="btn" onclick="confirmation(event)"><i class="fa-regular fa-trash-can" style="color: red;"></i></a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
                 </div>
             </div>
         </div>

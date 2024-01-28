@@ -75,7 +75,7 @@
                         <div class="col-12">
                             <div class="form-floating">
                                         <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" required>
-                                        <label for="phone"> Phone</label>
+                                        <label for="phone"> Số Điện Thoại </label>
                                 </div>
                         </div>
                         <div class="col-12">

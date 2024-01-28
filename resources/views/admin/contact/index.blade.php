@@ -7,11 +7,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Tên</th>
                     <th>Email</th>
-                    <th>Message</th>
-                    <th>Phone</th>
-                    <th>Submitted At</th>
+                    <th>Tin Nhắn</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Ngày Gửi</th>
                 </tr>
             </thead>
             <tbody>
