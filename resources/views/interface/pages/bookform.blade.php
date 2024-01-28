@@ -62,3 +62,18 @@
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 {!! Toastr::message() !!}
 @endsection
+
+<div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h4 class="font-weight-bold">Total</h4>
+                            <form id="paymentForm" action="{{ route('gd.pay') }}" method="POST">
+                                @csrf
+                                <h4 class="font-weight-bold text-danger" id="totalAmount"></h4>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>Đặt
+                                    ngay</strong></button>
+                            </form>
+                        </div>
+
+                    </div>

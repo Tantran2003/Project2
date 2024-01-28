@@ -116,6 +116,16 @@
                 <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
                 @endif
             </div>
+                <a href="{{ route('gd.booking', ['product_id' => $productId, 'schedule_id' => $scheduleId]) }}" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                    <span class="badge">
+                    @if(Session::has('booking'))
+                        {{count(Session::get('booking'))}}
+                    @else
+                        0
+                    @endif
+                    </span>
+                </a>
         </nav>
 
 

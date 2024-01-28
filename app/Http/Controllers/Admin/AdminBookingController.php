@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class AdminBookingController extends Controller
 {
     public function pendingBookingList(){
-        $pendinglists = Booking::where('approved_status', 0)->get();
+        $pendinglists = Booking::where('status', 'no')->get();
         return view('admin.booking.pendinglist', compact('pendinglists'));
     }
 

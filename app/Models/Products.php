@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Products extends Model
 {
     protected $table = "products";
-    protected $fillable = ["name", "keyword","vehicle", "desc", "content","price","price1","price2","price3","image","images","idcat","departureday","departurelocation","arrivallocation","status"];
+    protected $fillable = ["name", "keyword","vehicle", "desc", "content",
+    "price","price1","price2","image","images","idcat","departureday","departurelocation","arrivallocation","status"];
     protected $primaryKey = "id";
     public $timestamps = false;
 
@@ -25,6 +26,21 @@ class Products extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'idcat');
+    }
+    public function calculatePrice($personType)
+    {
+        $basePrice = $this->price;
+
+        switch ($personType) {
+            case 'price':
+                return $basePrice;
+            case 'price1':
+                return $basePrice * ($this->adult_percentage / 100);
+            case 'price2':
+                return $basePrice * ($this->young_children_percentage / 100);
+            default:
+                return $basePrice;
+        }
     }
 }
 
