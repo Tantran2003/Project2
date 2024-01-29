@@ -6,52 +6,92 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Products;
+use Illuminate\Support\Facades\Validator;
 class ScheduleController extends Controller
 {
     public function schedule(){
         $data["schedule"] = Schedule::get();
     return view("admin/schedule/schedule", $data);
     }
-    public function add(Request $request){
+    public function add(Request $request)
+    {
+      $messages = [
+
+        'date_start.before_or_equal' => 'Ngày đi phải trước ngày kết thúc',   
+        'date_end.after_or_equal' => 'Ngày kết thúc phải sau ngày đi ',   
+        'tour_code.unique' => 'Mã tour không được trùng'
+
+    ];
         if ($request->isMethod("post")) {
-            $this->validate($request, [
-              "date_start" => "required",
-              "date_end" => "required",
-              "tour_code" => "required",  
-            ]);
-            $sche = new Schedule();
-            // $prod->images = $request->images;
-            $sche->tour_id = $request->tour_id;
-            $sche->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
-            $sche->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
-            $sche->status = $request->status;
-            $sche->tour_code = $request->tour_code;
-            $sche->save();
-            toastr()->success('Thêm thành công!');
-            // Session::flash('note','Successfully !');
+            $validator = Validator::make($request->all(), [
+                "date_start" => "required|before_or_equal:date_end",
+                "date_end" => "required|after_or_equal:date_start",
+                "tour_code" => "required|unique:schedule,tour_code",
+            ],$messages);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput($request->only('tour_code'));
+            }
+    
+            // Kiểm tra xem ngày đã tồn tại trong cơ sở dữ liệu hay không
+            $existingSchedule = Schedule::where(function ($query) use ($request) {
+                $query->where('date_start', '<=', $request->date_end)
+                    ->where('date_end', '>=', $request->date_start)
+                    ->where('tour_id', $request->tour_id);
+            })->first();
+    
+            if ($existingSchedule) {
+                toastr()->error('Lịch trình đã tồn tại cho chuyến đi này!');
+                return redirect()->back();
+            }
+    
+            // Nếu không có lịch trình tồn tại, thêm mới
+            $schedule = new Schedule();
+            $schedule->tour_id = $request->tour_id;
+            $schedule->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
+            $schedule->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
+            $schedule->status = $request->status;
+            $schedule->tour_code = $request->tour_code;
+            $schedule->save();
+    
+            toastr()->success('Thêm lịch trình thành công!');
             return redirect()->route("ht.schedule");
-          } else {
+        } else {
             $data["schedule"] = Products::where("status", 1)->get();
-            return view("admin/schedule/addschedule",$data);
-          }
-      
+            return view("admin/schedule/addschedule", $data);
+        }
     }
+    
     public function update(Request $request, $id){
     $data["load"] = Schedule::find($id);
         if ($request->isMethod("post")) {
-            $this->validate($request, [
-              "date_start" => "required",
-              "date_end" => "required",
-              "tour_code" => "required",            
+          $validator = Validator::make($request->all(), [
+              "date_start" => "required|before_or_equal:date_end",
+              "date_end" => "required|after_or_equal:date_start",
+              "tour_code" => "required|unique:schedule,tour_code",      
             ]);
+            if ($validator->fails()) {
+              return redirect()->back()->withErrors($validator)->withInput($request->only('tour_code'));
+          }
+            // Kiểm tra xem ngày đã tồn tại trong cơ sở dữ liệu hay không
+            $existingSchedule = Schedule::where(function ($query) use ($request) {
+              $query->where('date_start', '<=', $request->date_end)
+                  ->where('date_end', '>=', $request->date_start)
+                  ->where('tour_id', $request->tour_id);
+          })->first();
+  
+          if ($existingSchedule) {
+              toastr()->error('Lịch trình đã tồn tại trong cơ sở dữ liệu!');
+              return redirect()->back();
+          }
             $edit =  Schedule::find($id);
-
             $edit->tour_id = $request->tour_id;
             $edit->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
             $edit->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
             $edit->status = $request->status;
-            $edit->tour_code = $request->tour_code;
-
+            if ($request->tour_code !== $data["load"]->tour_code) {
+              $edit->tour_code = $request->tour_code;
+          }
             $edit->save();
             toastr()->success('Sửa thành công!');
             // Session::flash('note','Successfully !');
