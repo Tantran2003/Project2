@@ -127,7 +127,7 @@
               <span class="item-name">Bình luận</span>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}" aria-current="page"
               href="{{ route('ht.guideindex') }}">
               <i class="icon">
@@ -135,7 +135,7 @@
               </i>
               <span class="item-name">Guide</span>
             </a>
-          </li> 
+          </li>  -->
 
           <li class="nav-item">
             <a href="{{ route('ht.ordermomo') }}" aria-current="page" class="nav-link">

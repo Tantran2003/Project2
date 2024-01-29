@@ -144,7 +144,7 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
     //booking
     Route::get('tour/momo', [AdminBookingController::class, 'ordermomo'])->name('ht.ordermomo');
     Route::get('tour/momo/delete/{key}', [AdminBookingController::class, 'deleteorder'])->name('ht.ordermomodel');
-    Route::get('tour/momo/detail', [AdminBookingController::class, 'tourhistory'])->name('ht.ordermomodetail');
+    Route::get('tour/momo/detail/{id}', [AdminBookingController::class, 'tourhistory'])->name('ht.ordermomodetail');
     //commments
     Route::get('/comments', [CommentsadminController::class, 'comments'])->name('ht.comments');
     Route::get('/comments/delete/{key}', [CommentsadminController::class, 'delete'])->name('ht.commentsdelete');

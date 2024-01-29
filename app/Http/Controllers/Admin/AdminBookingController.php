@@ -63,7 +63,7 @@ class AdminBookingController extends Controller
     }
 
 
-public function tourhistory(){
+public function tourhistory($id = null){
     $data["booking"] = Booking::where('id', '=', $id)->get();
     return view("admin/booking/historyList", $data);
 }
