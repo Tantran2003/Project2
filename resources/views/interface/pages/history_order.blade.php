@@ -1,5 +1,6 @@
 @extends('interface.layout_interface')
 @section('content')
+
 <div class="container-xxl my-5 py-5" style=" max-width: 1420px;">
         <h1>Lịch sử đặt hàng</h1>
 <h3> Hóa đơn</h3>

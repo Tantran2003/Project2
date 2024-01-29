@@ -13,7 +13,7 @@
                </div>
                <div>
                   <a href="{{route('ht.scheduleadd')}}" class="btn btn-link btn-soft-light bg-primary ">
-                  Tạo mới
+                     Tạo mới
                   </a>
                </div>
             </div>
@@ -44,10 +44,10 @@
                      <thead>
                         <tr>
                            <th>No</th>
-                        
+                           <th>Tour</th>
                            <th>Ngày đi</th>
                            <th>Ngày về</th>
-                           <th>Mã tour</th>                          
+                           <th>Mã tour</th>
                            <th>Trạng thái</th>
                            <th></th>
                         </tr>
@@ -60,10 +60,12 @@
 
                         <tr>
                            <td scope="row">{{ $value["id"]}}</td>
-                  
-                          
-                         
-       
+
+
+                           <!-- dựa vào model mối quan hệ belongto lấy phương thức gọi thẳng tên -->
+                           <td scope="row" class="text-break">{{ $value->product->name }}</td>
+
+
                            <td>{{ $value["date_start"]}}</td>
                            <td>{{ $value["date_end"]}}</td>
                            <td>{{ $value["tour_code"]}}</td>
@@ -77,11 +79,12 @@
                               </span>
                               @endif
                            </td>
-                           <td>
+                           <td style="width: 120px;">
                               <a href="{{route('ht.scheduleupdate',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>
-                              <a href="{{route('ht.scheduledelete',$value['id'])}}" class="btn" onclick="confirmation(event)"><i
-                                    class="fa-regular fa-trash-can" style="color: red;"></i></a>
+                              <a href="{{route('ht.scheduledelete',$value['id'])}}" class="btn"
+                                 onclick="confirmation(event)"><i class="fa-regular fa-trash-can"
+                                    style="color: red;"></i></a>
                            </td>
                         </tr>
 
@@ -96,29 +99,29 @@
    </div>
 </div>
 <script>
-    function confirmation(ev) {
-        ev.preventDefault();
-        var urlToRedirect = ev.currentTarget.getAttribute('href');
-        console.log(urlToRedirect);
+   function confirmation(ev) {
+      ev.preventDefault();
+      var urlToRedirect = ev.currentTarget.getAttribute('href');
+      console.log(urlToRedirect);
 
-        Swal.fire({
-            title: 'Bạn có chắc muốn xóa không?',
-            text: 'Dữ liệu sẽ bị mất vĩnh viễn!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy',
-            customClass: {
-                container: 'custom-swal'
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = urlToRedirect;
-            }
-        });
-    }
+      Swal.fire({
+         title: 'Bạn có chắc muốn xóa không?',
+         text: 'Dữ liệu sẽ bị mất vĩnh viễn!',
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Đồng ý',
+         cancelButtonText: 'Hủy',
+         customClass: {
+            container: 'custom-swal'
+         }
+      }).then((result) => {
+         if (result.isConfirmed) {
+            window.location.href = urlToRedirect;
+         }
+      });
+   }
 </script>
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>

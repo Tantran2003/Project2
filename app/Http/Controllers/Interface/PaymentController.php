@@ -93,9 +93,16 @@ return view('interface.pages.thankyou');
                     'created_at'=>  $dateTime,
                     'updated_at'=> $dateTime
                 ]);
+                $order= DB::table('Order_momo')->where('order_id','=',$orderId)->first();
+            //  dd($order);
+            // foreach ($order as $item){
+            //     echo($item->id);
+            // }
+
                 $bookingdetails = $request->session()->get('booking');
                 DB::table('bookings')->insert([
-                    'order_id' => $orderId,
+                    'order_id' => $order->id,
+                    'order_id_momo' => $orderId,
                     'user_id' =>  $bookingdetails['user_id'],
                     'schedule_id' =>  $bookingdetails['schedule_id'],
                     'fullname' =>  $bookingdetails['fullname'],
@@ -118,7 +125,7 @@ return view('interface.pages.thankyou');
                     'price0' =>  $bookingdetails['price0'],
                     'total_price' =>  $bookingdetails['total_price'],
 
-                    // Các trường khác...
+   
                 ]);
             //Just a example, please check more in there
        return redirect()->to($jsonResult['payUrl']);

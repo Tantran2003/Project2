@@ -30,8 +30,8 @@ class ProductsController extends Controller
         "price2" => "required",
         "price3" => "required",
         'image' => 'required|mimes:jpeg,png,gif,jpg,ico|max:4096',
-        'images' => 'required|array|min:1',
-        'images.*' => 'required|mimes:jpeg,bmp,png,gif,jpg|max:4096',
+  
+        'images.*' => 'required|mimes:jpeg,bmp,png,gif,jpg|max:4096|min:7',
 
         //"idcat" => "required",
         // "departuredate" => 'required|date_format:Y-m-d\TH:i',
