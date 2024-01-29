@@ -127,7 +127,7 @@
               <span class="item-name">Bình luận</span>
             </a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/guide*') ? 'active' : '' }}" aria-current="page"
               href="{{ route('ht.guideindex') }}">
               <i class="icon">
@@ -135,42 +135,25 @@
               </i>
               <span class="item-name">Guide</span>
             </a>
-          </li> -->
+          </li> 
 
-          <!-- <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="{{ route('ht.pendingbooking') }}">
+          <li class="nav-item">
+            <a href="{{ route('ht.ordermomo') }}" aria-current="page" class="nav-link">
               <i class="icon">
                 <i class="fa-solid fa-calendar-days" width="20"></i>
               </i>
-              <span class="item-name"> Booking Request</span>
+              <span class="item-name"> Order Momo</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('ht.packagerunning') }}" aria-current="page" class="nav-link">
-              <i class="icon">
-                <i class="fa-solid fa-calendar-days" width="20"></i>
-              </i>
-              <span class="item-name"> Running Package</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('ht.tourhistory') }}" aria-current="page" class="nav-link">
-              <i class="icon">
-                <i class="fa-solid fa-calendar-days" width="20"></i>
-              </i>
-              <span class="item-name"> Tour History</span>
-            </a>
-          </li> -->
-         
         </ul>
-        <!-- Sidebar Menu End -->
+     
       </div>
     </div>
     <div class="sidebar-footer"></div>
   </aside>
   <main class="main-content">
     <div class="position-relative iq-banner">
-      <!--Nav Start-->
+      <!-- Nav Start -->
       <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
         <div class="container-fluid navbar-inner">
           <a href="../dashboard/index.html" class="navbar-brand">

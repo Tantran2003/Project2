@@ -8,18 +8,18 @@ use App\Http\Controllers\Controller;
 use App\Notifications\PackageApproveConfirmation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-
+use DB;
+use App\Models\Order_momo;
 class AdminBookingController extends Controller
 {
-    public function pendingBookingList(){
-        $pendinglists = Booking::where('status', 'no')->get();
+    public function pendingBookingList($id){
+        $pendinglists = Booking::find($id);
         return view('admin.booking.pendinglist', compact('pendinglists'));
     }
 
     public function bookingApprove($id){
         $req = Booking::find($id);
-        $req->approved_status = 1;
+        
         $req->save();
 
         $req->tourist->notify(new PackageApproveConfirmation($req));
@@ -62,10 +62,33 @@ class AdminBookingController extends Controller
        return redirect()->back();
     }
 
-    public function tourHistory(){
-        $historyList = Booking::where('approved_status', 'yes')->where('is_completed', 'yes')->get();
-        return view('admin.booking.historyList', compact('historyList'));
+
+public function tourhistory(){
+    $data["booking"] = Booking::get();
+    return view("admin/booking/historyList", $data);
+}
+public function ordermomo(){
+    $data["booking"] = Order_momo::get();
+    return view("admin/booking/ordermomo", $data);
+}
+
+public function deleteorder($id)
+  {
+    try {
+      if (Booking::where('order_id', $id)->exists()) {
+
+        toastr()->error('Vui lòng xóa hết lịch trình của chuyến tour này trước khi xóa tour');
+        return redirect()->route('ht.ordermomo');
+      }
+     
+      Order_momo::destroy($id);
+
+      toastr()->success('Xóa thành công !');
+      return redirect()->route('ht.ordermomo');
+    } catch (\Throwable $th) {
+      return redirect()->route('ht.ordermomo');
     }
+}
 
-
+  
 }

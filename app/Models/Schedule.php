@@ -11,7 +11,10 @@ class Schedule extends Model
     protected $fillable = ["tour_id", "date_start", "date_end", "tour_code"];
     protected $primarykey = "id";
     public $timestamps = false;
-
+    protected $casts = [
+        'date_start' => 'date',
+        'date_end' => 'date',
+    ];
     public function product()
     {
         return $this->belongsTo(Products::class, 'tour_id', 'id');

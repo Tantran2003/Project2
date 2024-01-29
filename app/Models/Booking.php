@@ -21,7 +21,8 @@ class Booking extends Model
         // 'approved_status',
         "order_id",	
 "user_id",	
-"schedule_id",	
+"schedule_id",
+"product_id",	
 "fullname",	
 "email",	
 "phone",	
@@ -54,9 +55,13 @@ class Booking extends Model
         return $this->belongsTo(Guide::class, 'guide_id');
     }
 
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class, 'schedule_id', 'id');
+    } 
     public function product()
     {
-        return $this->belongsTo(Products::class, 'package_id', 'id');
+        return $this->belongsTo(Products::class, 'product_id', 'id');
     } 
     public function Order_momo()
     {

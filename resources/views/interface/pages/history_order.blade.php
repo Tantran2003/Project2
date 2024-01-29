@@ -1,18 +1,18 @@
 @extends('interface.layout_interface')
 @section('content')
-<div class="container-xxl my-5 py-5" style=" max-width: 1420px;">
-        <h1>Lịch sử đặt hàng</h1>
-<h3> Hóa đơn</h3>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <tr>
+<div class="container-xxl my-5 py-5" style="max-width: 1420px;">
+    <h1>Booking History</h1>
+
+    <h3>Receipts</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped ">
+                <thead class="thead-dark">
+                    <tr>
                             <th scope="col">Hóa đơn số</th>
                             <th scope="col">Mã hóa đơn</th>
                             <th scope="col">Ngày đặt hàng</th>
                             <th scope="col">Số tiền</th>
-                           
                             <th scope="col">Phương thức thanh toán</th>
                             
                         </tr>
@@ -23,9 +23,8 @@
                                 <td>{{ $order->order_id }}</td>
                                 <td>{{ $order->partner_code }}</td>
                                 <td>{{ date('d-m-Y',
-                        strtotime($order->created_at)) }}</td>
+                                    strtotime($order->created_at)) }}</td>
                                 <td>{{ number_format($order->amount, 0, ',', '.') }} VNĐ</td>
-                              
                                 <td>{{ $order->order_info }}</td>
                                 
                             </tr>
@@ -36,29 +35,28 @@
         </div>
         <h3>Chi tiết hóa đơn</h3>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tên khách hàng</th>
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                            <th scope="col">Tourist name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Số điện thoại</th>
-                            <th scope="col">Địa chỉ</th>
-                            <th scope="col">Điểm đi</th>
-                            <th scope="col">Điểm đến</th>
-                            <th style="width: 100px;" scope="col">Ngày đi</th>
-                            <th style="width: 100px;" scope="col">Ngày về</th>
-                            <th scope="col">Phương tiện đi</th>
-                            <th scope="col">Thời gian đi</th>
-                            <th scope="col">Mã tour</th>
-                            <th scope="col">Người lớn</th>
-                            <th scope="col">Trẻ em</th>
-                            <th scope="col">Trẻ nhỏ</th>
-                          
-                            <th scope="col">Giá người lớn</th>
-                            <th scope="col">Giá trẻ em</th>
-                            <th scope="col">Giá trẻ nhỏ</th>
-                            <th scope="col">Giá chuyến tour</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Departure location</th>
+                            <th scope="col">Arrival Location</th>
+                            <th style="width: 100px;" scope="col">Departure date</th>
+                            <th style="width: 100px;" scope="col">Leave date</th>
+                            <th scope="col">Transportation</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Tour code</th>
+                            <th scope="col">Adults</th>
+                            <th scope="col">Children</th>
+                            <th scope="col">Babies</th>
+                            <th scope="col">Price per adult(VND)</th>
+                            <th scope="col">Price per child(VND)</th>
+                            <th scope="col">Price per baby(VND)</th>
+                            <th scope="col">Tour(VND)</th>
                            
                     
                             

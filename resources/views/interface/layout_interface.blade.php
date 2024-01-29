@@ -7,7 +7,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -98,16 +100,7 @@
                 <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
                 @endif
             </div>
-                <a href="{{ route('gd.booking', ['product_id' => $productId, 'schedule_id' => $scheduleId]) }}" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">
-                    @if(Session::has('booking'))
-                        {{count(Session::get('booking'))}}
-                    @else
-                        0
-                    @endif
-                    </span>
-                </a>
+                
         </nav>
 
 

@@ -7,11 +7,12 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+  
     public function booking($product_id, $schedule_id)
     {
 
@@ -81,8 +82,10 @@ class CheckoutController extends Controller
             'price0' => $request->price0,
             //    'total_price' => number_format($total_price, 0, ',', '.') . ' VNĐ',
             'total_price' => $total_price,
+        
         ]);
-        //    dd($request->session()->get('booking'));
+        
+            // dd($request->session()->get('booking'));
         return view('interface/pages/pay');
     }
 

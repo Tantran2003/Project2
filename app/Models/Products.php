@@ -20,27 +20,27 @@ class Products extends Model
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'package_id', 'id');
+        return $this->hasMany(Booking::class, 'product_id', 'id');
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class, 'idcat');
     }
-    public function calculatePrice($personType)
-    {
-        $basePrice = $this->price;
+    // public function calculatePrice($personType)
+    // {
+    //     $basePrice = $this->price;
 
-        switch ($personType) {
-            case 'price':
-                return $basePrice;
-            case 'price1':
-                return $basePrice * ($this->adult_percentage / 100);
-            case 'price2':
-                return $basePrice * ($this->young_children_percentage / 100);
-            default:
-                return $basePrice;
-        }
-    }
+    //     switch ($personType) {
+    //         case 'price':
+    //             return $basePrice;
+    //         case 'price1':
+    //             return $basePrice * ($this->adult_percentage / 100);
+    //         case 'price2':
+    //             return $basePrice * ($this->young_children_percentage / 100);
+    //         default:
+    //             return $basePrice;
+    //     }
+    // }
 }
 

@@ -10,76 +10,69 @@
               	@include('partial.successMessage')
 
                 <div class="card my-5 mx-4">
-                    <div class="card-header  bg-dark">
-                      <h3 class="card-title float-left p-0 m-0"><strong>Tour History ({{ $historyList->count() }})</strong></h3>
-                    </div>
-                    <!-- card-header -->
-                    @if ($historyList->count() > 0)
-                    <div class="card-body">
+                <div class="card-header bg-white">
+                    <h3 class="card-title float-left p-0 m-0"><strong>Tour History ({{ $booking->count() }})</strong></h3>
+                </div>
+                <!-- card-header -->
+                @if ($booking->count() > 0)
+                <div class="card-body">
                     <div class="table-responsive">
-                      <table id="dataTableId" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                          <th>Package</th>
-                          <th>Price</th>
-                          <th>Tour Date</th>
-                          <th>Booking Date</th>
-                          <th>Day</th>
-                          <th>Guide</th>
-                          <th>Tourist Name</th>
-                          <th>Tourist Contact</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($historyList as $list)
-                        <tr>
-                          <td>{{ $list->package_name }}</td>
-                          <td>{{ $list->price }}</td>
-                          <td>{{ $list->date }}</td>
-                          
-                          <td>{{ $list->day }}</td>
-                          <td>
-                              @isset($list->guide->name)
-                                 {{ $list->guide->name }}
-                              @else 
-                                  His info is deleted by Admin
-                              @endisset
-                              
-                          </td>
-                           <td>
-                              
-                              @isset( $list->tourist->name )
-                                {{ $list->tourist->name }}
-                              @else 
-                                  His info is deleted by Admin
-                              @endisset
-                          </td>
-                          <td>
-                              @isset( $list->tourist->contact )
-                                {{ $list->tourist->contact }}
-                              @else 
-                                  His info is deleted by Admin
-                              @endisset
-                          </td>
-                          
-                        </tr>
-                        @endforeach    
-                        </tbody>
-                      </table>
+                        <table id="dataTableId" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fullname</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Departure location</th>
+                                    <th>Arrival location</th>
+                                    <th>Date Start</th>
+                                    <th>Date End</th>
+                                    <th>Vehicle</th>
+                                    <th>Duration</th>
+                                    <th>Tour Code</th>
+                                    <th>Adults</th>
+                                    <th>Children</th>
+                                    <th>Babies</th>
+                                    <th>Adults price</th>
+                                    <th>Children price</th>
+                                    <th>Babies price</th>
+                                    <th>Total price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($booking as $value)
+                                <tr>
+                                    <td>{{ $value-> fullname}}</td>
+                                    <td>{{ $value-> email}}</td>
+                                    <td>{{ $value-> phone}}</td>
+                                    <td>{{ $value-> address}}</td>
+                                    <td>{{ $value-> departurelocation}}</td>
+                                    <td>{{ $value-> arrivallocation}}</td>
+                                    
+                                    <td>{{ $value->date_start }}</td>
+                                    <td>{{ $value->date_end }}</td>
+                                    <td>{{ $value->vehicle }}</td>
+                                    <td>{{ $value->tour_code }}</td>
+                                    <td>{{ $value->person1 }}</td>
+                                    <td>{{ $value->person2 }}</td>
+                                    <td>{{ $value->person3 }}</td>
+                                    <td>{{ $value->price1 }}</td>
+                                    <td>{{ $value->price2 }}</td>
+                                    <td>{{ $value->price3 }}</td>
+                                    <td>{{ $value->total_price }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                @else
+                <h2 class="text-center text-info font-weight-bold m-3">No Tour History Found</h2>
+                @endif
 
-                
-
-
-              
-                      
-                    </div>
-                    @else 
-                      <h2 class="text-center text-info font-weight-bold m-3">No Tour History Found</h2>
-                    @endif
-
-                    <!-- /.card-body -->
-                  </div>
+                <!-- /.card-body -->
+            </div>
                   <!-- /.card -->
             </div>
         </div>

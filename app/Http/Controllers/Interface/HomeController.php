@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
     use App\Models\Products;
     use App\Models\Guide;
+    use App\Models\Booking;
+    use Auth;
 use DB;
 class HomeController extends Controller
 {

@@ -11,7 +11,7 @@
 <div class="container-xxl my-5 py-5" style=" max-width: 1320px; ">
 
     <div class="row my-4">
-        <h3 class="text-muted">Thanh toán</h3>
+        <h3 class="text-muted">Payment</h3>
     </div>
     <hr>
     <div class="row">
@@ -25,26 +25,26 @@
                 <div>
                     <h5><strong>{{ $booking->name }}</strong></h5>
                 </div>
-                <div class="pt-3"><small>Mã tour </small>&nbsp; <strong>{{ $booking->tour_code }} </strong></div>
-                <div class="pt-3"> <small>Ngày đi</small> &nbsp; <strong>{{ date('d-m-Y',
+                <div class="pt-3"><small>Tour code</small>&nbsp; <strong>{{ $booking->tour_code }} </strong></div>
+                <div class="pt-3"> <small>Start date</small> &nbsp; <strong>{{ date('d-m-Y',
                         strtotime($booking->date_start))
                         }}</strong></div>
 
-                <div class="pt-3"> <small>Ngày về</small> &nbsp; <strong>{{ date('d-m-Y', strtotime($booking->date_end))
+                <div class="pt-3"> <small>End date</small> &nbsp; <strong>{{ date('d-m-Y', strtotime($booking->date_end))
                         }}</strong></div>
-                <div class="pt-3"><small>Thời gian đi </small>&nbsp; <strong>{{ $booking->keyword }} </strong></div>
-                <div class="pt-3"> <small>Điểm khởi hành</small> &nbsp; <strong>{{ $booking->departurelocation
+                <div class="pt-3"><small>Duration</small>&nbsp; <strong>{{ $booking->keyword }} </strong></div>
+                <div class="pt-3"> <small>Departure Location</small> &nbsp; <strong>{{ $booking->departurelocation
                         }}</strong>
                 </div>
-                <div class="pt-3"> <small>Điểm đến</small> &nbsp; <strong>{{ $booking->arrivallocation }}</strong></div>
-                <div class="pt-3"> <small>Phương tiện di chuyển</small>&nbsp; <strong>{{ $booking->vehicle }}</strong>
+                <div class="pt-3"> <small>Arrival Locations</small> &nbsp; <strong>{{ $booking->arrivallocation }}</strong></div>
+                <div class="pt-3"> <small>Transportation</small>&nbsp; <strong>{{ $booking->vehicle }}</strong>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="container my-5">
-        <h4><strong class="text-muted pb-3">Thông tin liên lạc</strong></h4>
+        <h4><strong class="text-muted pb-3">Contact Information</strong></h4>
 
         <div class="row ">
             <div class="col-lg-7 bg-light p-3 mt-4">
@@ -70,7 +70,7 @@
                     ?>
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            <label for="name">Tên</label>
+                            <label for="name">Full Name</label>
                             <input type="name" class="form-control" placeholder="" name="fullname"
                                 value="<?php echo Auth::user()->fullname; ?>" id="name" required>
                         </div>
@@ -82,12 +82,12 @@
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
-                            Số điện thoại<input type="tel" class="form-control" placeholder="" name="phone"
+                            Phone number<input type="tel" class="form-control" placeholder="" name="phone"
                                 value="<?php echo Auth::user()->phone; ?>" id="phone">
 
                         </div>
                         <div class="col-sm-6 mt-3">
-                            Địa chỉ<input type="text" class="form-control" placeholder="" name="address"
+                            Address<input type="text" class="form-control" placeholder="" name="address"
                                 value="<?php echo Auth::user()->address; ?>" id="address">
 
                         </div>
@@ -98,14 +98,14 @@
                     ?>
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            <label for="name">Tên</label>
-                            <input type="name" class="form-control" placeholder="Nhập tên" name="fullname"
+                            <label for="name">Full Name</label>
+                            <input type="name" class="form-control" placeholder="Enter fullname" name="fullname"
                                 value="{{ old('fullname') }}" id="name">
                             {!! $errors->first('fullname', '<div class="has-error text-danger">:message</div>') !!}
                         </div>
                         <div class="col-sm-6">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" placeholder="Nhập email" name="email"
+                            <input type="email" class="form-control" placeholder="Enter email" name="email"
                                 value="{{ old('email') }}" id="email">
                             {!! $errors->first('email', '<div class="has-error text-danger">:message</div>') !!}
 
@@ -113,13 +113,13 @@
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
-                            Số điện thoại<input type="tel" class="form-control" placeholder="Nhập số điện thoại" name="phone"
+                        Phone number<input type="tel" class="form-control" placeholder="Enter phone" name="phone"
                                 value="{{ old('phone') }}" id="phone">
                             {!! $errors->first('phone', '<div class="has-error text-danger">:message</div>') !!}
 
                         </div>
                         <div class="col-sm-6 mt-3">
-                            Địa chỉ<input type="text" class="form-control" placeholder="Nhập địa chỉ" name="address"
+                        Address<input type="text" class="form-control" placeholder="Enter address" name="address"
                                 value="{{ old('address') }}" id="address">
                             {!! $errors->first('address', '<div class="has-error text-danger">:message</div>') !!}
 
@@ -132,20 +132,20 @@
 
                     <div class="row p-3">
                         <div class="col-sm-6">
-                            Người lớn<input type="number" min="1" value="1" class="form-control"
-                                placeholder="Nhập số người lớn" name="person1" data-person="Người lớn"
+                        Adults<input type="number" min="1" value="1" class="form-control"
+                                placeholder="No adults" name="person1" data-person="adults"
                                 data-price="{{ $booking->price1 }}">
                         </div>
                         <div class="col-sm-6">
-                            Trẻ em<input type="number" min="0" value="0" class="form-control "
-                                placeholder="Nhập số trẻ em" name="person2" data-person="Trẻ em"
+                        Children<input type="number" min="0" value="0" class="form-control "
+                                placeholder="No children" name="person2" data-person="children"
                                 data-price="{{ $booking->price2 }}">
                         </div>
                     </div>
                     <div class="row p-3">
                         <div class="col-sm-6 mt-3">
-                            Trẻ nhỏ<input type="number" min="0" value="0" class="form-control"
-                                placeholder="Nhập số trẻ nhỏ" name="person3" data-person="Trẻ nhỏ"
+                        Babies<input type="number" min="0" value="0" class="form-control"
+                                placeholder="No babies" name="person3" data-person="babies"
                                 data-price="{{ $booking->price3 }}">
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                     <input type="hidden" value="{{ $booking->price3 }}" name="price3">
                     <input type="hidden" value="{{ $booking->price }}" name="price0">
 
-                    <h5><strong class="text-muted">Bạn có thể ghi chú tại đây</strong></h5>
+                    <h5><strong class="text-muted">Please note down any other request:</strong></h5>
                     <div class="row m-3">
                         <textarea name="" id="" cols="5" rows="5"></textarea>
                     </div>
@@ -169,7 +169,7 @@
             <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="p-4 border border-secondary-subtle rounded">
                     <div class="border-0">
-                        <h4 class="font-weight-semi-bold m-0">Tổng chuyến đi</h4>
+                        <h4 class="font-weight-semi-bold m-0">Total</h4>
                     </div>
                     <div class="card-body mt-5">
 
@@ -178,6 +178,7 @@
                             <h5>{{$booking->name}}</h5>
                             <h5>{{$booking->price}}</h5>
                         </div>
+                        
                         @endforeach
                         <hr class="mt-0">
                         <div class="  mb-3 pt-1">
@@ -195,8 +196,7 @@
                             <h4 class="font-weight-bold text-danger" id="totalAmount"></h4>
                         </div>
                         <div class="d-flex justify-content-end mt-2">
-                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>Đặt
-                                    ngay</strong></button>
+                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>BOOk NOW</strong></button>
                             </form>
                         </div>
 
@@ -206,11 +206,11 @@
         </div>
     </div>
 </div>
-<!-- @if(Session::has('totalAmount'))
-    Giá trị totalAmount trong session là: {{ Session::get('totalAmount') }}
+@if(Session::has('totalAmount'))
+    Giá trị totalAmount trong session là: {{ Session::get('totalCost') }}
 @else
-    Session không có giá trị totalAmount
-@endif -->
+    Session không có giá trị totalCost
+@endif
 </div>
 </div>
 </div>
