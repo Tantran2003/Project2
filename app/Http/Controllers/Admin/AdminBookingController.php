@@ -64,13 +64,14 @@ class AdminBookingController extends Controller
 
 
 public function tourhistory(){
-    $data["booking"] = Booking::get();
+    $data["booking"] = Booking::where('id', '=', $id)->get();
     return view("admin/booking/historyList", $data);
 }
 public function ordermomo(){
     $data["booking"] = Order_momo::get();
     return view("admin/booking/ordermomo", $data);
 }
+
 
 public function deleteorder($id)
   {

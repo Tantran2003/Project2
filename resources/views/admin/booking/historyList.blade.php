@@ -14,59 +14,64 @@
                     <h3 class="card-title float-left p-0 m-0"><strong>Tour History ({{ $booking->count() }})</strong></h3>
                 </div>
                 <!-- card-header -->
-                @if ($booking->count() > 0)
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="dataTableId" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Fullname</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Departure location</th>
-                                    <th>Arrival location</th>
-                                    <th>Date Start</th>
-                                    <th>Date End</th>
-                                    <th>Vehicle</th>
-                                    <th>Duration</th>
-                                    <th>Tour Code</th>
-                                    <th>Adults</th>
-                                    <th>Children</th>
-                                    <th>Babies</th>
-                                    <th>Adults price</th>
-                                    <th>Children price</th>
-                                    <th>Babies price</th>
-                                    <th>Total price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($booking as $value)
-                                <tr>
-                                    <td>{{ $value-> fullname}}</td>
-                                    <td>{{ $value-> email}}</td>
-                                    <td>{{ $value-> phone}}</td>
-                                    <td>{{ $value-> address}}</td>
-                                    <td>{{ $value-> departurelocation}}</td>
-                                    <td>{{ $value-> arrivallocation}}</td>
-                                    
-                                    <td>{{ $value->date_start }}</td>
-                                    <td>{{ $value->date_end }}</td>
-                                    <td>{{ $value->vehicle }}</td>
-                                    <td>{{ $value->tour_code }}</td>
-                                    <td>{{ $value->person1 }}</td>
-                                    <td>{{ $value->person2 }}</td>
-                                    <td>{{ $value->person3 }}</td>
-                                    <td>{{ $value->price1 }}</td>
-                                    <td>{{ $value->price2 }}</td>
-                                    <td>{{ $value->price3 }}</td>
-                                    <td>{{ $value->total_price }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <h3>Chi tiết hóa đơn</h3>
+        <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                            <th scope="col">Tourist name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Departure location</th>
+                            <th scope="col">Arrival Location</th>
+                            <th style="width: 100px;" scope="col">Departure date</th>
+                            <th style="width: 100px;" scope="col">Leave date</th>
+                            <th scope="col">Transportation</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Tour code</th>
+                            <th scope="col">Adults</th>
+                            <th scope="col">Children</th>
+                            <th scope="col">Babies</th>
+                            <th scope="col">Price per adult(VND)</th>
+                            <th scope="col">Price per child(VND)</th>
+                            <th scope="col">Price per baby(VND)</th>
+                            <th scope="col">Tour(VND)</th>
+                           
+                    
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($booking as $order)
+                            <tr>
+                                <td>{{ $order->fullname }}</td>
+                                <td>{{ $order->email }}</td>
+                                <td>{{ $order->phone }}</td>
+                                <td>{{$order->address}}</td>
+                                <td>{{ $order->departurelocation }}</td>
+                                <td>{{ $order->arrivallocation }}</td>
+                                <td>{{ date('d-m-Y H:i',
+                        strtotime($order->date_start)) }}</td>
+                                <td>{{ date('d-m-Y ',
+                        strtotime($order->date_end)) }}</td>
+                                <td>{{ $order->vehicle }}</td>
+                                <td>{{$order->keyword}}</td>
+                                <td>{{ $order->tour_code }}</td>
+                                <td>{{ $order->person1 }}</td>
+                                <td>{{ $order->person2 }}</td>
+                                <td>{{ $order->person3 }}</td>
+                                <td>{{ $order->price1 }}</td>
+                                <td>{{ $order->price2 }} </td>
+                                <td>{{ $order->price3 }}</td>
+                                <td>{{ $order->price0}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
                 @else
                 <h2 class="text-center text-info font-weight-bold m-3">No Tour History Found</h2>
                 @endif
