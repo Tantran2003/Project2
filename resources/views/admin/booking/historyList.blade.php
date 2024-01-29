@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table table-bordered table-striped">
-                            <thead>
+                            <thead class="table-primary">
 
                                 @foreach ($booking as $order)
                                 <th scope="col">Tourist name</th>
@@ -27,10 +27,10 @@
                                 <th scope="col">Address</th>
                                 <th scope="col">Departure location</th>
                                 <th scope="col">Arrival Location</th>
-                                <th style="width: 100px;" scope="col">Departure date</th>
-                                <th style="width: 100px;" scope="col">Leave date</th>
+                                <th style="col">Departure date</th>
+                                <th style="col">Leave date</th>
                                 <th scope="col">Transportation</th>
-                                <th scope="col">Duration</th>
+
 
                             </thead>
                             <tr>
@@ -46,10 +46,12 @@
                                 <td>{{ date('d-m-Y ',
                                     strtotime($order->date_end)) }}</td>
                                 <td>{{ $order->vehicle }}</td>
-                                <td>{{$order->keyword}}</td>    
+
                             </tr>
                             </thead>
-                            <tr class="thead-dark">
+                            <tr class="table-primary">
+                                <th scope="col">Tour code</th>
+                                <th scope="col">Duration</th>
                                 <th scope="col">Adults</th>
                                 <th scope="col">Children</th>
                                 <th scope="col">Babies</th>
@@ -57,11 +59,13 @@
                                 <th scope="col">Price per child(VND)</th>
                                 <th scope="col">Price per baby(VND)</th>
                                 <th scope="col">Tour(VND)</th>
-                                <th scope="col">Tour code</th>
+
                                 </thead>
                                 <tbody>
                             </tr>
                             <tr>
+                                <td>{{ $order->tour_code }}</td>
+                                <td>{{$order->keyword}}</td>
                                 <td>{{ $order->person1 }}</td>
                                 <td>{{ $order->person2 }}</td>
                                 <td>{{ $order->person3 }}</td>
@@ -69,7 +73,7 @@
                                 <td>{{ $order->price2 }} </td>
                                 <td>{{ $order->price3 }}</td>
                                 <td>{{ $order->price0}}</td>
-                                <td>{{ $order->tour_code }}</td>
+
                             </tr>
                             @endforeach
                             </tbody>
