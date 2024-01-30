@@ -65,9 +65,9 @@
                            <!-- dựa vào model mối quan hệ belongto lấy phương thức gọi thẳng tên -->
                            <td scope="row" class="text-break">{{ $value->product->name }}</td>
 
+                           <td style="width:100px;">{{ date('d-m-Y', strtotime( $value["date_start"])) }}</td>
 
-                           <td>{{ $value["date_start"]}}</td>
-                           <td>{{ $value["date_end"]}}</td>
+                           <td style="width:100px;">{{ date('d-m-Y', strtotime( $value["date_end"])) }}</td>
                            <td>{{ $value["tour_code"]}}</td>
                            <td>
                               @if($value->status == 1)

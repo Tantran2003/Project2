@@ -63,13 +63,20 @@ class ScheduleController extends Controller
     }
     
     public function update(Request $request, $id){
+      $messages = [
+
+        'date_start.before_or_equal' => 'Ngày đi phải trước ngày kết thúc',   
+        'date_end.after_or_equal' => 'Ngày kết thúc phải sau ngày đi ',   
+        'tour_code.unique' => 'Mã tour không được trùng'
+
+    ];
     $data["load"] = Schedule::find($id);
         if ($request->isMethod("post")) {
           $validator = Validator::make($request->all(), [
               "date_start" => "required|before_or_equal:date_end",
               "date_end" => "required|after_or_equal:date_start",
               "tour_code" => "required|unique:schedule,tour_code",      
-            ]);
+            ],  $messages);
             if ($validator->fails()) {
               return redirect()->back()->withErrors($validator)->withInput($request->only('tour_code'));
           }
@@ -89,9 +96,7 @@ class ScheduleController extends Controller
             $edit->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
             $edit->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
             $edit->status = $request->status;
-            if ($request->tour_code !== $data["load"]->tour_code) {
-              $edit->tour_code = $request->tour_code;
-          }
+         
             $edit->save();
             toastr()->success('Sửa thành công!');
             // Session::flash('note','Successfully !');

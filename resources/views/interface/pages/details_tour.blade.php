@@ -111,7 +111,7 @@
                         </tr>
                         <tr>
                             <td><i class="fa fa-calendar-alt text-primary me-2"></i>Ngày đi: </td>
-                            <td>{{ date('d-m-Y', strtotime($detail->date_start)) }} &nbsp; <b>Giờ đi:</b> {{ date('H:i',
+                            <td>{{ date('d-m-Y', strtotime($detail->date_start)) }} &nbsp; <br> <b>Giờ đi:</b> {{ date('H:i',
                                 strtotime($detail->date_start)) }}</td>
 
                         </tr>

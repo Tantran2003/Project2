@@ -118,11 +118,11 @@
                                             </div>
                                             <p><b>Mã tour:</b> {{ $tourDate->tour_code }}</p>
                                             <div class="">
-                                                <a href="">
+                                             
                                                     <h5 class="card-title text-break mb-0"
                                                         style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                                         {{$item->name}}</h5>
-                                                </a>
+                                              
                                             </div>
                                             <p class="flex-fill pt-3"><i
                                                     class="fa fa-map-marker-alt text-primary me-2"></i>Điểm khởi hành:
@@ -164,45 +164,3 @@
     </div>
 </div>
 @endsection
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Lắng nghe sự kiện khi select box sắp xếp thay đổi
-        document.getElementById('sortBy').addEventListener('change', function () {
-            filterProducts();
-        });
-
-        // Lắng nghe sự kiện khi checkbox giá thay đổi
-        var priceCheckboxes = document.querySelectorAll('input[name^="priceCheckbox"]');
-        priceCheckboxes.forEach(function (checkbox) {
-            checkbox.addEventListener('change', function () {
-                filterProducts();
-            });
-        });
-
-        // Gọi hàm filter khi trang được tải
-        filterProducts();
-    });
-
-    function filterProducts() {
-        // Lấy giá trị từ select box sắp xếp
-        var sortBy = document.getElementById('sortBy').value;
-
-        // Lấy giá trị từ checkbox giá
-        var priceRanges = [];
-        var priceCheckboxes = document.querySelectorAll('input[name^="priceCheckbox"]:checked');
-        priceCheckboxes.forEach(function (checkbox) {
-            priceRanges.push(checkbox.value);
-        });
-
-        // Gửi Ajax request để lấy danh sách sản phẩm theo filter
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/your-api-endpoint?sortBy=' + sortBy + '&priceRanges=' + priceRanges.join(','), true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Cập nhật nội dung container sản phẩm
-                document.getElementById('productListContainer').innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-</script> -->

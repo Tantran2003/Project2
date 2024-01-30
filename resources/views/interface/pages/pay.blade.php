@@ -27,7 +27,7 @@ $booking = session('booking');
                         <th><b>Transportation</b></th>
                         <th><b>Total</b></th>
                         <th>Payment option</th>
-                        <th>Payment option</th>
+               
                     </tr>
                     <tr>
                         <td>{{$booking['fullname']}}</td>
@@ -48,14 +48,7 @@ $booking = session('booking');
                                 <button type="submit" class="btn btn-primary" name="payURl">Thanh toán MoMo</button>
                             </form>
                         </td>
-                        <td>
-
-                            <form action="{{ route('gd.vnpay') }}" method="POST">
-                                @csrf
-                                
-                                <button type="submit" class="btn btn-default check_out" name="redirect">Thanh toán VnPay</button>
-                            </form>
-                        </td>
+                       
                     </tr>
                 </tbody>
             </table>

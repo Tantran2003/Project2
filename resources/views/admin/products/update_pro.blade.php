@@ -27,8 +27,6 @@
                             {!! $errors->first('desc', '<div class="has-error text-danger">:message</div>') !!}
                         </div>
                     </div>
-
-
                     <div class="mb-3 row">
                         <div class="col-sm-6 col-6 offset-sm">
 

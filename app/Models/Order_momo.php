@@ -13,6 +13,6 @@ class Order_momo extends Model
     public $timestamps = true;
     public function bookings()
     {
-        return $this->belongsTo(Booking::class);
+        return $this->belongsTo(Booking::class,'order_momo');
     }
 }

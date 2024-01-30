@@ -175,7 +175,7 @@
 
 
                         <div class="d-flex justify-content-between">
-                            <h5>{{$booking->name}}</h5>
+                            <h5 class="mx-2" >{{$booking->name}}</h5>
                             <h5>{{$booking->price}}</h5>
                         </div>
                         
@@ -206,11 +206,7 @@
         </div>
     </div>
 </div>
-@if(Session::has('totalAmount'))
-    Giá trị totalAmount trong session là: {{ Session::get('totalCost') }}
-@else
-    Session không có giá trị totalCost
-@endif
+
 </div>
 </div>
 </div>

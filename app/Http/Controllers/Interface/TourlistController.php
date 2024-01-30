@@ -9,15 +9,15 @@ use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 class TourlistController extends Controller
 {
-
+ 
    public function index($id = null){
       try {
          if($id == 0){
-            $data['loadproduct'] =Products::with('schedule')->get();  
+            $data['loadproduct'] =Products::with('schedule')->where('status',1)->get();  
          }else{
             $data['loadproduct'] =Products::where('idcat',$id)->get();
          }  
-         
+      
          return view('interface/pages/tour',$data);
       } catch (\Throwable $th) {
          return redirect()->route('gd.home');

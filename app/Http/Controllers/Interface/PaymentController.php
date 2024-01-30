@@ -70,7 +70,7 @@ class PaymentController extends Controller
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $_POST['total_momo'];
         $orderId = time() . "";
-        $redirectUrl = "http://localhost:83/Project2/payment/confirm";
+        $redirectUrl = "http://localhost:84/Project2/payment/confirm";
         $ipnUrl = "http://localhost:84/Project2/payment/confirm";
         $extraData = "";
 
@@ -110,9 +110,18 @@ class PaymentController extends Controller
                 'created_at' => $dateTime,
                 'updated_at' => $dateTime
             ]);
+             $order= DB::table('Order_momo')->where('order_id','=',$orderId)->first();
+            // //  dd($order);
+       
+
+         
+            //       
+            //         'order_id' => $order->id,
+            //         
             $bookingdetails = $request->session()->get('booking');
             DB::table('bookings')->insert([
-                'order_id' => $orderId,
+                'order_id' => $order->id,
+                'order_id_momo' => $orderId,
                 'user_id' => $bookingdetails['user_id'],
                 'schedule_id' => $bookingdetails['schedule_id'],
                 'fullname' => $bookingdetails['fullname'],

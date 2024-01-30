@@ -20,13 +20,13 @@
                     <tbody>
                         @foreach ($orders as $order)
                             <tr>
-                                <td>{{ $order->order_id }}</td>
+                                <td>{{ $order->order_id_momo }}</td>
                                 <td>{{ $order->partner_code }}</td>
                                 <td>{{ date('d-m-Y',
                                     strtotime($order->created_at)) }}</td>
                                 <td>{{ number_format($order->amount, 0, ',', '.') }} VNĐ</td>
                                 <td>{{ $order->order_info }}</td>
-                                
+                            
                             </tr>
                         @endforeach
                     </tbody>

@@ -20,6 +20,7 @@ class Booking extends Model
         // 'is_completed',
         // 'approved_status',
         "order_id",	
+        "order_id_momo",
 "user_id",	
 "schedule_id",
 "product_id",	
@@ -65,6 +66,6 @@ class Booking extends Model
     } 
     public function Order_momo()
     {
-        return $this->belongsTo(Order_momo::class);
+        return $this->belongsTo(Order_momo::class, 'order_id', 'id');
     }
 }
