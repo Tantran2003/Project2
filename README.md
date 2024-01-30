@@ -21,7 +21,7 @@ Nguyễn Duy Anh (student1468183)
 Nguyễn Quang Huy (Student1468178)
 
 =======================================
-
+Link vieo demo website :https://github.com/Tantran2003/Project2/blob/master/Document/Video%20gi%E1%BB%9Bi%20thi%E1%BB%87u%20website.mp4
 Documentations : https://github.com/Tantran2003/Project2/tree/master/Document
 
 
