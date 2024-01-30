@@ -28,6 +28,8 @@
 
                     <div class="form-group">
                         <a href="{{ route('gd.editprofile.form') }}" class="btn btn-primary">Chỉnh sửa thông tin</a>
+                        <a href="{{ route('gd.hisroty_order') }}" class="btn btn-primary">Lịch sử đặt hàng</a>
+                   
                     </div>
                 </div>
             </div>

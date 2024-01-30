@@ -2,118 +2,95 @@
 
 namespace App\Http\Controllers\Interface;
 
+use App\Models\Products;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Schedule;
+use Illuminate\Support\Facades\Session;
 
-class BookingController extends Controller
+class CheckoutController extends Controller
 {
-    public function vnpay_payment()
+  
+    public function booking($product_id, $schedule_id)
     {
-        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://localhost/vnpay_php/vnpay_return.php";
-        $vnp_TmnCode = ""; //Mã website tại VNPAY 
-        $vnp_HashSecret = ""; //Chuỗi bí mật
 
-        $vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = $_POST['order_desc'];
-        $vnp_OrderType = $_POST['order_type'];
-        $vnp_Amount = $_POST['amount'] * 100;
-        $vnp_Locale = $_POST['language'];
-        $vnp_BankCode = $_POST['bank_code'];
-        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        //Add Params of 2.0.1 Version
-        $vnp_ExpireDate = $_POST['txtexpire'];
-        //Billing
-        $vnp_Bill_Mobile = $_POST['txt_billing_mobile'];
-        $vnp_Bill_Email = $_POST['txt_billing_email'];
-        $fullName = trim($_POST['txt_billing_fullname']);
-        if (isset($fullName) && trim($fullName) != '') {
-            $name = explode(' ', $fullName);
-            $vnp_Bill_FirstName = array_shift($name);
-            $vnp_Bill_LastName = array_pop($name);
-        }
-        $vnp_Bill_Address = $_POST['txt_inv_addr1'];
-        $vnp_Bill_City = $_POST['txt_bill_city'];
-        $vnp_Bill_Country = $_POST['txt_bill_country'];
-        $vnp_Bill_State = $_POST['txt_bill_state'];
-        // Invoice
-        $vnp_Inv_Phone = $_POST['txt_inv_mobile'];
-        $vnp_Inv_Email = $_POST['txt_inv_email'];
-        $vnp_Inv_Customer = $_POST['txt_inv_customer'];
-        $vnp_Inv_Address = $_POST['txt_inv_addr1'];
-        $vnp_Inv_Company = $_POST['txt_inv_company'];
-        $vnp_Inv_Taxcode = $_POST['txt_inv_taxcode'];
-        $vnp_Inv_Type = $_POST['cbo_inv_type'];
-        $inputData = array(
-            "vnp_Version" => "2.1.0",
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_Amount" => $vnp_Amount,
-            "vnp_Command" => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
-            "vnp_IpAddr" => $vnp_IpAddr,
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
-            "vnp_ExpireDate" => $vnp_ExpireDate,
-            "vnp_Bill_Mobile" => $vnp_Bill_Mobile,
-            "vnp_Bill_Email" => $vnp_Bill_Email,
-            "vnp_Bill_FirstName" => $vnp_Bill_FirstName,
-            "vnp_Bill_LastName" => $vnp_Bill_LastName,
-            "vnp_Bill_Address" => $vnp_Bill_Address,
-            "vnp_Bill_City" => $vnp_Bill_City,
-            "vnp_Bill_Country" => $vnp_Bill_Country,
-            "vnp_Inv_Phone" => $vnp_Inv_Phone,
-            "vnp_Inv_Email" => $vnp_Inv_Email,
-            "vnp_Inv_Customer" => $vnp_Inv_Customer,
-            "vnp_Inv_Address" => $vnp_Inv_Address,
-            "vnp_Inv_Company" => $vnp_Inv_Company,
-            "vnp_Inv_Taxcode" => $vnp_Inv_Taxcode,
-            "vnp_Inv_Type" => $vnp_Inv_Type
-        );
+        $data['checkout'] = DB::table('products')
+            ->join('schedule', 'products.id', '=', 'schedule.tour_id')
+            ->select('products.*', 'schedule.*')
+            ->where('products.id', '=', $product_id)
+            ->where('schedule.id', '=', $schedule_id)
+            ->get();
 
-        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
-        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-        }
+        return view('interface/pages/checkout', $data);
 
-        //var_dump($inputData);
-        ksort($inputData);
-        $query = "";
-        $i = 0;
-        $hashdata = "";
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-            } else {
-                $hashdata .= urlencode($key) . "=" . urlencode($value);
-                $i = 1;
-            }
-            $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        }
-
-        $vnp_Url = $vnp_Url . "?" . $query;
-        if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
-            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-        }
-        $returnData = array(
-            'code' => '00'
-            ,
-            'message' => 'success'
-            ,
-            'data' => $vnp_Url
-        );
-        if (isset($_POST['redirect'])) {
-            header('Location: ' . $vnp_Url);
-            die();
-        } else {
-            echo json_encode($returnData);
-        }
-        // vui lòng tham khảo thêm tại code demo
     }
 
+
+
+
+
+    public function save(Request $request)
+    {
+        $request->validate([
+            'fullname' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'person1' => 'required|numeric|min:1',
+            'person2' => 'required|numeric|min:0',
+            'person3' => 'required|numeric|min:0',
+        ]);
+
+        // Xử lý giá tiền
+        $price1 = str_replace(['.', ' VNĐ'], '', $request->price1);
+        $price2 = str_replace(['.', ' VNĐ'], '', $request->price2);
+        $price3 = str_replace(['.', ' VNĐ'], '', $request->price3);
+        $price0 = str_replace(['.', ' VNĐ'], '', $request->price0);
+
+        // Chuyển đổi sang số
+        $price1 = intval($price1);
+        $price2 = intval($price2);
+        $price3 = intval($price3);
+        $price0 = intval($price0);
+
+        // Tiếp tục tính toán tổng giá trị
+        $total_price = ($request->person1 * $price1) + ($request->person2 * $price2) + ($request->person3 * $price3) + $price0;
+
+        // Lưu dữ liệu người dùng và tổng giá trị vào session
+        $request->session()->put('booking', [
+            'user_id' => $request->user_id,
+            'schedule_id' => $request->schedule_id,
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'departurelocation' => $request->departurelocation,
+            'arrivallocation' => $request->arrivallocation, 
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'vehicle' => $request->vehicle,
+            'keyword' => $request->keyword,
+            'tour_code' => $request->tour_code,
+            'person1' => $request->person1,
+            'person2' => $request->person2,
+            'person3' => $request->person3,
+            'price1' => $request->price1,
+            'price2' => $request->price2,
+            'price3' => $request->price3,
+            'price0' => $request->price0,
+            //    'total_price' => number_format($total_price, 0, ',', '.') . ' VNĐ',
+            'total_price' => $total_price,
+        
+        ]);
+        
+            // dd($request->session()->get('booking'));
+        return view('interface/pages/pay');
+    }
+
+
+
 }
+
+//  

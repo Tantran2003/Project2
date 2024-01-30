@@ -216,7 +216,23 @@ class SecureController extends Controller
     }
 
 
+    public function history()
+    {
+        if (auth()->check()) {
+            $userId = auth()->id(); // Lấy ID của người dùng đã đăng nhập
 
+            $data['orders'] = DB::table('order_momo')
+                ->join('bookings', 'order_momo.order_id', '=', 'bookings.order_id_momo')    //'order_momo.order_id', '=', 'bookings.order_id' so sánh từ order_id của 2 bảng (2 cột của 2 bảng phải giống nhau để lấy quan hệ)
+                ->where('order_momo.user_id', $userId)
+                ->select('order_momo.*', 'bookings.*')
+                ->get();
+            // Trả về view với dữ liệu lịch sử đặt hàng
+            return view('interface.pages.history_order', $data);
+        }
+
+
+
+    }
 
 
 

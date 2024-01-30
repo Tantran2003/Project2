@@ -7,7 +7,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('public/interface')}}/css/bootstrap.min.css" rel="stylesheet">
 
@@ -75,7 +77,7 @@
     <div class="container-fluid position-relative p-0" style="">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
             <a href="" class="navbar-brand p-0">
-                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1>
+                <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>TravelTour</h1>
                 <!-- <img src="img/logo.png" alt="Logo"> -->
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -84,28 +86,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="{{route('gd.home')}}" class="nav-item nav-link ">Trang chủ</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tour</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="{{route('gd.index_tour',0)}}" class="dropdown-item">Tour List</a>
-                            <a href="{{ route('gd.pendingbooking') }}" class="dropdown-item">Pending Booking</a>
-                            <a href="{{ route('gd.tourhistory') }}" class="dropdown-item">History Booking</a>
-                        </div>
-                    </div>
-                    <a href="service.html" class="nav-item nav-link">Services</a>
-                    <a href="{{route('blog.index')}}" class="nav-item nav-link">Blog</a>
-                    <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a>
-
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu m-0">
-                            <a href="destination.html" class="dropdown-item">Destination</a>
-                            <a href="booking.html" class="dropdown-item">Booking</a>
-                            <a href="team.html" class="dropdown-item">Travel Guides</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="404.html" class="dropdown-item">404 Page</a>
-                        </div>
-                    </div>
+                    <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
+                    
+                    <a href="{{route('blog.index')}}" class="nav-item nav-link">Tin tức</a>
+                    <!-- <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a> -->
                     <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Liên hệ</a>
                 </div>
                 @if(Auth::check())
@@ -116,6 +100,7 @@
                 <a href="{{route('gd.login')}}" class="btn btn-primary rounded-pill py-2 px-4">Đăng nhập</a>
                 @endif
             </div>
+                
         </nav>
 
 
@@ -130,15 +115,14 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
+                    <h4 class="text-white mb-3">Trang chủ</h4>
+                    <a class="btn btn-link" href="{{route('gd.contactindex')}}">Liên hệ</a>
+                    <a class="btn btn-link" href="{{route('blog.index')}}">Tin tức</a>
+                    <a class="btn btn-link" href="{{route('gd.index_tour',0)}}">Tour</a>
+                
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
+                    <h4 class="text-white mb-3">Liên hệ</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
@@ -150,60 +134,41 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Gallery</h4>
+                    <h4 class="text-white mb-3">Hình ảnh</h4>
                     <div class="row g-2 pt-2">
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-1.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-2.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-3.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-2.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-3.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('public/interface')}}/img/package-1.jpg" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text"
-                            placeholder="Your email">
-                        <button type="button"
-                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
-
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
+                    <h4 class="text-white mb-3">Đăng ký</h4>
+                    <a href="{{route('gd.register')}}" 
+                            class="btn btn-primary py-2  top-0 end-0 mt-2 me-2">Đăng ký</a>
+                    <div class="position-relative mx-auto d-flex" style="max-width: 400px;">
+                        <div class="d-flex"> 
                         </div>
+                       
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
     <!-- Footer End -->
 

@@ -94,8 +94,6 @@ class AccountController extends Controller
                 toastr()->error('Bạn không thể tự xóa chính mình!');
                 return redirect()->route('ht.account'); 
             }
-    
-          
             Account::destroy($id);
     
             toastr()->success('Xóa thành công!');

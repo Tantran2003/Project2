@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CommentsadminController;
 use App\Http\Controllers\Admin\GuideController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Middleware\Decentralization;
@@ -19,6 +20,8 @@ use App\Http\Controllers\Interface\TourlistController;
 use App\Http\Controllers\Interface\DetailsController;
 use App\Http\Controllers\Interface\BookingController;
 use App\Http\Controllers\Interface\ContactController;
+use App\Http\Controllers\Interface\CheckoutController;
+use App\Http\Controllers\Interface\PaymentController;
 
 //Guide
 Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
@@ -27,14 +30,15 @@ Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.g
 //Booking
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
 Route::post('/store-tour-booking/{id}', [HomeController::class, 'storeBookingRequest'])->name('gd.storetourbooking');
-
+//checkout
+Route::match(['get','post'],"/booking-tour/{key}/{name}", [CheckoutController::class, 'booking'])->name("gd.booking_tour");
+Route::post('/payment', [CheckoutController::class, 'save'])->name('gd.savebooking');
+//MOMO
+Route::match(['get','post'],'/pay', [PaymentController::class, 'pay'])->name('gd.pay');
+Route::post("/momo_payment", [PaymentController::class, 'momo_payment'])->name("gd.momo_payment");
+Route::get('/payment/confirm', [PaymentController::class, 'confirmPayment'])->name("gd.savepayment");
 //VNPAY
-Route::post('/vnpay_payment',  [BookingController::class, 'cancelBookingRequest'])->name('booking.cancel');
-// Auth::routes(['verify' => true]);
-Route::get('/tour-history/list',[BookingController::class, 'tourHistory'])->name('gd.tourhistory');
-Route::get('/booking-request/list', [BookingController::class, 'pendingBookingList'])->name('gd.pendingbooking');
-Route::post('/booking-request/cancel/{id}',  [BookingController::class, 'cancelBookingRequest'])->name('gd.bookingcancel');
-
+Route::post("/vn_pay", [PaymentController::class, 'vnpay_payment'])->name("gd.vnpay");
 //index chinh
 Route::get("/", [HomeController::class, 'index'])->name("gd.home");
 // danh sach tour
@@ -53,6 +57,8 @@ Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->n
 Route::match(['get','post'],"/login", [SecureController::class, 'login'])->name("gd.login");
 Route::get("/logout", [SecureController::class, 'logout'])->name("gd.logout");
 Route::match(['get','post'],"/register", [SecureController::class, 'register'])->name("gd.register");
+Route::get("/history-order", [SecureController::class, 'history'])->name("gd.hisroty_order");
+
 //profile user
 Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
 Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');
@@ -136,17 +142,12 @@ Route::get("/logout", [LoginAdminController::class, 'logout'])->name("ht.logout"
     Route::match(['get', 'post'], '/account/update/{key}', [AccountController::class, 'update'])->name('ht.accountupdate');
     Route::get('/account/delete/{key}', [AccountController::class, 'delete'])->name('ht.accountdelete');
     //booking
-    Route::get('list', [AccountController::class,'adminList'])->name('list');
-
-    Route::get('booking-request/list', [AdminBookingController::class, 'pendingBookingList'])->name('ht.pendingbooking');
-    Route::post('booking-request/approve/{id}', [AdminBookingController::class, 'bookingApprove'])->name('ht.bookingapprove');
-    Route::post('booking-request/remove/{id}', [AdminBookingController::class, 'bookingRemoveByAdmin'])->name('ht.bookingremove');
-    Route::get('running/packages/', [AdminBookingController::class, 'runningPackage'])->name('ht.packagerunning');
-    Route::post('running/package/complete/{id}', [AdminBookingController::class, 'runningPackageComplete'])->name('ht.packagerunningcomplete');
-    Route::get('tour-history/list', [AdminBookingController::class, 'tourHistory'])->name('ht.tourhistory');
-    //guide
-    
-
+    Route::get('tour/momo', [AdminBookingController::class, 'ordermomo'])->name('ht.ordermomo');
+    Route::get('tour/momo/delete/{key}', [AdminBookingController::class, 'deleteorder'])->name('ht.ordermomodel');
+    Route::get('tour/momo/detail/{id}', [AdminBookingController::class, 'tourhistory'])->name('ht.ordermomodetail');
+    //commments
+    Route::get('/comments', [CommentsadminController::class, 'comments'])->name('ht.comments');
+    Route::get('/comments/delete/{key}', [CommentsadminController::class, 'delete'])->name('ht.commentsdelete');
     // blog
     Route::get('/blog/list', [BlogController::class, 'adminIndex'])->name('blog.admin.index');
     Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');

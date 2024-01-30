@@ -26,7 +26,7 @@
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Ngày đi</label>
             <div class="col-sm-5">
-                <input type="datetime-local" class="form-control" value="{{old('date_start', date('Y-m-d\TH:i'))}}" name="date_start"   min="{{ now()->format('Y-m-d\TH:i') }}">
+                <input type="datetime-local" class="form-control" value="{{old('date_start')}}" name="date_start"   min="{{ now()->format('Y-m-d\TH:i') }}">
                 {!!$errors->first('date_start','<div class="has-error text-danger">:message</div>')!!}
             </div>
         </div>
@@ -65,7 +65,7 @@
             <label for="inputPassword" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-5 ">
                 <button class="btn btn-success" type="submit" href="" role="button"><i class="fa fa-floppy-disk"></i>&nbsp;Lưu</button>
-                <a class="btn btn-secondary" href="{{route('ht.categorie')}}" role="button">Back</a>
+                <a class="btn btn-secondary" href="{{route('ht.schedule')}}" role="button">Back</a>
             </div>
         </div>
     </form>
