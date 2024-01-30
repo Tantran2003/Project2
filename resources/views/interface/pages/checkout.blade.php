@@ -196,7 +196,7 @@
                             <h4 class="font-weight-bold text-danger" id="totalAmount"></h4>
                         </div>
                         <div class="d-flex justify-content-end mt-2">
-                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>BOOk NOW</strong></button>
+                            <button type="submit" id="paymentButton" class="btn btn-primary btn-lg"><strong>Đặt ngay</strong></button>
                             </form>
                         </div>
 

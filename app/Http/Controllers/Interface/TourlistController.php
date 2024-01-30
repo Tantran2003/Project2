@@ -13,9 +13,13 @@ class TourlistController extends Controller
    public function index($id = null){
       try {
          if($id == 0){
-            $data['loadproduct'] =Products::with('schedule')->where('status',1)->get();  
+            $data['loadproduct'] =Products::with('schedule')->whereHas('category', function($query) {
+               $query->where('status', 1);
+           })->where('status', 1)->get();  
          }else{
-            $data['loadproduct'] =Products::where('idcat',$id)->get();
+            $data['loadproduct'] = Products::where('idcat', $id)->whereHas('category', function($query) {
+               $query->where('status', 1);
+           })->get();
          }  
       
          return view('interface/pages/tour',$data);

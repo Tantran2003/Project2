@@ -48,7 +48,7 @@
                            <th>Ngày đi</th>
                            <th>Ngày về</th>
                            <th>Mã tour</th>
-                           <th>Trạng thái</th>
+                           <!-- <th>Trạng thái</th> -->
                            <th></th>
                         </tr>
                      </thead>
@@ -69,7 +69,7 @@
 
                            <td style="width:100px;">{{ date('d-m-Y', strtotime( $value["date_end"])) }}</td>
                            <td>{{ $value["tour_code"]}}</td>
-                           <td>
+                           <!-- <td>
                               @if($value->status == 1)
                               <span
                                  style="font-weight:bold; border: 2px solid #0f994b; padding: 2px 5px; color: #0f994b;">Mở</span>
@@ -78,7 +78,7 @@
                                  style="font-weight:bold; border: 2px solid #df2a3c; padding: 2px 5px; color: #df2a3c;">Khóa
                               </span>
                               @endif
-                           </td>
+                           </td> -->
                            <td style="width: 120px;">
                               <a href="{{route('ht.scheduleupdate',$value['id'])}}" class="btn "><i
                                     class="fa-regular fa-pen-to-square" style="color: green;"></i></a>

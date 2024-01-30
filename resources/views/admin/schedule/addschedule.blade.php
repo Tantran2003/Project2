@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="" class="col-sm-2 col-form-label">Trạng thái</label>
                         <div class="form-check form-check-inline ">
                             <input class="form-check-input" type="radio" name="status" checked value=1>
@@ -60,7 +60,7 @@
                             <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value=2>
                             <label class="form-check-label">Khóa</label>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mb-3 row ">
                         <label for="inputPassword" class="col-sm-2 col-form-label"></label>

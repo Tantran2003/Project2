@@ -23,44 +23,53 @@ class HomeController extends Controller
 
     
 
-public function search(Request $request)
-{
-    $departureDate = $request->input('departure_date');
-    $arrivalLocation = $request->input('arrivallocation');
-
-    // Kiểm tra cả hai trường đều trống
-    if (empty($departureDate) && empty($arrivalLocation)) {
-        return redirect()->route('gd.home');
-    }
-
-    $query = Products::query();
-
-    if (!empty($departureDate)) {
-        $formattedDepartureDate = date('Y-m-d', strtotime($departureDate));
-        $query->whereHas('schedule', function ($q) use ($formattedDepartureDate) {
-            $q->whereDate('date_start', '=', $formattedDepartureDate);
+    public function search(Request $request)
+    {
+        $departureDate = $request->input('departure_date');
+        $arrivalLocation = $request->input('arrivallocation');
+    
+        // Kiểm tra cả hai trường đều trống
+        if (empty($departureDate) && empty($arrivalLocation)) {
+            return redirect()->route('gd.home');
+        }
+    
+        $query = Products::query();
+    
+        if (!empty($departureDate)) {
+            $formattedDepartureDate = date('Y-m-d', strtotime($departureDate));
+            $query->whereHas('schedule', function ($q) use ($formattedDepartureDate) {
+                $q->whereDate('date_start', '=', $formattedDepartureDate);
+            });
+        }
+    
+        if (!empty($arrivalLocation)) {
+            $query->where('arrivallocation', '=', $arrivalLocation);
+        }
+    
+        // Thêm điều kiện để chỉ lấy các sản phẩm mà id_cat không bị khóa
+        $query->whereHas('category', function ($q) {
+            $q->where('status', '=', 1);
         });
+    
+        if (isset($formattedDepartureDate)) {
+            $query->with(['schedule' => function ($q) use ($formattedDepartureDate) {
+                $q->whereDate('date_start', '=', $formattedDepartureDate);
+            }]);
+        } else {
+            $query->with('schedule');
+        }
+    
+        $loadproduct = $query->get();
+        $data['search'] = $loadproduct;
+        $data['destinations'] = DB::table('products')->select('arrivallocation')->get();
+    
+        if ($data['search']->isEmpty()) {
+            return redirect()->route('gd.noresults');
+        }
+    
+        return view("interface/pages/search", $data);
     }
-
-    if (!empty($arrivalLocation)) {
-        $query->where('arrivallocation', '=', $arrivalLocation);
-    }
-
-    if (isset($formattedDepartureDate)) {
-        $query->with(['schedule' => function ($q) use ($formattedDepartureDate) {
-            $q->whereDate('date_start', '=', $formattedDepartureDate);
-        }]);
-    } else {
-        $query->with('schedule');
-    }
-    $loadproduct = $query->get();
-    $data['search'] = $loadproduct;
-    $data['destinations'] = DB::table('products')->select('arrivallocation')->get();
-    if ($data['search']->isEmpty()) {
-        return redirect()->route('gd.noresults');
-    }
-    return view("interface/pages/search", $data);
-}
+    
 
     public function noresults(){
         return view("interface/pages/no_results");
