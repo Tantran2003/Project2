@@ -24,10 +24,9 @@ Nguyễn Quang Huy (Student1468178)
 
 Documentations : https://github.com/Tantran2003/Project2/tree/master/Document
 
-Link demo video LightMyDesk: https://www.youtube.com/watch?v=M4fpT4XII7g
 
-Link database: https://github.com/Pahana-vn/LightMyDesk_Group02/blob/main/lightmydesk4.sql
 
+Link database: https://github.com/Tantran2003/Project2/blob/master/travel%20(13).sql
 =======================================
 
 Thank you for visit our website.
