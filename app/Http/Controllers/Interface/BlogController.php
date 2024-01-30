@@ -34,10 +34,7 @@ class BlogController extends Controller
     {
         $blogDetail = Blog::find($id);
         if ($request->isMethod("post")) {
-            // $this->validate($request, [
-            //   "title" => "required",
-            //   "description" => "required"
-            // ]);
+            
             $edit = Blog::find($id);
             $edit->title = $request->title;
             $edit->description = $request->description;
@@ -63,10 +60,7 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        //     'description' => 'required',
-        // ]);
+        
 
         $imagePath = null;
 

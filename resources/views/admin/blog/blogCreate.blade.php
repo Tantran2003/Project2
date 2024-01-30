@@ -20,9 +20,7 @@
         </div>
         <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Mô tả</label>
-            <!-- <div class="col-sm-5">
-                <input type="text" class="form-control" value="{{old('description')}}" name="description">
-            </div> -->
+            
             <textarea required class="form-control" value="{{old('description')}}" name="description" id="description"
                                 cols="30" rows="10"></textarea>
                             <script>   CKEDITOR.replace('description');</script>
