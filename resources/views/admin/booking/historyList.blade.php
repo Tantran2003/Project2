@@ -30,7 +30,7 @@
                                 <th style="col">Departure date</th>
                                 <th style="col">Leave date</th>
                                 <th scope="col">Transportation</th>
-
+                               <th></th>
 
                             </thead>
                             <tr>
@@ -46,7 +46,7 @@
                                 <td>{{ date('d-m-Y ',
                                     strtotime($order->date_end)) }}</td>
                                 <td>{{ $order->vehicle }}</td>
-
+                                
                             </tr>
                             </thead>
                             <tr class="table-primary">
@@ -59,7 +59,7 @@
                                 <th scope="col">Price per child(VND)</th>
                                 <th scope="col">Price per baby(VND)</th>
                                 <th scope="col">Tour(VND)</th>
-
+                                <th scope="col" style="color:red; font-size:25px">Total</th>
                                 </thead>
                                 <tbody>
                             </tr>
@@ -73,7 +73,7 @@
                                 <td>{{ $order->price2 }} </td>
                                 <td>{{ $order->price3 }}</td>
                                 <td>{{ $order->price0}}</td>
-
+                                <td >{{ number_format($order['total_price'], 0, ',', '.') }} VNĐ</td>
                             </tr>
                             @endforeach
                             </tbody>

@@ -64,7 +64,7 @@ class Booking extends Model
     {
         return $this->belongsTo(Products::class, 'product_id', 'id');
     } 
-    public function Order_momo()
+    public function order_momo()
     {
         return $this->belongsTo(Order_momo::class, 'order_id', 'id');
     }

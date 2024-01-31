@@ -18,20 +18,11 @@ class PaymentController extends Controller
 {
     public function pay()
     {
-
-
         return view('interface.pages.pay');
     }
 
-
-
-
-
-
-
     public function confirmPayment(Request $request)
     {
-
         return view('interface.pages.thankyou');
         // Redirect hoặc trả về response tùy theo yêu cầu của bạn
     }
@@ -70,8 +61,8 @@ class PaymentController extends Controller
         $orderInfo = "Thanh toán qua MoMo";
         $amount = $_POST['total_momo'];
         $orderId = time() . "";
-        $redirectUrl = "http://localhost:84/Project2/payment/confirm";
-        $ipnUrl = "http://localhost:84/Project2/payment/confirm";
+        $redirectUrl = "http://localhost:83/Project2/payment/confirm";
+        $ipnUrl = "http://localhost:83/Project2/payment/confirm";
         $extraData = "";
 
         $requestId = time() . "";
@@ -101,7 +92,7 @@ class PaymentController extends Controller
             $dateTime = Carbon::now();
             $userId = auth()->id();     //lấy id người dùng đang đăng nhập
             // Lưu thông tin thanh toán  vào cơ sở dữ liệu
-            DB::table('Order_momo')->insertGetId([
+            DB::table('order_momo')->insertGetId([
                 'user_id' => $userId,
                 'partner_code' => $partnerCode,
                 'order_id' => $orderId,
@@ -110,14 +101,7 @@ class PaymentController extends Controller
                 'created_at' => $dateTime,
                 'updated_at' => $dateTime
             ]);
-             $order= DB::table('Order_momo')->where('order_id','=',$orderId)->first();
-            // //  dd($order);
-       
-
-         
-            //       
-            //         'order_id' => $order->id,
-            //         
+            $order= DB::table('order_momo')->where('order_id','=',$orderId)->first();      
             $bookingdetails = $request->session()->get('booking');
             DB::table('bookings')->insert([
                 'order_id' => $order->id,
@@ -152,73 +136,73 @@ class PaymentController extends Controller
 
     }
     
-        public function vnpay_payment($order)
-    {   
-        $configVnpay = vnpayConfig();
-        $vnp_Url = $configVnpay()['vnp_Url'];
-        $vnp_Returnurl = $configVnpay()['vnp_Returnurl'];
-        $vnp_TmnCode =$configVnpay()['vnp_TmnCode']; //Mã website tại VNPAY 
-        $vnp_HashSecret = $configVnpay()['vnp_HashSecret']; //Chuỗi bí mật
+    //     public function vnpay_payment($order)
+    // {   
+    //     $configVnpay = vnpayConfig();
+    //     $vnp_Url = $configVnpay()['vnp_Url'];
+    //     $vnp_Returnurl = $configVnpay()['vnp_Returnurl'];
+    //     $vnp_TmnCode =$configVnpay()['vnp_TmnCode']; //Mã website tại VNPAY 
+    //     $vnp_HashSecret = $configVnpay()['vnp_HashSecret']; //Chuỗi bí mật
         
 
-        $vnp_TxnRef = $order -> code; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = (!empty($order->name)) ? $order->name : 'Transaction #'. $order->code.'vnpay';
-        $vnp_OrderType = "TravelTour";
-        $vnp_Amount = ($order->booking['total_momo']) * 100;
-        // floatval(Session::get('total_price')) * 100
-        $vnp_Locale = "VN";
+    //     $vnp_TxnRef = $order -> code; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+    //     $vnp_OrderInfo = (!empty($order->name)) ? $order->name : 'Transaction #'. $order->code.'vnpay';
+    //     $vnp_OrderType = "TravelTour";
+    //     $vnp_Amount = ($order->booking['total_momo']) * 100;
+    //     // floatval(Session::get('total_price')) * 100
+    //     $vnp_Locale = "VN";
         
-        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+    //     $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 
-        $inputData = [
-            "vnp_Version" => "2.1.0",
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_Amount" => $vnp_Amount,
-            "vnp_Command" => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
-            "vnp_IpAddr" => $vnp_IpAddr,
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
-        ];
-        dd($inputData);
-        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
+    //     $inputData = [
+    //         "vnp_Version" => "2.1.0",
+    //         "vnp_TmnCode" => $vnp_TmnCode,
+    //         "vnp_Amount" => $vnp_Amount,
+    //         "vnp_Command" => "pay",
+    //         "vnp_CreateDate" => date('YmdHis'),
+    //         "vnp_CurrCode" => "VND",
+    //         "vnp_IpAddr" => $vnp_IpAddr,
+    //         "vnp_Locale" => $vnp_Locale,
+    //         "vnp_OrderInfo" => $vnp_OrderInfo,
+    //         "vnp_OrderType" => $vnp_OrderType,
+    //         "vnp_ReturnUrl" => $vnp_Returnurl,
+    //         "vnp_TxnRef" => $vnp_TxnRef,
+    //     ];
+    //     dd($inputData);
+    //     if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+    //         $inputData['vnp_BankCode'] = $vnp_BankCode;
+    //     }
 
-        ksort($inputData);
-        $query = "";
-        $i = 0;
-        $hashdata = "";
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-            } else {
-                $hashdata .= urlencode($key) . "=" . urlencode($value);
-                $i = 1;
-            }
-            $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        }
+    //     ksort($inputData);
+    //     $query = "";
+    //     $i = 0;
+    //     $hashdata = "";
+    //     foreach ($inputData as $key => $value) {
+    //         if ($i == 1) {
+    //             $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+    //         } else {
+    //             $hashdata .= urlencode($key) . "=" . urlencode($value);
+    //             $i = 1;
+    //         }
+    //         $query .= urlencode($key) . "=" . urlencode($value) . '&';
+    //     }
 
-        $vnp_Url = $vnp_Url . "?" . $query;
+    //     $vnp_Url = $vnp_Url . "?" . $query;
 
-        if (isset($vnp_HashSecret)) {
-            $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
-            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-        }
-        $returnData = array(
-            'code'=> '00',
-            'message'=> 'succes',
-            'data'=> $vnp_Url
-        );
+    //     if (isset($vnp_HashSecret)) {
+    //         $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+    //         $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+    //     }
+    //     $returnData = array(
+    //         'code'=> '00',
+    //         'message'=> 'succes',
+    //         'data'=> $vnp_Url
+    //     );
 
-        if (isset($_POST['redirect'])) {
-            header('Location: ' . $vnp_Url);
-            die();
-        } else {
-            echo json_encode(['code' => '00', 'message' => 'success', 'data' => $vnp_Url]);
-        }
-    }}
+    //     if (isset($_POST['redirect'])) {
+    //         header('Location: ' . $vnp_Url);
+    //         die();
+    //     } else {
+    //         echo json_encode(['code' => '00', 'message' => 'success', 'data' => $vnp_Url]);
+    //     }
+}
