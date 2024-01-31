@@ -1,5 +1,6 @@
 Tour Viet
 
+Tour booking website is a website where people can go and view tour information, find the tour they want, book the tour, then pay and view their invoice.
 =======================================
 
 Supervisor : Phạm Công Danh
