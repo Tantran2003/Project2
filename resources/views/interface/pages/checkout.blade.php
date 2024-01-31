@@ -47,7 +47,7 @@
         <h4><strong class="text-muted pb-3">Contact Information</strong></h4>
 
         <div class="row ">
-            <div class="col-lg-7 bg-light p-3 mt-4">
+            <div class="col-lg-7 bg-light p-3 mt-4" >
                 <form action="{{route('gd.savebooking')}}" method="post" name="form">
                     @csrf
                     <input type="hidden" name="id" value="{{$booking->id}}">
@@ -77,7 +77,7 @@
                         <div class="col-sm-6">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" placeholder="" name="email"
-                                value="<?php echo Auth::user()->email; ?>" id="email" required>
+                                value="{{ Auth::check() ? Auth::user()->email : old('email') }}" id="email" required>
                         </div>
                     </div>
                     <div class="row p-3">
@@ -93,41 +93,7 @@
                         </div>
 
                     </div>
-                    <?php 
-                        }else{
-                    ?>
-                    <div class="row p-3">
-                        <div class="col-sm-6">
-                            <label for="name">Full Name</label>
-                            <input type="name" class="form-control" placeholder="Enter fullname" name="fullname"
-                                value="{{ old('fullname') }}" id="name">
-                            {!! $errors->first('fullname', '<div class="has-error text-danger">:message</div>') !!}
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" placeholder="Enter email" name="email"
-                                value="{{ old('email') }}" id="email">
-                            {!! $errors->first('email', '<div class="has-error text-danger">:message</div>') !!}
-
-                        </div>
-                    </div>
-                    <div class="row p-3">
-                        <div class="col-sm-6 mt-3">
-                        Phone number<input type="tel" class="form-control" placeholder="Enter phone" name="phone"
-                                value="{{ old('phone') }}" id="phone">
-                            {!! $errors->first('phone', '<div class="has-error text-danger">:message</div>') !!}
-
-                        </div>
-                        <div class="col-sm-6 mt-3">
-                        Address<input type="text" class="form-control" placeholder="Enter address" name="address"
-                                value="{{ old('address') }}" id="address">
-                            {!! $errors->first('address', '<div class="has-error text-danger">:message</div>') !!}
-
-                        </div>
-                    </div>
-                    <?php 
-                        }
-                    ?>
+                    
                     <h5><strong class="text-muted">Passenger</strong></h5>
 
                     <div class="row p-3">
@@ -160,7 +126,11 @@
                     </div>
 
 
-
+                    <?php }else{ ?>
+                    <div align="center">Login to proceed
+                        <a href="{{route('gd.login')}}"><h2 style="color:lightblue;">Login</h2></a>
+                    </div>
+                    <?php } ?>
             </div>
 
 
