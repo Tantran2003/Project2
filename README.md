@@ -27,7 +27,7 @@ Documentations : https://github.com/Tantran2003/Project2/tree/master/Document
 
 
 Link video demo website :
-https://github.com/Tantran2003/Project2/blob/master/Document/Video%20gi%E1%BB%9Bi%20thi%E1%BB%87u%20website.mp4
+https://www.youtube.com/watch?v=0a_LSfqaQ-E
 
 
 Link database: https://github.com/Tantran2003/Project2/blob/master/travel%20(13).sql
