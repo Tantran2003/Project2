@@ -50,7 +50,7 @@ class ScheduleController extends Controller
             $schedule->tour_id = $request->tour_id;
             $schedule->date_start = date('Y-m-d H:i:s', strtotime($request->date_start));
             $schedule->date_end = date('Y-m-d H:i:s', strtotime($request->date_end));
-            $schedule->status = $request->status;
+            $schedule->status = 1;
             $schedule->tour_code = $request->tour_code;
             $schedule->save();
     

@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{ $value-> partner_code}}</td>
                                     <td>{{ $value-> order_id}}</td>
-                                    <td>{{ $value-> amount}}</td>
+                                    <td>{{ number_format($value['amount'], 0, ',', '.') }} VNĐ</td>
                                     <td>{{ $value-> order_info}}</td>
                                     <td>{{ $value-> created_at}}</td>
                                     <td>{{ $value-> updated_at}}</td>
