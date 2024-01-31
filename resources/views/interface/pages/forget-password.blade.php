@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 
-<div class="container-xxl py-5 mt-5 destination" style=" max-width: 1320px;">
+<div class="container-xxl  destination" style=" max-width: 1320px; margin-bottom:200px;margin-top:100px; ">
     <style>
         .login-img img {
             width: 10%;
