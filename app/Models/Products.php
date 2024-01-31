@@ -9,7 +9,7 @@ class Products extends Model
 {
     protected $table = "products";
     protected $fillable = ["name", "keyword","vehicle", "desc", "content",
-    "price","price1","price2","image","images","idcat","departureday","departurelocation","arrivallocation","status"];
+    "price0","price1","price2","image","images","idcat","departureday","departurelocation","arrivallocation","status"];
     protected $primaryKey = "id";
     public $timestamps = false;
 

@@ -8,11 +8,16 @@ use App\Models\Order_vnpay;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Booking;
-
+use Mail;
 use Carbon\Carbon;
-
+Use Illuminate\Contracts\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Illuminate\Bus\Queueable;
+use App\Mail\BookingSuccess;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
 
 class PaymentController extends Controller
 {
@@ -130,12 +135,21 @@ class PaymentController extends Controller
 
                 // Các trường khác...
             ]);
-            //Just a example, please check more in there
+            try {
+                Mail::to($bookingdetails['email'])->send(new BookingSuccess(['booking' => $order]));
+
+            } catch (\Exception $e) {
+                \Log::error('Error sending booking success email: ' . $e->getMessage());
+            }
+    
+            // Redirect to MoMo payment URL
             return redirect()->to($jsonResult['payUrl']);
         }
 
     }
     
+
+
     //     public function vnpay_payment($order)
     // {   
     //     $configVnpay = vnpayConfig();
