@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Session;
-
+use Auth;
 class CheckoutController extends Controller
 {
   
@@ -33,6 +33,12 @@ class CheckoutController extends Controller
 
     public function save(Request $request)
     {
+        //Check if the user is not logged in
+        if (!Auth::check()) {
+            $request->session()->put('failed_to_process', 'You must be logged in to proceed with the checkout.');
+            return redirect()->route('gd.login'); // Redirect the user to the login page
+        }
+
         $request->validate([
             'fullname' => 'required|string',
             'email' => 'required|email',
@@ -88,9 +94,6 @@ class CheckoutController extends Controller
             // dd($request->session()->get('booking'));
         return view('interface/pages/pay');
     }
-
-
-
 }
 
 //  

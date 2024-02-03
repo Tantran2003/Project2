@@ -89,7 +89,7 @@
                     <a href="{{route('gd.index_tour',0)}}" class="nav-item nav-link">Tour</a>
                     
                     <a href="{{route('blog.index')}}" class="nav-item nav-link">Tin tức</a>
-                    <!-- <a href="{{ route('gd.guide') }}" class="nav-item nav-link">Guides</a> -->
+                   
                     <a href="{{route('gd.contactindex')}}" class="nav-item nav-link">Liên hệ</a>
                 </div>
                 @if(Auth::check())

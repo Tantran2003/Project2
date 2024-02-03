@@ -13,6 +13,10 @@ use Mail;
 use App\Mail\Sendmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SecureController extends Controller
 {
@@ -172,6 +176,9 @@ class SecureController extends Controller
 
     }
 
+    
+///SEND MAIL BOOKING SUCCESS
+    
     public function profile()
     {
         $user = Auth::user();
@@ -229,10 +236,30 @@ class SecureController extends Controller
             // Trả về view với dữ liệu lịch sử đặt hàng
             return view('interface.pages.history_order', $data);
         }
-
-
-
     }
+    public function showSearchOrderForm()
+    {
+        return view('interface.pages.searchform');
+    }
+
+    public function searchorder(Request $request)
+{
+    $order_id_momo = $request->input('order_id_momo');
+
+    $order = DB::table('order_momo')
+        ->join('bookings', 'order_momo.order_id', '=', 'bookings.order_id_momo')
+        ->where('order_momo.order_id', $order_id_momo)
+        ->first();
+
+    if ($order) {
+        // Order found, return to history_order.blade.php with order data
+        $data['orders'] = [$order];
+        return view('interface.pages.history_order', $data);
+    } else {
+        // Order not found, return to history_order.blade.php with alert
+        return redirect()->route('gd.history_order')->with('order_not_found', true);
+    }
+}
 
 
 

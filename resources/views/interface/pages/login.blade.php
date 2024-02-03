@@ -1,6 +1,25 @@
 @extends ('interface/layout_interface')
 @section('content')
 <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+<style>
+    .session-message {
+        font-family: 'YourFont', sans-serif; /* Change 'YourFont' to the desired font-family */
+        font-size: 16px; /* Adjust the font size as needed */
+        color: #ffffff; /* Adjust the font color */
+        background-color: #007bff; /* Adjust the background color */
+        /* Add any other styling properties you want */
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        align: center;
+    }
+</style>
+@if (session('failed_to_process'))
+    <div class="session-message" >
+        {{ session('failed_to_process') }}
+    </div>
+@endif
+<link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
 
 <section class="vh-100" style="margin:100px 0 10px 0;" style="">

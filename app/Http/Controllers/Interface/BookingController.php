@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Interface;
 
 use App\Models\Booking;
-use App\Models\Guide;
+use App\Models\Account;
 use App\Models\Products;
 use App\Models\Schedule;
 use App\Models\Order;
@@ -12,25 +12,28 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use DB;
+
 class BookingController extends Controller
 {
     public function booking()
     {
-        
+
         return view("interface/pages/booking,'productId' , 'scheduleId'");
     }
-    public function addbooking(Request $request, $id = null) {
-    //     $guides = Guide::where('status', 1)->get();
-    //     $product = Products::find($product_id);
-    //     if (!$product) {
-    //         return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
-    //     }
-    //     $schedule = Schedule::find($schedule_id);
-    //     if (!$schedule) {
-    //         return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
-    //     }
-    //     return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
-    // }{
+    public function addbooking(Request $request, $id = null)
+    {
+        //     $guides = Guide::where('status', 1)->get();
+        //     $product = Products::find($product_id);
+        //     if (!$product) {
+        //         return redirect()->back()->with('error', 'Không tìm thấy sản phẩm.');
+        //     }
+        //     $schedule = Schedule::find($schedule_id);
+        //     if (!$schedule) {
+        //         return redirect()->back()->with('error', 'Không tìm thấy lịch trình.');
+        //     }
+        //     return view('interface/pages/bookingform', compact('guides', 'product', 'schedule'));
+        // }{
         if ($request->isMethod('post')) {
             $id = $request->id;
             $product = Products::find((int) $request->id);
@@ -123,61 +126,67 @@ class BookingController extends Controller
 //         return redirect(route('gd.checkout'));
 //     }
 // }
-    public function checkout(Request $request){
-    if($request->isMethod('post')){
-        //tính tong tien
-        $giatien=0;
-        foreach (Session::get('booking') as  $value) {
-            $giatien=$giatien+$value['price']*$value['amount'];
+    public function checkout(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            //tính tong tien
+            $giatien = 0;
+            foreach (Session::get('booking') as $value) {
+                $giatien = $giatien + $value['price'] * $value['amount'];
+            }
+            $order = new Order();
+            $order->id_user = Auth::user()->id;
+            $order->ship = 10;
+            $order->total = $giatien;
+            $order->payment = $request->payment;
+            $order->timeship = 7;
+            $order->note = "";
+            $order->date_order = date('d/m/Y', strtotime(date('Y-m-d H:i:s')));
+            $order->status_order = 1;
+            $order->save();
+            foreach (Session::get('booking') as $key => $value) {
+                $ctdh = new Booking();
+                $ctdh->quantity = (int) $value['amount'];
+                $ctdh->id_order = (int) $order->id;
+                $ctdh->id_product = (int) $value['id'];
+                $ctdh->status = 1;
+                $ctdh->save();
+            }
+            Session::forget('cart');
+            return redirect()->route('gd.home');
         }
-        $order=new Order();
-        $order->id_user=Auth::user()->id;
-        $order->ship=10;
-        $order->total=$giatien;
-        $order->payment=$request->payment;
-        $order->timeship=7;
-        $order->note="";
-        $order->date_order=date('d/m/Y',strtotime(date('Y-m-d H:i:s')));
-        $order->status_order=1;
-        $order->save();
-        foreach (Session::get('booking') as $key => $value) {
-            $ctdh=new Booking();
-            $ctdh->quantity=(int)$value['amount'];
-            $ctdh->id_order=(int)$order->id;
-            $ctdh->id_product=(int)$value['id'];
-            $ctdh->status=1;
-            $ctdh->save();
-        }
-        Session::forget('cart');
-        return redirect()->route('gd.home');
+        return view("giaodien/pages/checkout");
     }
-    return view("giaodien/pages/checkout");
-}
-    public function getGuides(){
-        $guides = Guide::latest()->paginate(8);
-        $guideCount = Guide::all()->count();
-        // Share the $guides variable with all views
-        // view()->share('guides', $guides);
-        return response()->view('interface.guide.index',compact( 'guideCount','guides'));
+        
         
     }
 
-    public function getGuideDetails($id){
-        $guide = Guide::find($id);
-        return response()->view('interface.guide.show',compact('guide'));
-    }
-    public function tourHistory()
-    {
-        $historyList = Booking::where('bookings.status', 1)
-            ->join('account', 'bookings.tourist_id', '=', 'account.id')
-            ->where('tourist_id', Auth::id())
-            ->get();
 
-        $currentDate = Carbon::now()->format('F d, Y');
-        return view('interface.booking.historyList', compact('historyList', 'currentDate'));
-    }
+    // public function getGuides(){
+    //     $guides = Guide::latest()->paginate(8);
+    //     $guideCount = Guide::all()->count();
+    //     // Share the $guides variable with all views
+    //     // view()->share('guides', $guides);
+    //     return response()->view('interface.guide.index',compact( 'guideCount','guides'));
 
-    
+    // }
+
+    // public function getGuideDetails($id){
+    //     $guide = Guide::find($id);
+    //     return response()->view('interface.guide.show',compact('guide'));
+    // }
+    // public function tourHistory()
+    // {
+    //     $historyList = Booking::where('bookings.status', 1)
+    //         ->join('account', 'bookings.tourist_id', '=', 'account.id')
+    //         ->where('tourist_id', Auth::id())
+    //         ->get();
+
+    //     $currentDate = Carbon::now()->format('F d, Y');
+    //     return view('interface.booking.historyList', compact('historyList', 'currentDate'));
+    // }
+
+
 
 
     // public function pendingBookingList(){
@@ -188,39 +197,38 @@ class BookingController extends Controller
 
     //     return view('interface.booking.bookingform', compact('pendinglists'));
     // }
-    public function pendingBookingList()
-    {
-        $pendinglists = Booking::where('bookings.status', 0)
-            ->join('account', 'bookings.tourist_id', '=', 'account.id')
-            ->join('products', 'bookings.package_id', '=', 'products.id')
-            ->join('schedule', 'bookings.sche_id', '=', 'schedule.id')
-            ->where('tourist_id', Auth::id())
-            ->select(
-                'bookings.*',
-                'account.fullname as tourist_name',
-                'account.phone as tourist_phone',
-                'products.keyword as day',
-                'schedule.date_start as departure_date'
-            )
-            ->get();
+    // public function pendingBookingList()
+    // {
+    //     $pendinglists = Booking::where('bookings.status', 0)
+    //         ->join('account', 'bookings.tourist_id', '=', 'account.id')
+    //         ->join('products', 'bookings.package_id', '=', 'products.id')
+    //         ->join('schedule', 'bookings.sche_id', '=', 'schedule.id')
+    //         ->where('tourist_id', Auth::id())
+    //         ->select(
+    //             'bookings.*',
+    //             'account.fullname as tourist_name',
+    //             'account.phone as tourist_phone',
+    //             'products.keyword as day',
+    //             'schedule.date_start as departure_date'
+    //         )
+    //         ->get();
 
-        return view('interface.booking.bookingform', compact('pendinglists'));
-    }
-
-
+    //     return view('interface.booking.bookingform', compact('pendinglists'));
+    // }
 
 
-    public function cancelBookingRequest($id)
-    {
-        $req = Booking::find($id);
 
-        $guide = Guide::find($req->guide_id);
-        $guide->status = 1;
-        $guide->save();
 
-        $req->delete();
-        session()->flash('success', 'Booking Request Canceled Successfully');
-        return redirect()->back();
-    }
+    // public function cancelBookingRequest($id)
+    // {
+    //     $req = Booking::find($id);
 
-}
+    //     $guide = Guide::find($req->guide_id);
+    //     $guide->status = 1;
+    //     $guide->save();
+
+    //     $req->delete();
+    //     session()->flash('success', 'Booking Request Canceled Successfully');
+    //     return redirect()->back();
+    // }
+

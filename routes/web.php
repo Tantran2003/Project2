@@ -23,9 +23,9 @@ use App\Http\Controllers\Interface\ContactController;
 use App\Http\Controllers\Interface\CheckoutController;
 use App\Http\Controllers\Interface\PaymentController;
 
-//Guide
-Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
-Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.guidedetail');
+// //Guide
+// Route::get('/guides',[HomeController::class, 'getGuides'])->name('gd.guide');
+// Route::get('/guide/{id}',[HomeController::class, 'getGuideDetails'])->name('gd.guidedetail');
 
 //Booking
 Route::get('/tour-booking/{product_id}/{schedule_id}', [HomeController::class, 'packageBooking'])->name('gd.tourbooking');
@@ -57,8 +57,13 @@ Route::get('/filter-products', [TourlistController::class, 'filterProducts'])->n
 Route::match(['get','post'],"/login", [SecureController::class, 'login'])->name("gd.login");
 Route::get("/logout", [SecureController::class, 'logout'])->name("gd.logout");
 Route::match(['get','post'],"/register", [SecureController::class, 'register'])->name("gd.register");
-Route::get("/history-order", [SecureController::class, 'history'])->name("gd.hisroty_order");
-
+Route::get("/history-order", [SecureController::class, 'history'])->name("gd.history_order");
+// Show search order form
+Route::get('/show-search-order', [SecureController::class, 'showSearchOrderForm'])->name('gd.showsearchform');
+// Search order (POST request)
+Route::post('/search-order', [SecureController::class, 'searchorder'])->name('gd.searchorder');
+// Search order (GET request, optional)
+Route::get('/search-order', [SecureController::class, 'showSearchOrderForm']);
 //profile user
 Route::get("/profile", [SecureController::class, 'profile'])->name("gd.profile");
 Route::get('/edit-profile', [SecureController::class, 'editProfileForm'])->name('gd.editprofile.form');
