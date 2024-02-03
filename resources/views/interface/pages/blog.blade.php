@@ -27,7 +27,7 @@
                         <h3 class="mb-0">{{ $item->title }}</h3>
                         <div style="text-overflow: ellipsis;overflow:hidden;white-space:nowrap;-webkit-line-clamp: 1;-webkit-box-orient: vertical;display: -webkit-box; ">{!!$item->description!!}</div>
                         <div class="d-flex justify-content-center mb-2">
-                            <a href="{{route('blog.detail', $item->id)}}" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px">Read More</a>
+                            <a href="{{route('blog.detail', $item->id)}}" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px">Xem Thêm</a>
                         </div>
                     </div>
                 </div>

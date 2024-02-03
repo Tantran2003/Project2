@@ -33,7 +33,7 @@
             <tr>
                 <td scope="row">
                     <div class="d-flex align-items-center">
-                        <img class="img-fluid" style=" width:200px; object-fit: cover;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Hình ảnh Blog">
+                        <img class="img-fluid" style=" height:100px;width:200px; object-fit: cover;" src="{{ asset('public/file/img/img_blog/'.$value->image) }}" alt="Hình ảnh Blog">
                     </div>
                 </td>
                 <td>{{ $value["title"] }}</td>
